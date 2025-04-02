@@ -10,6 +10,10 @@ export default function Home() {
         <Container className="main-content">
           <Row className="shadow-lg mt-3 p-3 bg-body rounded">
             <Col lg={8} className="mx-auto">
+              TEST
+              <br />
+              <br />
+              <br />
               Welcome to NextDex, your ultimate destination for exploring the
               vast world of Pokémon! Built with cutting-edge web technologies
               including React, Next.js, and Bootstrap, NextDex offers a fast,
