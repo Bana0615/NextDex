@@ -12,7 +12,7 @@ const defaultNavLinks = [
   { label: "Feedback", href: "/feedback", target: "" },
   {
     label: "GitHub",
-    href: process.env.NEXT_PUBLIC_APP_GITHUB_URL,
+    href: process.env.NEXT_PUBLIC_APP_GITHUB_URL || "",
     target: "_blank",
   },
 ];
@@ -21,7 +21,7 @@ function MonHeader({
   className = "",
   showBadge = false,
   navLinks = defaultNavLinks,
-}) {
+}: HeaderProps) {
   return (
     <Navbar
       id="main-header"
