@@ -1,30 +1,30 @@
 import { Container, Row, Col } from "react-bootstrap";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import MonHeader from "@/components/MonHeader";
+import MonFooter from "@/components/MonFooter";
 
 export default function Home() {
   return (
     <>
       <div className="main-container">
-        <Header />
+        <MonHeader showBadge={true} />
         <Container className="main-content">
-          <h3 className="text-center my-3">SiloCityPages</h3>
-          <Row className="shadow-lg p-3 bg-body rounded">
+          <Row className="shadow-lg mt-3 p-3 bg-body rounded">
             <Col lg={8} className="mx-auto">
-              SiloCityPages, developed by SiloCityLabs, is a streamlined
-              framework designed to accelerate the development and deployment of
-              static websites. Leveraging the power of Bootstrap for responsive
-              design, React for component-driven architecture, and Next.js for
-              efficient rendering, SiloCityPages provides a robust foundation
-              for building modern web applications. Optimized for seamless
-              deployment to GitHub Pages, this framework simplifies the process
-              of creating and hosting performant, visually appealing websites,
-              allowing developers to focus on content and functionality rather
-              than complex configurations.
+              Welcome to NextDex, your ultimate destination for exploring the
+              vast world of Pokémon! Built with cutting-edge web technologies
+              including React, Next.js, and Bootstrap, NextDex offers a fast,
+              responsive, and visually appealing experience for trainers of all
+              levels. Dive into our comprehensive Pokédex section to search,
+              filter, and learn intricate details about every known Pokémon.
+              Beyond the Pokédex, NextDex is designed to be an ever-expanding
+              resource, featuring in-depth information on Pokémon games,
+              regions, items, characters, and much more. Prepare to enhance your
+              Pokémon knowledge with a sleek interface and a wealth of data
+              right at your fingertips!
             </Col>
           </Row>
         </Container>
-        <Footer />
+        <MonFooter />
       </div>
     </>
   );

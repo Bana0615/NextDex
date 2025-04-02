@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { Container, Row, Col } from "react-bootstrap";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import MonHeader from "@/components/MonHeader";
+import MonFooter from "@/components/MonFooter";
 
 const redirects: Record<string, string> = {
   // Example
@@ -28,7 +28,7 @@ export default function NotFoundPage() {
         <meta name="description" content="This page could not be found." />
       </Head>
       <div className="main-container">
-        <Header />
+        <MonHeader showBadge={true} />
         <Container className="main-content" fluid>
           <Row>
             <Col>
@@ -50,7 +50,7 @@ export default function NotFoundPage() {
             </Col>
           </Row>
         </Container>
-        <Footer />
+        <MonFooter />
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Container, Row, Col } from "react-bootstrap";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import MonHeader from "@/components/MonHeader";
+import MonFooter from "@/components/MonFooter";
 
 export default function Terms() {
   return (
@@ -12,7 +12,7 @@ export default function Terms() {
         <meta name="keywords" content="terms and conditions" />
       </Head>
       <div className="main-container">
-        <Header />
+        <MonHeader showBadge={true} />
         <Container className="main-content" fluid>
           <Row>
             <Col>
@@ -215,7 +215,7 @@ export default function Terms() {
             </Col>
           </Row>
         </Container>
-        <Footer />
+        <MonFooter />
       </div>
     </>
   );

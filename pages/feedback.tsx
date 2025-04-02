@@ -3,8 +3,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Select, { MultiValue } from "react-select";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import MonHeader from "@/components/MonHeader";
+import MonFooter from "@/components/MonFooter";
 import { generateGithubLink } from "@/helpers/_silabs/generateGithubLink";
 //json
 import githubLabels from "@/json/github/labels.json";
@@ -103,7 +103,7 @@ export default function Feedback() {
         <title>Feedback</title>
       </Head>
       <div className="main-container">
-        <Header />
+        <MonHeader showBadge={true} />
         <Container className="main-content">
           <h3 className="text-center mt-4">Feedback</h3>
           <Row className="shadow-lg p-3 bg-body rounded mt-4">
@@ -194,7 +194,7 @@ export default function Feedback() {
             </Col>
           </Row>
         </Container>
-        <Footer />
+        <MonFooter />
       </div>
     </>
   );

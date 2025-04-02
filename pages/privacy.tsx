@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 import { Container, Row, Col } from "react-bootstrap";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import MonHeader from "@/components/MonHeader";
+import MonFooter from "@/components/MonFooter";
 
 export default function Privacy() {
   return (
@@ -13,7 +13,7 @@ export default function Privacy() {
         <meta name="keywords" content="privacy policy" />
       </Head>
       <div className="main-container">
-        <Header />
+        <MonHeader showBadge={true} />
         <Container className="main-content" fluid>
           <Row>
             <Col>
@@ -233,7 +233,7 @@ export default function Privacy() {
             </Col>
           </Row>
         </Container>
-        <Footer />
+        <MonFooter />
       </div>
     </>
   );
