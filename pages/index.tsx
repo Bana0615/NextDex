@@ -6,17 +6,6 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
-        <meta
-          name="description"
-          content="SiloCityPages: A framework by SiloCityLabs leveraging Bootstrap, React, and Next.js for efficient static site development. Deploy seamlessly to GitHub Pages."
-        />
-        <meta
-          name="keywords"
-          content="SiloCityPages, SiloCityLabs, Bootstrap, React, Next.js, GitHub Pages, static site generator, static site framework, web development, front-end, component-based, rapid deployment, web application, responsive design, website builder, React components, Next.js framework, GitHub hosting"
-        />
-      </Head>
       <div className="main-container">
         <Header />
         <Container className="main-content">
