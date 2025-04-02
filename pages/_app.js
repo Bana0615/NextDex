@@ -32,7 +32,6 @@ function MyApp({ Component, pageProps }) {
         <link rel="manifest" href="/manifest.json" />
         <meta name="description" content={process.env.NEXT_PUBLIC_APP_DESC} />
         <meta name="keywords" content={process.env.NEXT_PUBLIC_APP_KEYWORDS} />
-        <meta name="google-adsense-account" content="ca-pub-6836460257655749" />
       </Head>
       {GA_TRACKING_ID !== "" && (
         <>
