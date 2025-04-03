@@ -12,7 +12,10 @@ function TypesSection() {
     <Row g={2}>
       {types.map((type) => (
         <Col key={type.name} xs={4} lg={2} className="mb-2 px-1">
-          <a href={`#${type.name}`} style={{ textDecoration: "none" }}>
+          <a
+            href={`/pokemon/type?id=${type.name}`}
+            style={{ textDecoration: "none" }}
+          >
             <Badge
               className="w-100 d-flex align-items-center justify-content-center"
               style={{
