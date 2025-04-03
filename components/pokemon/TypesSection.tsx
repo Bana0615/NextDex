@@ -25,17 +25,15 @@ function TypesSection() {
                 padding: "0.5em !important",
               }}
             >
-              {type.imgSrc && (
-                <img
-                  src={type.imgSrc}
-                  alt={`${type.name} type icon`}
-                  style={{
-                    height: "1.0em",
-                    marginRight: "0.3em",
-                  }}
-                />
-              )}
-              <span>{type.name}</span>{" "}
+              <img
+                src={`/images/pokemon/types/transparent/${type.imgSrc}`}
+                alt={`${type.name} type icon`}
+                style={{
+                  height: "1.0em",
+                  marginRight: "0.3em",
+                }}
+              />
+              <span>{type.name}</span>
             </Badge>
           </a>
         </Col>
