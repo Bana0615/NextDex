@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Normal",
+    "color": "#A8A77A",
+    "imgSrc": "images/pokemon/types/transparent/normal.svg"
+  },
+  {
+    "name": "Fire",
+    "color": "#EE8130",
+    "imgSrc": "images/pokemon/types/transparent/fire.svg"
+  },
+  {
+    "name": "Water",
+    "color": "#6390F0",
+    "imgSrc": "images/pokemon/types/transparent/water.svg"
+  },
+  {
+    "name": "Grass",
+    "color": "#7AC74C",
+    "imgSrc": "images/pokemon/types/transparent/grass.svg"
+  },
+  {
+    "name": "Electric",
+    "color": "#F7D02C",
+    "imgSrc": "images/pokemon/types/transparent/electric.svg"
+  },
+  {
+    "name": "Ice",
+    "color": "#96D9D6",
+    "imgSrc": "images/pokemon/types/transparent/ice.svg"
+  },
+  {
+    "name": "Fighting",
+    "color": "#C22E28",
+    "imgSrc": "images/pokemon/types/transparent/fighting.svg"
+  },
+  {
+    "name": "Poison",
+    "color": "#A33EA1",
+    "imgSrc": "images/pokemon/types/transparent/poison.svg"
+  },
+  {
+    "name": "Ground",
+    "color": "#E2BF65",
+    "imgSrc": "images/pokemon/types/transparent/ground.svg"
+  },
+  {
+    "name": "Flying",
+    "color": "#A98FF3",
+    "imgSrc": "images/pokemon/types/transparent/flying.svg"
+  },
+  {
+    "name": "Psychic",
+    "color": "#F95587",
+    "imgSrc": "images/pokemon/types/transparent/psychic.svg"
+  },
+  {
+    "name": "Bug",
+    "color": "#A6B91A",
+    "imgSrc": "images/pokemon/types/transparent/bug.svg"
+  },
+  {
+    "name": "Rock",
+    "color": "#B6A136",
+    "imgSrc": "images/pokemon/types/transparent/rock.svg"
+  },
+  {
+    "name": "Ghost",
+    "color": "#735797",
+    "imgSrc": "images/pokemon/types/transparent/ghost.svg"
+  },
+  {
+    "name": "Dragon",
+    "color": "#6F35FC",
+    "imgSrc": "images/pokemon/types/transparent/dragon.svg"
+  },
+  {
+    "name": "Dark",
+    "color": "#705746",
+    "imgSrc": "images/pokemon/types/transparent/dark.svg"
+  },
+  {
+    "name": "Steel",
+    "color": "#B7B7CE",
+    "imgSrc": "images/pokemon/types/transparent/steel.svg"
+  },
+  {
+    "name": "Fairy",
+    "color": "#D685AD",
+    "imgSrc": "images/pokemon/types/transparent/fairy.svg"
+  }
+]
