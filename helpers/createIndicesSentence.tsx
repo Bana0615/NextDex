@@ -7,8 +7,8 @@ import { getSentenceSeperator } from "@/helpers/getSentenceSeperator";
 /**
  * Creates a JSX sentence describing game indices with links.
  *
- * @param {string} baseName - The name of the type taking damage (e.g., "Fighting").
- * @param {GenerationGameIndex[]} values - Array of type objects causing double damage.
+ * @param {string} baseName - The name of the item
+ * @param {GenerationGameIndex[]} values - Array of item objects game indicies.
  * @returns {JSX.Element | null} - JSX element representing the sentence, or null if no game indices.
  */
 export function createIndicesSentence(
@@ -19,11 +19,11 @@ export function createIndicesSentence(
 
   // Handle empty cases
   if (numTypes === 0) {
-    return <span>{baseName} has no game indices.</span>;
+    return <p>{baseName} has no game indices.</p>;
   }
 
   return (
-    <span>
+    <p>
       {baseName} has game indices of{" "}
       {values.map((info, index) => {
         const typeLink = (
@@ -36,12 +36,12 @@ export function createIndicesSentence(
         const separator: string | null = getSentenceSeperator(index, numTypes);
 
         return (
-          <React.Fragment key={info.generation.name + "-sep"}>
+          <React.Fragment key={info.generation.name + "-indices-sep"}>
             {typeLink}
             {separator}
           </React.Fragment>
         );
       })}
-    </span>
+    </p>
   );
 }

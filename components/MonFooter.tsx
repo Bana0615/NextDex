@@ -76,12 +76,6 @@ function MonFooter() {
                 Privacy Policy
               </Nav.Link>
             </Nav.Item>
-            {/* Add more links here if needed */}
-            {/* Example:
-            <Nav.Item>
-              <Nav.Link href="/contact" className="footer-link px-2">Contact</Nav.Link>
-            </Nav.Item>
-             */}
           </Nav>
         </div>
       </Container>

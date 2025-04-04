@@ -20,11 +20,11 @@ export function createWeaknessSentence(
 
   // Handle empty cases
   if (numTypes === 0) {
-    return <span>{baseName} has no double damage weaknesses listed.</span>;
+    return <p>{baseName} has no double damage weaknesses listed.</p>;
   }
 
   return (
-    <span>
+    <p>
       {baseName} takes double damage from{" "}
       {values.map((info, index) => {
         const typeLink = (
@@ -37,12 +37,12 @@ export function createWeaknessSentence(
         const separator: string | null = getSentenceSeperator(index, numTypes);
 
         return (
-          <React.Fragment key={info.name + "-sep"}>
+          <React.Fragment key={info.name + "-weakness-sep"}>
             {typeLink}
             {separator}
           </React.Fragment>
         );
       })}
-    </span>
+    </p>
   );
 }
