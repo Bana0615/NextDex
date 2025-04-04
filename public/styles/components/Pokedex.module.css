@@ -1,0 +1,277 @@
+/* --- Base Pokedex Body --- */
+.pokedex {
+  width: 350px; /* Adjust size as needed */
+  height: 550px;
+  background-color: #dc2626; /* Pokedex Red */
+  border: 4px solid #a11d1d; /* Darker red border */
+  border-radius: 15px 15px 15px 40px; /* Rounded top, sharper bottom-right */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  position: relative; /* For absolute positioning of hinge */
+  font-family: "Press Start 2P", cursive; /* Optional: Pixel font */
+}
+
+/* --- Top Section --- */
+.topSection {
+  position: relative; /* Context for hinge */
+  height: 80px; /* Adjust as needed */
+  margin-bottom: 15px;
+  padding-top: 10px; /* Space above lights */
+  border-bottom: 4px solid #a11d1d; /* Divider line */
+  padding-bottom: 10px;
+}
+
+.hinge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25px; /* Hinge height */
+  background-color: #b91c1c; /* Slightly darker red */
+  border-bottom: 4px solid #a11d1d;
+  /* Simulate the angled hinge cut */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%);
+  z-index: 1; /* Ensure it's above the main red body slightly */
+}
+
+.lightsContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between lights */
+  position: relative; /* Ensure lights are above hinge visually */
+  z-index: 2;
+  padding-left: 15px; /* Align lights */
+}
+
+.light {
+  border-radius: 50%;
+  border: 2px solid #333; /* Dark border around lights */
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
+}
+
+.blueLight {
+  width: 50px;
+  height: 50px;
+  background-color: #3b82f6; /* Blue */
+  border: 3px solid #1e40af; /* Darker blue border */
+}
+
+.redLight {
+  width: 15px;
+  height: 15px;
+  background-color: #ef4444; /* Red */
+}
+
+.yellowLight {
+  width: 15px;
+  height: 15px;
+  background-color: #facc15; /* Yellow */
+}
+
+.greenLight {
+  width: 15px;
+  height: 15px;
+  background-color: #4ade80; /* Green */
+}
+
+/* --- Middle Section --- */
+.middleSection {
+  flex-grow: 1; /* Takes up available space */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the screen */
+  padding: 10px 0;
+}
+
+.screenBorder {
+  background-color: #d1d5db; /* Light gray border */
+  padding: 10px;
+  border-radius: 5px 5px 5px 20px; /* Rounded corners, sharper bottom right */
+  border: 2px solid #9ca3af; /* Slightly darker gray */
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+  width: 90%; /* Adjust width */
+  margin-bottom: 10px; /* Space below screen */
+}
+
+.screen {
+  background-color: #1f2937; /* Dark gray/black screen */
+  color: #f3f4f6; /* Light text color */
+  height: 180px; /* Adjust height */
+  border-radius: 3px;
+  border: 2px solid #111827; /* Very dark border */
+  display: flex;
+  flex-direction: column; /* Stack image and text */
+  align-items: center;
+  justify-content: center; /* Center placeholder */
+  padding: 10px;
+  overflow: hidden; /* Hide overflow if content is too big */
+}
+
+.pokemonSprite {
+  width: 96px; /* Adjust based on sprite size */
+  height: 96px;
+  object-fit: contain; /* Ensure sprite scales correctly */
+  margin-bottom: 10px;
+  image-rendering: pixelated; /* Keep sprites crisp */
+}
+
+.pokemonInfo {
+  text-align: center;
+  font-size: 0.7rem; /* Smaller text for info */
+}
+
+.pokemonInfo h3 {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.placeholderText {
+  font-size: 0.8rem;
+  color: #6b7280; /* Dim color */
+}
+
+.screenBottomLights {
+  display: flex;
+  gap: 15px; /* Space between small red lights */
+  margin-top: 5px; /* Space above the lights */
+}
+
+.smallButton {
+  border-radius: 50%;
+  border: 1px solid #444;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.smallRedButton {
+  width: 10px;
+  height: 10px;
+  background-color: #ef4444; /* Red */
+}
+
+/* --- Bottom Section --- */
+.bottomSection {
+  height: 150px; /* Adjust height */
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align items to the top of the section */
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Layout for buttons */
+  grid-template-rows: auto auto;
+  gap: 10px;
+  width: 65%; /* Take up most of the bottom left */
+  align-items: center;
+}
+
+.largeBlueButton {
+  grid-column: 1 / 2; /* First column */
+  grid-row: 1 / 2; /* First row */
+  width: 45px;
+  height: 45px;
+  background-color: #3b82f6; /* Blue */
+  border: 2px solid #1e40af;
+  border-radius: 50%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  justify-self: center; /* Center in grid cell */
+}
+.largeBlueButton:active {
+  transform: scale(0.95);
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.greenRectButton,
+.orangeRectButton {
+  width: 50px;
+  height: 15px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  justify-self: center; /* Center in grid cell */
+}
+.greenRectButton:active,
+.orangeRectButton:active {
+  transform: translateY(1px);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.greenRectButton {
+  grid-column: 2 / 3; /* Second column */
+  grid-row: 1 / 2; /* First row */
+  background-color: #4ade80; /* Green */
+}
+
+.orangeRectButton {
+  grid-column: 3 / 4; /* Third column */
+  grid-row: 1 / 2; /* First row */
+  background-color: #fb923c; /* Orange */
+}
+
+.dPad {
+  grid-column: 1 / 4; /* Span all columns */
+  grid-row: 2 / 3; /* Second row */
+  width: 60px;
+  height: 60px;
+  background-color: #374151; /* Dark Gray */
+  position: relative;
+  border-radius: 5px; /* Slight rounding */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  justify-self: center; /* Center in grid cell */
+  margin-top: 10px; /* Space above D-pad */
+  cursor: grab; /* Indicate draggability (though not functional here) */
+}
+/* Create cross shape using pseudo-elements */
+.dPad::before,
+.dPad::after {
+  content: "";
+  position: absolute;
+  background-color: #374151; /* Dark Gray */
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+/* Horizontal bar */
+.dPad::before {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 30%; /* Adjust thickness */
+  border-radius: 3px;
+}
+/* Vertical bar */
+.dPad::after {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%; /* Adjust thickness */
+  height: 100%;
+  border-radius: 3px;
+}
+
+.speakerGrill {
+  width: 30%; /* Remaining width */
+  height: 70px; /* Adjust height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  margin-top: 15px; /* Align roughly with bottom buttons */
+}
+
+.speakerLine {
+  width: 80%;
+  height: 4px;
+  background-color: #b91c1c; /* Darker red */
+  border-radius: 2px;
+}
+
+/* Optional: Add a pixel font */
+/* Make sure you import it in your global CSS or _app.js */
+/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */

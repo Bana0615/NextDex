@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { PokemonClient } from "pokenode-ts";
 //Components
@@ -50,6 +51,11 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>{`${value} type Pokémon | ${process.env.NEXT_PUBLIC_APP_NAME}`}</title>
+        <meta name="description" content={typeData?.description ?? ""} />
+        {/* <meta name="keywords" content="" /> */}
+      </Head>
       <div className="main-container">
         <MonHeader showBadge={true} />
         <Container className="main-content">
@@ -89,6 +95,19 @@ export default function Home() {
                       {value} type Pokémon: {apiTypeData?.pokemon.length}
                     </Col>
                   </Row>
+                  <hr />
+                  <div className="mt-5">
+                    <pre
+                      style={{
+                        whiteSpace: "pre-wrap",
+                        wordBreak: "break-all",
+                        maxHeight: "500px",
+                        overflowY: "auto",
+                      }}
+                    >
+                      <code>{JSON.stringify(apiTypeData, null, 2)}</code>
+                    </pre>
+                  </div>
                 </>
               )}
             </Col>
