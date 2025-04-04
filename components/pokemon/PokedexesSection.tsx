@@ -33,7 +33,7 @@ function PokedexesSection() {
         pokedexes.map((type, index) => (
           <Col key={type.name} className="mb-2 px-1">
             <a
-              href={`/pokedex?id=${type.name}`}
+              href={`/pokedex?name=${type.name}`}
               style={{ textDecoration: "none" }}
             >
               <Badge

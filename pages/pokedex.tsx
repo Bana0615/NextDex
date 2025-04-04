@@ -15,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const typeParam = urlParams.get("id") ?? "";
+    const typeParam = urlParams.get("name") ?? "";
 
     if (typeParam === null) {
       router.replace("/404");
@@ -52,7 +52,7 @@ export default function Home() {
               {!isLoading && value && (
                 <>
                   <h2 className="fw-bold mb-3 text-center">
-                    {value} <small className="text-muted">(pokedex)</small>
+                    {value} <small className="text-muted">(Pokédex)</small>
                   </h2>
                   <Row>
                     <Col md={6}>

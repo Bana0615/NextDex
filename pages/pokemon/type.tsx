@@ -9,6 +9,7 @@ import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
 //Helpers
 import { createWeaknessSentence } from "@/helpers/createWeaknessSentence";
+import { createIndicesSentence } from "@/helpers/createIndicesSentence";
 //Data
 import typesData from "@/json/pokemon/types.json";
 //Types
@@ -19,11 +20,12 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [value, setValue] = useState<string | null>(null);
   const [apiData, setApiData] = useState<PokemonTypeData>();
+  const [tmpApiData, setTmpApiData] = useState<PokemonTypeData>();
   const [typeData, setTypeData] = useState<PokemonType>();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const typeParam = urlParams.get("id") ?? "";
+    const typeParam = urlParams.get("name") ?? "";
     const foundType = typesData.find(
       (type) => type.name.toLowerCase() === typeParam.toLowerCase()
     );
@@ -42,7 +44,13 @@ export default function Home() {
 
       await api
         .getTypeByName(typeParam)
-        .then((data) => setApiData(data as PokemonTypeData))
+        .then((data) => {
+          const tmp = { ...data };
+          delete tmp.damage_relations;
+          delete tmp.game_indices;
+          setTmpApiData(tmp as PokemonTypeData)
+          setApiData(data as PokemonTypeData)
+        })
         .catch((error) => console.error(error));
     })();
 
@@ -92,6 +100,17 @@ export default function Home() {
                           </p>
                         </>
                       )}
+                      {apiData?.game_indices && (
+                        <>
+                          <h4 className="text-center">Game Indices</h4>
+                          <p>
+                            {createIndicesSentence(
+                              value,
+                              apiData?.game_indices
+                            )}
+                          </p>
+                        </>
+                      )}
                     </Col>
                     <Col md={6}>
                       {value} type Pokémon: {apiData?.pokemon.length}
@@ -107,7 +126,7 @@ export default function Home() {
                         overflowY: "auto",
                       }}
                     >
-                      <code>{JSON.stringify(apiData, null, 2)}</code>
+                      <code>{JSON.stringify(tmpApiData, null, 2)}</code>
                     </pre>
                   </div>
                 </>
