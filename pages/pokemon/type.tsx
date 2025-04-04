@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Image from 'next/image';
 import { PokemonClient } from "pokenode-ts";
 //Components
 import MonHeader from "@/components/MonHeader";
@@ -38,7 +39,7 @@ export default function Home() {
     );
     setTypeData(foundType);
     (async () => {
-      const api = new PokemonClient(); // create a PokemonClient
+      const api = new PokemonClient();
 
       await api
         .getTypeByName(typeParam)
@@ -47,7 +48,7 @@ export default function Home() {
     })();
 
     setIsLoading(false);
-  }, []);
+  }, [router]);
 
   return (
     <>
@@ -65,9 +66,11 @@ export default function Home() {
                 <>
                   <h2 className="fw-bold mb-3 text-center">
                     {typeData && (
-                      <img
+                      <Image
                         src={`/images/pokemon/types/color/${typeData.imgSrc}`}
                         alt={`${typeData.name} type icon`}
+                        height={35}
+                        width={35}
                         style={{
                           height: "1.1em",
                           marginRight: "0.3em",

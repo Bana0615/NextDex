@@ -22,7 +22,6 @@ export default function Home() {
                 pokemonData={{
                   name: "Bulbasaur",
                   id: "001",
-                  sprite: "url_to_sprite",
                   description: "...",
                 }}
               />

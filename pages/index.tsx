@@ -34,6 +34,8 @@ export default function Home() {
             </Col>
             <Col lg={5}>
               <TypesSection />
+              <hr />
+              <TypesSection />
             </Col>
           </Row>
         </Container>

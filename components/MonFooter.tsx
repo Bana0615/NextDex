@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Nav } from "react-bootstrap";
+import Image from 'next/image';
 
 function MonFooter() {
   const currentYear = new Date().getFullYear();
@@ -32,25 +33,33 @@ function MonFooter() {
                 style={{ display: 'inline-block' }}
               >
                 CC BY-NC-SA 4.0
-                <img
+                <Image
                   style={{ height: '22px', marginLeft: '3px', verticalAlign: 'text-bottom' }}
                   src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
                   alt=""
+                  height={20}
+                  width={20}
                 />
-                <img
+                <Image
                   style={{ height: '22px', marginLeft: '3px', verticalAlign: 'text-bottom' }}
                   src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
                   alt=""
+                  height={20}
+                  width={20}
                 />
-                <img
+                <Image
                   style={{ height: '22px', marginLeft: '3px', verticalAlign: 'text-bottom' }}
                   src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
                   alt=""
+                  height={20}
+                  width={20}
                 />
-                <img
+                <Image
                   style={{ height: '22px', marginLeft: '3px', verticalAlign: 'text-bottom' }}
                   src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
                   alt=""
+                  height={20}
+                  width={20}
                 />
               </a>
             </p>

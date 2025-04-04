@@ -1,12 +1,9 @@
-// components/Pokedex.js
 import React from "react";
-import styles from "@/public/styles/components/Pokedex.module.css"; // Import the CSS Module
-import { Container, Row, Col } from "react-bootstrap"; // Optional: Use if needed for internal layout
+import Image from 'next/image';
+//Styles
+import styles from "@/public/styles/components/Pokedex.module.css";
 
 const Pokedex = ({ pokemonData }) => {
-  // pokemonData is a placeholder prop for future data fetching
-  // Example structure: { name: 'Bulbasaur', id: '001', sprite: 'url_to_sprite', description: '...' }
-
   return (
     <div className={styles.pokedex}>
       {/* Top Section (Lights & Hinge) */}
@@ -26,10 +23,12 @@ const Pokedex = ({ pokemonData }) => {
           <div className={styles.screen}>
             {pokemonData ? (
               <>
-                <img
-                  src={pokemonData.sprite || "/placeholder-sprite.png"} // Provide a default/placeholder
-                  alt={pokemonData.name || "Pokemon"}
+                <Image
+                  src={pokemonData.sprite || "/images/pokedex/question_mark.png"}
+                  alt={pokemonData.name || "Pokémon"}
                   className={styles.pokemonSprite}
+                  height={16}
+                  width={16}
                 />
                 <div className={styles.pokemonInfo}>
                   <h3>{pokemonData.name || "POKEMON NAME"}</h3>
@@ -39,7 +38,7 @@ const Pokedex = ({ pokemonData }) => {
               </>
             ) : (
               <div className={styles.placeholderText}>
-                Awaiting Pokemon Data...
+                Awaiting Pokémon Data...
               </div>
             )}
           </div>

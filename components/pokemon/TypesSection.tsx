@@ -1,8 +1,10 @@
 "use client";
-
 import React from "react";
+import Image from 'next/image';
 import { Badge, Col, Row } from "react-bootstrap";
+//Data
 import typesData from "@/json/pokemon/types.json";
+//Types
 import { PokemonType } from "@/types/pokemon/Types";
 
 function TypesSection() {
@@ -10,6 +12,7 @@ function TypesSection() {
 
   return (
     <Row g={2}>
+      <h4 className="text-center mb-3">Pokémon Types</h4>
       {types.map((type) => (
         <Col key={type.name} xs={4} lg={2} className="mb-2 px-1">
           <a
@@ -25,11 +28,14 @@ function TypesSection() {
                 padding: "0.5em !important",
               }}
             >
-              <img
+              <Image
                 src={`/images/pokemon/types/transparent/${type.imgSrc}`}
                 alt={`${type.name} type icon`}
+                height={16}
+                width={16}
                 style={{
-                  height: "1.0em",
+                  height: '1.1em',
+                  width: 'auto',
                   marginRight: "0.3em",
                 }}
               />
