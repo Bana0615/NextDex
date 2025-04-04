@@ -4,7 +4,6 @@ import { Badge, Col, Row } from "react-bootstrap";
 import { GameClient, NamedAPIResource } from "pokenode-ts";
 
 function PokedexesSection() {
-  const color = "#e63946";
   const [isLoading, setIsLoading] = useState(true);
   const [pokedexes, setPokedexes] = useState<NamedAPIResource[]>([]);
 

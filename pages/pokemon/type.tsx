@@ -18,7 +18,7 @@ export default function Home() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [value, setValue] = useState<string | null>(null);
-  const [apiTypeData, setApiTypeData] = useState<PokemonTypeData>();
+  const [apiData, setApiData] = useState<PokemonTypeData>();
   const [typeData, setTypeData] = useState<PokemonType>();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function Home() {
 
       await api
         .getTypeByName(typeParam)
-        .then((data) => setApiTypeData(data as PokemonTypeData))
+        .then((data) => setApiData(data as PokemonTypeData))
         .catch((error) => console.error(error));
     })();
 
@@ -81,20 +81,20 @@ export default function Home() {
                   <Row>
                     <Col md={6}>
                       <p>{typeData?.description}</p>
-                      {apiTypeData?.damage_relations && (
+                      {apiData?.damage_relations && (
                         <>
                           <h4 className="text-center">Damage Relations</h4>
                           <p>
                             {createWeaknessSentence(
                               value,
-                              apiTypeData?.damage_relations.double_damage_from
+                              apiData?.damage_relations.double_damage_from
                             )}
                           </p>
                         </>
                       )}
                     </Col>
                     <Col md={6}>
-                      {value} type Pokémon: {apiTypeData?.pokemon.length}
+                      {value} type Pokémon: {apiData?.pokemon.length}
                     </Col>
                   </Row>
                   <hr />
@@ -107,7 +107,7 @@ export default function Home() {
                         overflowY: "auto",
                       }}
                     >
-                      <code>{JSON.stringify(apiTypeData, null, 2)}</code>
+                      <code>{JSON.stringify(apiData, null, 2)}</code>
                     </pre>
                   </div>
                 </>
