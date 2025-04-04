@@ -49,7 +49,9 @@ export default function TypePage() {
           const tmp = { ...data };
           delete tmp.damage_relations;
           delete tmp.game_indices;
-          // delete tmp.id;
+          delete tmp.generation;
+          delete tmp.id;
+          delete tmp.move_damage_class;
           setTmpApiData(tmp as PokemonTypeData)
           setApiData(data as PokemonTypeData)
         })
@@ -124,10 +126,15 @@ export default function TypePage() {
                           {' of Pokémon.'}
                         </p>
                       )}
+                      {apiData?.move_damage_class && (
+                        <p>
+                          The move damage class is {apiData?.move_damage_class.name}
+                        </p>
+                      )}
                       {apiData?.pokemon && (
-                        <>
+                        <p>
                           {value} type Pokémon: {apiData?.pokemon.length}
-                        </>
+                        </p>
                       )}
                     </Col>
                   </Row>
