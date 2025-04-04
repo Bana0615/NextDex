@@ -7,7 +7,7 @@ import { GameClient, Pokedex } from "pokenode-ts";
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
 
-export default function PokedexPage() {
+export default function GenerationPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [value, setValue] = useState<string | null>(null);
@@ -40,7 +40,7 @@ export default function PokedexPage() {
   return (
     <>
       <Head>
-        <title>{`${value} Pokédex | ${process.env.NEXT_PUBLIC_APP_NAME}`}</title>
+        <title>{`${value} Generation | ${process.env.NEXT_PUBLIC_APP_NAME}`}</title>
         {/* <meta name="description" content="" /> */}
         {/* <meta name="keywords" content="" /> */}
       </Head>
@@ -52,14 +52,14 @@ export default function PokedexPage() {
               {!isLoading && value && (
                 <>
                   <h2 className="fw-bold mb-3 text-center">
-                    {value} <small className="text-muted">(Pokédex)</small>
+                    {value} <small className="text-muted">(generation)</small>
                   </h2>
                   <Row>
                     <Col md={6}>
                       <p>description</p>
                     </Col>
                     <Col md={6}>
-                      {value} Pokédex contains: ?? Pokémon
+                      stuff
                     </Col>
                   </Row>
                   <hr />

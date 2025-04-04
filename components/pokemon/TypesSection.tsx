@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from 'next/image';
+import Link from 'next/link';
 import { Badge, Col, Row } from "react-bootstrap";
 //Data
 import typesData from "@/json/pokemon/types.json";
@@ -15,7 +16,7 @@ function TypesSection() {
       <h4 className="text-center mb-3">Pokémon Types</h4>
       {types.map((type) => (
         <Col key={type.name} xs={4} lg={2} className="mb-2 px-1">
-          <a
+          <Link
             href={`/pokemon/type?name=${type.name}`}
             style={{ textDecoration: "none" }}
           >
@@ -41,7 +42,7 @@ function TypesSection() {
               />
               <span>{type.name}</span>
             </Badge>
-          </a>
+          </Link>
         </Col>
       ))}
     </Row>

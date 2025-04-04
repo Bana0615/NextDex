@@ -1,4 +1,5 @@
 import React, { JSX } from "react";
+import Link from 'next/link';
 import { NamedAPIResource } from "pokenode-ts";
 //Helpers
 import { getSentenceSeperator } from "@/helpers/getSentenceSeperator";
@@ -27,9 +28,9 @@ export function createWeaknessSentence(
       {baseName} takes double damage from{" "}
       {values.map((info, index) => {
         const typeLink = (
-          <a href={`/pokemon/type?name=${info.name}`} key={info.name}>
+          <Link href={`/pokemon/type?name=${info.name}`} key={info.name}>
             {info.name}
-          </a>
+          </Link>
         );
 
         // Determine the separator to add *after* the current link

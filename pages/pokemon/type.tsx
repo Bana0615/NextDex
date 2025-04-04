@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Head from "next/head";
+import Link from 'next/link';
 import { useRouter } from "next/router";
 import Image from 'next/image';
 import { PokemonClient, Type as PokemonTypeData } from "pokenode-ts";
@@ -15,7 +16,7 @@ import typesData from "@/json/pokemon/types.json";
 //Types
 import { PokemonType } from "@/types/pokemon/Types";
 
-export default function Home() {
+export default function TypePage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [value, setValue] = useState<string | null>(null);
@@ -25,29 +26,30 @@ export default function Home() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const typeParam = urlParams.get("name") ?? "";
+    const nameParam = urlParams.get("name") ?? "";
     const foundType = typesData.find(
-      (type) => type.name.toLowerCase() === typeParam.toLowerCase()
+      (type) => type.name.toLowerCase() === nameParam.toLowerCase()
     );
 
-    if (typeParam === null || !foundType) {
+    if (nameParam === null || !foundType) {
       router.replace("/404");
       return;
     }
 
     setValue(
-      typeParam.charAt(0).toUpperCase() + typeParam.slice(1).toLowerCase()
+      nameParam.charAt(0).toUpperCase() + nameParam.slice(1).toLowerCase()
     );
     setTypeData(foundType);
     (async () => {
       const api = new PokemonClient();
 
       await api
-        .getTypeByName(typeParam)
+        .getTypeByName(nameParam)
         .then((data) => {
           const tmp = { ...data };
           delete tmp.damage_relations;
           delete tmp.game_indices;
+          // delete tmp.id;
           setTmpApiData(tmp as PokemonTypeData)
           setApiData(data as PokemonTypeData)
         })
@@ -113,7 +115,20 @@ export default function Home() {
                       )}
                     </Col>
                     <Col md={6}>
-                      {value} type Pokémon: {apiData?.pokemon.length}
+                      {apiData?.generation && (
+                        <p className="mb-2">
+                          {`${value} type pokémon were first introduced in `}
+                          <Link href={`/pokemon/generation?name=${apiData?.generation.name}`}>
+                            {apiData?.generation.name}
+                          </Link>
+                          {' of Pokémon.'}
+                        </p>
+                      )}
+                      {apiData?.pokemon && (
+                        <>
+                          {value} type Pokémon: {apiData?.pokemon.length}
+                        </>
+                      )}
                     </Col>
                   </Row>
                   <hr />

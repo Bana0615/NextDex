@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Link from 'next/link';
 import { Badge, Col, Row } from "react-bootstrap";
 import { GameClient, NamedAPIResource } from "pokenode-ts";
 
@@ -32,7 +33,7 @@ function PokedexesSection() {
       ) : (
         pokedexes.map((type, index) => (
           <Col key={type.name} className="mb-2 px-1">
-            <a
+            <Link
               href={`/pokedex?name=${type.name}`}
               style={{ textDecoration: "none" }}
             >
@@ -53,7 +54,7 @@ function PokedexesSection() {
                     .join(" ")}
                 </span>
               </Badge>
-            </a>
+            </Link>
           </Col>
         ))
       )}
