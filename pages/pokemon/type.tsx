@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Image from 'next/image';
-import { PokemonClient } from "pokenode-ts";
+import { PokemonClient, Type as PokemonTypeData } from "pokenode-ts";
 //Components
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
@@ -12,7 +12,6 @@ import { createWeaknessSentence } from "@/helpers/createWeaknessSentence";
 //Data
 import typesData from "@/json/pokemon/types.json";
 //Types
-import { PokemonTypeData } from "@/types/pokemon/Types";
 import { PokemonType } from "@/types/pokemon/Types";
 
 export default function Home() {

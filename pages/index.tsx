@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
 import TypesSection from "@/components/pokemon/TypesSection";
+import PokedexesSection from "@/components/pokemon/PokedexesSection";
 
 export default function Home() {
   return (
@@ -35,7 +36,7 @@ export default function Home() {
             <Col lg={5}>
               <TypesSection />
               <hr />
-              <TypesSection />
+              <PokedexesSection />
             </Col>
           </Row>
         </Container>

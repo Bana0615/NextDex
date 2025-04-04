@@ -25,7 +25,7 @@ function TypesSection() {
                 backgroundColor: `${type.color} !important`,
                 color: "#fff",
                 textShadow: "1px 1px 2px rgba(0,0,0,0.6)",
-                padding: "0.5em !important",
+                padding: "0.5em",
               }}
             >
               <Image
