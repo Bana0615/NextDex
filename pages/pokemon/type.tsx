@@ -9,6 +9,7 @@ import { PokemonClient, Type as PokemonTypeData } from "pokenode-ts";
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
 import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
+import PokemonGrid from "@/components/pokemon/PokemonGrid";
 //Helpers
 import { createDamageRelationSentences } from "@/helpers/createDamageRelationSentences";
 import { createIndicesSentence } from "@/helpers/createIndicesSentence";
@@ -23,7 +24,6 @@ export default function TypePage() {
   const [value, setValue] = useState<string | null>(null);
   const [apiData, setApiData] = useState<PokemonTypeData>();
   const [typeData, setTypeData] = useState<PokemonType>();
-  // Find a type that has past_damage_relations
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -49,7 +49,7 @@ export default function TypePage() {
         .then((data) => {
           //delete tmp.moves; //TODO: More with this
           //delete tmp.pokemon; //TODO: More with this
-          console.log("data", data);
+          console.log("data.pokemon", data?.pokemon[0]);
           setApiData(data as PokemonTypeData);
         })
         .catch((error) => console.error(error));
@@ -68,7 +68,7 @@ export default function TypePage() {
       <div className="main-container">
         <MonHeader showBadge={true} />
         <Container className="main-content">
-          <Row className="shadow-lg mt-3 p-3 bg-body rounded">
+          <Row className="shadow-lg my-3 p-3 bg-body rounded">
             <Col>
               {!isLoading && value && (
                 <>
@@ -119,22 +119,46 @@ export default function TypePage() {
                       )}
                     </Col>
                     <Col md={3}>
+                      <Row className="justify-content-center text-center">
+                        {apiData?.pokemon && (
+                          <Col xs={12} md={6}>
+                            <h3 className="fw-bold mb-0">
+                              {apiData?.pokemon.length}
+                            </h3>
+                            <p className="mt-1">{`${value} type Pokémon`}</p>
+                          </Col>
+                        )}
+                        {apiData?.moves && (
+                          <Col xs={12} md={6}>
+                            <h3 className="fw-bold mb-0">
+                              {apiData?.moves.length}
+                            </h3>
+                            <p className="mt-1">{`${value}-type moves`}</p>
+                          </Col>
+                        )}
+                      </Row>
                       {apiData?.generation && (
-                        <p className="mb-2">
-                          {`${value} type pokémon were first introduced in `}
-                          <Link
-                            href={`/pokemon/generation?name=${apiData?.generation.name}`}
-                          >
-                            {apiData?.generation.name}
-                          </Link>
-                          {" of Pokémon."}
-                        </p>
+                        <>
+                          <hr />
+                          <p className="mb-2">
+                            {`${value} type pokémon were first introduced in `}
+                            <Link
+                              href={`/pokemon/generation?name=${apiData?.generation.name}`}
+                            >
+                              {apiData?.generation.name}
+                            </Link>
+                            {" of Pokémon."}
+                          </p>
+                        </>
                       )}
                       {apiData?.move_damage_class && (
-                        <p>
-                          The class of damage inflicted by this type is{" "}
-                          {apiData?.move_damage_class.name}
-                        </p>
+                        <>
+                          <hr />
+                          <p>
+                            The class of damage inflicted by this type is{" "}
+                            {apiData?.move_damage_class.name}
+                          </p>
+                        </>
                       )}
                       {apiData?.moves && (
                         <p>
@@ -144,18 +168,20 @@ export default function TypePage() {
                           {apiData?.moves.length}
                         </p>
                       )}
-                      {apiData?.pokemon && (
-                        <p>
-                          {/* TODO: Create a section at the bottom of the page to list these */}
-                          {/* TODO: Maybe move this up as a badge and link to the bottom section? */}
-                          {value} type Pokémon: {apiData?.pokemon.length}
-                        </p>
-                      )}
                     </Col>
                   </Row>
                   <div className="mt-5">
                     {apiData?.sprites && (
-                      <PokemonSpritesDisplay spritesData={apiData?.sprites} />
+                      <>
+                        <h3 className="text-center mb-4">{`${value} type Pokémon`}</h3>
+                        <PokemonGrid pokemonList={apiData?.pokemon} />
+                      </>
+                    )}
+                    {apiData?.sprites && (
+                      <>
+                        <hr />
+                        <PokemonSpritesDisplay spritesData={apiData?.sprites} />
+                      </>
                     )}
                   </div>
                 </>

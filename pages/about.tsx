@@ -60,12 +60,12 @@ export default function AboutPage() {
                     >
                       React Bootstrap
                     </a>
-                    <li>
-                      <a href="https://git-scm.com/" target="_blank">
-                        Git
-                      </a>
-                      {" - "} Version control software
-                    </li>
+                  </li>
+                  <li>
+                    <a href="https://git-scm.com/" target="_blank">
+                      Git
+                    </a>
+                    {" - "} Version control software
                   </li>
                 </ul>
               </div>

@@ -58,12 +58,7 @@ const PokemonSpritesDisplay: React.FC<PokemonSpritesDisplayProps> = ({
 
   return (
     <Container fluid className="pokemon-sprites-container">
-      {title && (
-        <>
-          <h3 className="mb-3 text-center">{title}</h3>
-          <hr />
-        </>
-      )}
+      {title && <h3 className="mb-3 text-center">{title}</h3>}
 
       {sortedGenerationKeys.filter(
         (key) => spritesData[key] && Object.keys(spritesData[key]!).length > 0

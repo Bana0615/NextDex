@@ -91,6 +91,11 @@ function MonFooter() {
 
           <Nav className="footer-nav justify-content-center justify-content-md-end">
             <Nav.Item>
+              <Nav.Link href="/about" className="footer-link px-2">
+                About
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
               <Nav.Link href="/terms" className="footer-link px-2">
                 Terms
               </Nav.Link>

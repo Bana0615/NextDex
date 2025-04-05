@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
 
-export default function PokedexPage() {
+export default function PokemonPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [value, setValue] = useState<string | null>(null);
@@ -30,7 +30,7 @@ export default function PokedexPage() {
   return (
     <>
       <Head>
-        <title>{`${value} Pokédex | ${process.env.NEXT_PUBLIC_APP_NAME}`}</title>
+        <title>{`${value} Pokémon | ${process.env.NEXT_PUBLIC_APP_NAME}`}</title>
         {/* <meta name="description" content="" /> */}
         {/* <meta name="keywords" content="" /> */}
       </Head>
@@ -42,7 +42,7 @@ export default function PokedexPage() {
               {!isLoading && value && (
                 <>
                   <h2 className="fw-bold mb-3 text-center">
-                    {value} <small className="text-muted">(pokédex)</small>
+                    {value} <small className="text-muted">(pokémon)</small>
                   </h2>
                   <Row className="mt-5">
                     <span className="text-center">Coming Soon.....</span>
