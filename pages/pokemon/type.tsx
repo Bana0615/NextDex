@@ -8,6 +8,7 @@ import { PokemonClient, Type as PokemonTypeData } from "pokenode-ts";
 //Components
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
+import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
 //Helpers
 import { createDamageRelationSentences } from "@/helpers/createDamageRelationSentences";
 import { createIndicesSentence } from "@/helpers/createIndicesSentence";
@@ -20,8 +21,8 @@ export default function TypePage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [value, setValue] = useState<string | null>(null);
-  const [apiData, setApiData] = useState<PokemonTypeData>();
-  const [tmpApiData, setTmpApiData] = useState<PokemonTypeData>();
+  const [apiData, setApiData] = useState<any>();
+  const [tmpApiData, setTmpApiData] = useState<any>();
   const [typeData, setTypeData] = useState<PokemonType>();
   // Find a type that has past_damage_relations
 
@@ -146,6 +147,12 @@ export default function TypePage() {
                           The class of damage inflicted by this type is{" "}
                           {apiData?.move_damage_class.name}
                         </p>
+                      )}
+                      {apiData?.sprites && (
+                        <PokemonSpritesDisplay
+                          spritesData={apiData?.sprites}
+                          title="Type Icons"
+                        />
                       )}
                       {apiData?.moves && (
                         <p>
