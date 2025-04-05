@@ -4,7 +4,7 @@ import {
   TypeRelations,
   TypeRelationsPast,
   NamedAPIResource,
-} from "pokenode-ts"; // Added NamedAPIResource for clarity
+} from "pokenode-ts";
 // Helpers
 import { getSentenceSeperator } from "@/helpers/getSentenceSeperator";
 
@@ -33,11 +33,11 @@ const pastTenseDescriptions: Record<DamageRelationKey, string> = {
 
 /**
  * Creates an array of JSX sentences describing type damage relations with links.
- * Uses past tense and includes generation context if TypeRelationsPast is provided.
+ * Uses past tense and includes generation context (with a link) if TypeRelationsPast is provided.
  * Example Output (Present):
  * - "Ice takes double damage from fighting, rock, steel and fire"
  * Example Output (Past):
- * - "During generation-i, Ice took double damage from fighting and rock"
+ * - "During [link to generation-i], Ice took double damage from fighting and rock"
  *
  * @param {string} baseName - The name of the type being described (e.g., "Ice").
  * @param {TypeRelationsPast | TypeRelations | undefined | null} damageRelationsInput - The damage relations object for the type, potentially null or undefined.
@@ -52,7 +52,6 @@ export function createDamageRelationSentences(
     return [];
   }
 
-  // --- Determine if the relations are from the past ---
   // Type Guard to check if it's TypeRelationsPast
   const isPast = (
     relations: TypeRelationsPast | TypeRelations
@@ -62,39 +61,53 @@ export function createDamageRelationSentences(
 
   const isPastRelations = isPast(damageRelationsInput);
   const damageRelations = isPastRelations
-    ? damageRelationsInput.damage_relations // Access nested relations for past type
-    : damageRelationsInput; // Use directly for present type
+    ? damageRelationsInput.damage_relations
+    : damageRelationsInput;
 
   // Select the correct tense descriptions
   const descriptions = isPastRelations
     ? pastTenseDescriptions
     : presentTenseDescriptions;
 
-  // Get generation name if applicable
-  const generationName = isPastRelations
-    ? damageRelationsInput.generation.name
-    : null;
-  const pastTensePrefix = generationName ? `During ${generationName}, ` : "";
+  // Create Generation Link
+  let generationPrefix: JSX.Element | null = null;
+  let rawGenerationName: string | null = null;
+
+  if (isPastRelations) {
+    rawGenerationName = damageRelationsInput.generation.name;
+    generationPrefix = (
+      <>
+        During{" "}
+        <Link
+          href={`/pokemon/generation?name=${rawGenerationName}`}
+          key={rawGenerationName}
+        >
+          {rawGenerationName}
+        </Link>
+        ,{" "}
+      </>
+    );
+  }
 
   const sentences: JSX.Element[] = [];
 
   // Iterate over the known damage relation keys
   (Object.keys(descriptions) as DamageRelationKey[]).forEach((relationKey) => {
-    // Check if the key exists on the damageRelations object
-    // Need to safely access the key
     const values: NamedAPIResource[] | undefined =
       damageRelations?.[relationKey];
 
-    // Only proceed if the values array exists and has items
     if (values && values.length > 0) {
       const numTypes = values.length;
       const description = descriptions[relationKey];
 
       // Construct the sentence paragraph
       sentences.push(
-        <p key={`${baseName}-${relationKey}${isPastRelations ? "-past" : ""}`}>
-          {" "}
-          {isPastRelations && pastTensePrefix} {/* Add prefix if past tense */}
+        <p
+          key={`${baseName}-${relationKey}${
+            isPastRelations ? `-past-${rawGenerationName}` : ""
+          }`}
+        >
+          {generationPrefix}
           {baseName} {description}{" "}
           {values.map((info, index) => {
             const typeLink = (
@@ -103,7 +116,6 @@ export function createDamageRelationSentences(
               </Link>
             );
 
-            // Determine the separator
             const separator: string | null = getSentenceSeperator(
               index,
               numTypes
@@ -124,9 +136,12 @@ export function createDamageRelationSentences(
   // If after checking all relations no sentences were generated, return a generic message
   if (sentences.length === 0) {
     const noRelationsKey = `${baseName}-no-relations${
-      isPastRelations ? `-past-${generationName}` : ""
+      isPastRelations ? `-past-${rawGenerationName}` : ""
     }`;
-    const noRelationsContext = isPastRelations ? ` for ${generationName}` : "";
+
+    const noRelationsContext = isPastRelations
+      ? ` during ${rawGenerationName}`
+      : "";
     return [
       <p key={noRelationsKey}>
         {baseName} had no specific damage relations listed{noRelationsContext}.
