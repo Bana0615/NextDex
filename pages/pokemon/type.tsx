@@ -148,12 +148,6 @@ export default function TypePage() {
                           {apiData?.move_damage_class.name}
                         </p>
                       )}
-                      {apiData?.sprites && (
-                        <PokemonSpritesDisplay
-                          spritesData={apiData?.sprites}
-                          title="Type Icons"
-                        />
-                      )}
                       {apiData?.moves && (
                         <p>
                           {/* TODO: Create a section at the bottom of the page to list these */}
@@ -173,16 +167,9 @@ export default function TypePage() {
                   </Row>
                   <hr />
                   <div className="mt-5">
-                    <pre
-                      style={{
-                        whiteSpace: "pre-wrap",
-                        wordBreak: "break-all",
-                        maxHeight: "500px",
-                        overflowY: "auto",
-                      }}
-                    >
-                      <code>{JSON.stringify(tmpApiData, null, 2)}</code>
-                    </pre>
+                    {apiData?.sprites && (
+                      <PokemonSpritesDisplay spritesData={apiData?.sprites} />
+                    )}
                   </div>
                 </>
               )}

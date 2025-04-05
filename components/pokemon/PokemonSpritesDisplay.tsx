@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
-//Types
 import { PokemonTypeSprites } from "@/types/pokemon/TypeSprite";
 
 interface PokemonSpritesDisplayProps {
@@ -33,7 +32,6 @@ const PokemonSpritesDisplay: React.FC<PokemonSpritesDisplayProps> = ({
     keyof PokemonTypeSprites
   >;
 
-  // Sort generation keys for consistent order
   const sortedGenerationKeys = generationKeys.sort((a, b) => {
     const getGenNumber = (genKey: string): number => {
       const part = genKey.split("-")[1];
@@ -54,16 +52,21 @@ const PokemonSpritesDisplay: React.FC<PokemonSpritesDisplayProps> = ({
       {sortedGenerationKeys.length === 0 && <p>No sprite data available.</p>}
 
       {sortedGenerationKeys.map((generationKey) => {
-        // TypeScript now knows the exact type of spritesData[generationKey]
         const gameVersions = spritesData[generationKey];
-        // Get the keys for the specific game versions within this generation
-        const gameVersionKeys = Object.keys(gameVersions) as Array<
-          keyof typeof gameVersions
-        >;
 
-        if (gameVersionKeys.length === 0) {
+        if (!gameVersions) {
           return null;
         }
+
+        const gameEntries = Object.entries(gameVersions);
+
+        if (gameEntries.length === 0) {
+          return null;
+        }
+
+        const hasValidSprites = gameEntries.some(
+          ([, spriteDetail]) => spriteDetail?.name_icon
+        );
 
         return (
           <Card key={generationKey} className="mb-4 shadow-sm">
@@ -71,14 +74,7 @@ const PokemonSpritesDisplay: React.FC<PokemonSpritesDisplayProps> = ({
               {formatGenerationName(generationKey)}
             </Card.Header>
             <Card.Body>
-              {gameVersionKeys.map((gameKey) => {
-                // TypeScript knows gameVersions[gameKey] is of type NameIcon
-                const spriteDetail = gameVersions[gameKey];
-
-                // Check remains useful in case the data source *could* deviate
-                // or if the object itself is unexpectedly missing at runtime.
-                // Since NameIcon requires name_icon: string, the primary risk
-                // is spriteDetail being undefined, which ?. handles.
+              {gameEntries.map(([gameKey, spriteDetail]) => {
                 if (!spriteDetail?.name_icon) {
                   return null;
                 }
@@ -89,14 +85,12 @@ const PokemonSpritesDisplay: React.FC<PokemonSpritesDisplayProps> = ({
                     className="mb-2 align-items-center border-bottom pb-2"
                   >
                     <Col xs={12} sm={5} md={4} lg={3}>
-                      {/* We use `String(gameKey)` because TS might infer gameKey
-                           as a union of specific literal types, and formatGameName expects string */}
-                      <strong>{formatGameName(String(gameKey))}:</strong>
+                      <strong>{formatGameName(gameKey)}:</strong>{" "}
                     </Col>
                     <Col xs={12} sm={7} md={8} lg={9}>
                       <img
-                        src={spriteDetail.name_icon} // Known to be string if object exists
-                        alt={`${formatGameName(String(gameKey))} sprite`}
+                        src={spriteDetail.name_icon}
+                        alt={`${formatGameName(gameKey)} sprite`}
                         style={{
                           width: "40px",
                           height: "auto",
@@ -110,10 +104,7 @@ const PokemonSpritesDisplay: React.FC<PokemonSpritesDisplayProps> = ({
                   </Row>
                 );
               })}
-              {/* Handle case where generation exists but has no valid sprites (less likely with strict types) */}
-              {gameVersionKeys.every(
-                (gameKey) => !gameVersions[gameKey]?.name_icon
-              ) && (
+              {!hasValidSprites && (
                 <p className="text-muted fst-italic">
                   No sprites found for this generation's versions.
                 </p>
