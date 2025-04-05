@@ -120,7 +120,7 @@ export default function TypePage() {
                           <h4 className="text-center">Past Damage Relations</h4>
                           {createDamageRelationSentences(
                             value,
-                            apiData?.past_damage_relations[0].damage_relations
+                            apiData?.past_damage_relations[0]
                           )}
                         </>
                       )}
