@@ -1,5 +1,5 @@
 import React from "react";
-import Image from 'next/image';
+import Image from "next/image";
 //Styles
 import styles from "@/public/styles/components/Pokedex.module.css";
 
@@ -24,7 +24,9 @@ const Pokedex = ({ pokemonData }) => {
             {pokemonData ? (
               <>
                 <Image
-                  src={pokemonData.sprite || "/images/pokedex/question_mark.png"}
+                  src={
+                    pokemonData.sprite || "/images/pokedex/question_mark.png"
+                  }
                   alt={pokemonData.name || "Pokémon"}
                   className={styles.pokemonSprite}
                   height={16}
