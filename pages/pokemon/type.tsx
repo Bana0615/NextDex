@@ -54,10 +54,11 @@ export default function TypePage() {
           delete tmp.generation;
           delete tmp.id;
           delete tmp.move_damage_class;
-          delete tmp.moves;
+          delete tmp.moves; //TODO: More with this
           delete tmp.name;
           delete tmp.names;
-          console.log("past_damage_relations", tmp.past_damage_relations);
+          delete tmp.past_damage_relations;
+          delete tmp.pokemon; //TODO: More with this
           setTmpApiData(tmp as PokemonTypeData);
           setApiData(data as PokemonTypeData);
         })
@@ -102,6 +103,7 @@ export default function TypePage() {
                       {/* TODO: This need to be updated with the correct data */}
                       {apiData?.damage_relations && (
                         <>
+                          <hr />
                           <h4 className="text-center">Damage Relations</h4>
                           {createDamageRelationSentences(
                             value,
@@ -111,12 +113,14 @@ export default function TypePage() {
                       )}
                       {apiData?.game_indices && (
                         <>
+                          <hr />
                           <h4 className="text-center">Game Indices</h4>
                           {createIndicesSentence(value, apiData?.game_indices)}
                         </>
                       )}
                       {apiData?.past_damage_relations && (
                         <>
+                          <hr />
                           <h4 className="text-center">Past Damage Relations</h4>
                           {createDamageRelationSentences(
                             value,
