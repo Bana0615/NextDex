@@ -21,8 +21,7 @@ export default function TypePage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [value, setValue] = useState<string | null>(null);
-  const [apiData, setApiData] = useState<any>();
-  const [tmpApiData, setTmpApiData] = useState<any>();
+  const [apiData, setApiData] = useState<PokemonTypeData>();
   const [typeData, setTypeData] = useState<PokemonType>();
   // Find a type that has past_damage_relations
 
@@ -48,19 +47,8 @@ export default function TypePage() {
       await api
         .getTypeByName(nameParam)
         .then((data) => {
-          const tmp = { ...data };
-          //TODO: damage_relations and past_damage_relations are the same structure
-          delete tmp.damage_relations;
-          delete tmp.game_indices;
-          delete tmp.generation;
-          delete tmp.id;
-          delete tmp.move_damage_class;
-          delete tmp.moves; //TODO: More with this
-          delete tmp.name;
-          delete tmp.names;
-          delete tmp.past_damage_relations;
-          delete tmp.pokemon; //TODO: More with this
-          setTmpApiData(tmp as PokemonTypeData);
+          //delete tmp.moves; //TODO: More with this
+          //delete tmp.pokemon; //TODO: More with this
           setApiData(data as PokemonTypeData);
         })
         .catch((error) => console.error(error));

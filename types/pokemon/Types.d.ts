@@ -1,3 +1,10 @@
+export type PokemonType = {
+  name: string;
+  color: string;
+  imgSrc: string;
+  description: string;
+};
+
 interface NameIcon {
   name_icon: string;
 }

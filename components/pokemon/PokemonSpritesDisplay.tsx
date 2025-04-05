@@ -1,6 +1,8 @@
 import React from "react";
+import Image from "next/image";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { PokemonTypeSprites } from "@/types/pokemon/TypeSprite";
+//Types
+import { PokemonTypeSprites } from "@/types/pokemon/Types";
 
 interface PokemonSpritesDisplayProps {
   spritesData: PokemonTypeSprites;
@@ -105,23 +107,20 @@ const PokemonSpritesDisplay: React.FC<PokemonSpritesDisplayProps> = ({
                     return (
                       <Row
                         key={gameKey}
-                        className="mb-2 align-items-center border-bottom pb-2 flex-shrink-0" // flex-shrink-0 prevents rows from shrinking
+                        className="mb-2 align-items-center border-bottom pb-2 flex-shrink-0"
                       >
                         <Col xs={12} sm={5} md={4} lg={3}>
                           <strong>{formatGameName(gameKey)}:</strong>{" "}
                         </Col>
                         <Col xs={12} sm={7} md={8} lg={9}>
-                          <img
+                          <Image
                             src={spriteDetail.name_icon}
                             alt={`${formatGameName(gameKey)} sprite`}
-                            style={{
-                              width: "40px",
-                              height: "auto",
-                              imageRendering: "pixelated",
-                              verticalAlign: "middle",
-                            }}
-                            className="ms-2"
+                            width={55}
+                            height={15}
                             loading="lazy"
+                            className="ms-2 pixelated-sprite"
+                            unoptimized={true}
                           />
                         </Col>
                       </Row>
@@ -130,7 +129,7 @@ const PokemonSpritesDisplay: React.FC<PokemonSpritesDisplayProps> = ({
                   <div className="mt-auto">
                     {!hasValidSprites && (
                       <p className="text-muted fst-italic pt-2 mb-0">
-                        No sprites found for this generation's versions.
+                        No sprites found for this generation&apos;s versions.
                       </p>
                     )}
                   </div>
