@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { TypeRelationsPast } from "pokenode-ts";
 //Helpers
 import { getSentenceSeperator } from "@/helpers/getSentenceSeperator";
-import { createWeaknessSentence } from "@/helpers/createWeaknessSentence";
+import { createWeaknessSentence } from "@/helpers/createDamageRelationSentences";
 
 /**
  * Creates a JSX sentence describing past damage relations with links.

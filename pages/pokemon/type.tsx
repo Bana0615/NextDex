@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Head from "next/head";
-import Link from 'next/link';
+import Link from "next/link";
 import { useRouter } from "next/router";
-import Image from 'next/image';
+import Image from "next/image";
 import { PokemonClient, Type as PokemonTypeData } from "pokenode-ts";
 //Components
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
 //Helpers
-import { createWeaknessSentence } from "@/helpers/createWeaknessSentence";
+import { createDamageRelationSentences } from "@/helpers/createDamageRelationSentences";
 import { createIndicesSentence } from "@/helpers/createIndicesSentence";
-import { createPastDamageRelationsSentence } from "@/helpers/createPastDamageRelationsSentence";
 //Data
 import typesData from "@/json/pokemon/types.json";
 //Types
@@ -49,6 +48,7 @@ export default function TypePage() {
         .getTypeByName(nameParam)
         .then((data) => {
           const tmp = { ...data };
+          //TODO: damage_relations and past_damage_relations are the same structure
           delete tmp.damage_relations;
           delete tmp.game_indices;
           delete tmp.generation;
@@ -103,27 +103,24 @@ export default function TypePage() {
                       {apiData?.damage_relations && (
                         <>
                           <h4 className="text-center">Damage Relations</h4>
-                          {createWeaknessSentence(
+                          {createDamageRelationSentences(
                             value,
-                            apiData?.damage_relations.double_damage_from
+                            apiData?.damage_relations
                           )}
                         </>
                       )}
                       {apiData?.game_indices && (
                         <>
                           <h4 className="text-center">Game Indices</h4>
-                          {createIndicesSentence(
-                            value,
-                            apiData?.game_indices
-                          )}
+                          {createIndicesSentence(value, apiData?.game_indices)}
                         </>
                       )}
                       {apiData?.past_damage_relations && (
                         <>
                           <h4 className="text-center">Past Damage Relations</h4>
-                          {createPastDamageRelationsSentence(
+                          {createDamageRelationSentences(
                             value,
-                            apiData?.past_damage_relations
+                            apiData?.past_damage_relations[0].damage_relations
                           )}
                         </>
                       )}
@@ -132,22 +129,26 @@ export default function TypePage() {
                       {apiData?.generation && (
                         <p className="mb-2">
                           {`${value} type pokémon were first introduced in `}
-                          <Link href={`/pokemon/generation?name=${apiData?.generation.name}`}>
+                          <Link
+                            href={`/pokemon/generation?name=${apiData?.generation.name}`}
+                          >
                             {apiData?.generation.name}
                           </Link>
-                          {' of Pokémon.'}
+                          {" of Pokémon."}
                         </p>
                       )}
                       {apiData?.move_damage_class && (
                         <p>
-                          The class of damage inflicted by this type is {apiData?.move_damage_class.name}
+                          The class of damage inflicted by this type is{" "}
+                          {apiData?.move_damage_class.name}
                         </p>
                       )}
                       {apiData?.moves && (
                         <p>
                           {/* TODO: Create a section at the bottom of the page to list these */}
                           {/* TODO: Maybe move this up as a badge and link to the bottom section? */}
-                          Total number of moves with this type: {apiData?.moves.length}
+                          Total number of moves with this type:{" "}
+                          {apiData?.moves.length}
                         </p>
                       )}
                       {apiData?.pokemon && (
