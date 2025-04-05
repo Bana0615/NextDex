@@ -48,8 +48,6 @@ export default function TypePage() {
         .getTypeByName(nameParam)
         .then((data) => {
           //delete tmp.moves; //TODO: More with this
-          //delete tmp.pokemon; //TODO: More with this
-          console.log("data.pokemon", data?.pokemon[0]);
           setApiData(data as PokemonTypeData);
         })
         .catch((error) => console.error(error));

@@ -76,8 +76,16 @@ function PokemonGrid({ pokemonList }) {
                     loading="lazy"
                   />
                   <Card.Body className="d-flex flex-column justify-content-center">
-                    <Card.Title as="h6" className="mb-1 text-truncate">
-                      {capitalize(name)}
+                    <Card.Title as="h6" className="mb-1">
+                      {capitalize(
+                        name
+                          .split("-")
+                          .map(
+                            (word) =>
+                              word.charAt(0).toUpperCase() + word.slice(1)
+                          )
+                          .join(" ")
+                      )}
                     </Card.Title>
                     <Card.Text className="small text-muted mb-0">
                       Slot: {slot}
