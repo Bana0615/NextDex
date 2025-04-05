@@ -49,6 +49,7 @@ export default function TypePage() {
         .then((data) => {
           //delete tmp.moves; //TODO: More with this
           //delete tmp.pokemon; //TODO: More with this
+          console.log("data", data);
           setApiData(data as PokemonTypeData);
         })
         .catch((error) => console.error(error));
@@ -87,9 +88,8 @@ export default function TypePage() {
                     {value} <small className="text-muted">(type)</small>
                   </h2>
                   <Row>
-                    <Col md={6}>
+                    <Col md={9}>
                       <p>{typeData?.description}</p>
-                      {/* TODO: This need to be updated with the correct data */}
                       {apiData?.damage_relations && (
                         <>
                           <hr />
@@ -118,7 +118,7 @@ export default function TypePage() {
                         </>
                       )}
                     </Col>
-                    <Col md={6}>
+                    <Col md={3}>
                       {apiData?.generation && (
                         <p className="mb-2">
                           {`${value} type pokémon were first introduced in `}
@@ -153,7 +153,6 @@ export default function TypePage() {
                       )}
                     </Col>
                   </Row>
-                  <hr />
                   <div className="mt-5">
                     {apiData?.sprites && (
                       <PokemonSpritesDisplay spritesData={apiData?.sprites} />

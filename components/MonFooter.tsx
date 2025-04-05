@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Nav } from "react-bootstrap";
-import Image from 'next/image';
+import Image from "next/image";
 
 function MonFooter() {
   const currentYear = new Date().getFullYear();
@@ -18,11 +18,19 @@ function MonFooter() {
             Pokémon images & names © {copyrightStartYearNintendo}-{currentYear}{" "}
             Nintendo/Game Freak.
             <p className="mt-3 copyright-section">
-              <a href="https://nextdex.elbaneh.dev/" target="_blank" rel="noopener noreferrer">
-                NextDex
+              <a
+                href="https://nextdex.elbaneh.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {process.env.NEXT_PUBLIC_APP_NAME}
               </a>{" "}
               by{" "}
-              <a href="https://github.com/OneBuffaloLabs" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/OneBuffaloLabs"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 OneBuffaloLabs
               </a>{" "}
               is licensed under{" "}
@@ -30,32 +38,48 @@ function MonFooter() {
                 href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
                 target="_blank"
                 rel="license noopener noreferrer"
-                style={{ display: 'inline-block' }}
+                style={{ display: "inline-block" }}
               >
                 CC BY-NC-SA 4.0
                 <Image
-                  style={{ height: '22px', marginLeft: '3px', verticalAlign: 'text-bottom' }}
+                  style={{
+                    height: "22px",
+                    marginLeft: "3px",
+                    verticalAlign: "text-bottom",
+                  }}
                   src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
                   alt=""
                   height={20}
                   width={20}
                 />
                 <Image
-                  style={{ height: '22px', marginLeft: '3px', verticalAlign: 'text-bottom' }}
+                  style={{
+                    height: "22px",
+                    marginLeft: "3px",
+                    verticalAlign: "text-bottom",
+                  }}
                   src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
                   alt=""
                   height={20}
                   width={20}
                 />
                 <Image
-                  style={{ height: '22px', marginLeft: '3px', verticalAlign: 'text-bottom' }}
+                  style={{
+                    height: "22px",
+                    marginLeft: "3px",
+                    verticalAlign: "text-bottom",
+                  }}
                   src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
                   alt=""
                   height={20}
                   width={20}
                 />
                 <Image
-                  style={{ height: '22px', marginLeft: '3px', verticalAlign: 'text-bottom' }}
+                  style={{
+                    height: "22px",
+                    marginLeft: "3px",
+                    verticalAlign: "text-bottom",
+                  }}
                   src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
                   alt=""
                   height={20}

@@ -17,7 +17,9 @@ export default function AboutPage() {
         <MonHeader showBadge={true} />
         <Container className="main-content">
           <Row className="shadow-lg mt-3 p-3 bg-body rounded">
-            <h2 className="fw-bold mb-3 text-center">About NextDex</h2>
+            <h2 className="fw-bold mb-3 text-center">
+              About {process.env.NEXT_PUBLIC_APP_NAME}
+            </h2>
             <Col lg={8}>
               <p className="lead fs-6">About section</p>
               <h4>Tech used to build this site</h4>
