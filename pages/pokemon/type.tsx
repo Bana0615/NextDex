@@ -197,7 +197,7 @@ export default function TypePage() {
                             />
                           </small>
                         </h3>
-                        <PokemonGrid pokemonList={apiData?.pokemon} />
+                        <PokemonGrid data={apiData?.pokemon} />
                       </>
                     )}
                     {apiData?.moves && (
