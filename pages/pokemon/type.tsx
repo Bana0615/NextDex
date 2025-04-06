@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Table } from "react-bootstrap";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -159,6 +159,27 @@ export default function TypePage() {
                             The class of damage inflicted by this type is{" "}
                             {apiData?.move_damage_class.name}
                           </p>
+                        </>
+                      )}
+                      {apiData?.names && (
+                        <>
+                          <hr />
+                          <Table striped bordered hover>
+                            <thead>
+                              <tr>
+                                <th>Language</th>
+                                <th>Name</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {apiData?.names.map((item) => (
+                                <tr>
+                                  <td>{item.language.name}</td>
+                                  <td>{item.name}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </Table>
                         </>
                       )}
                     </Col>
