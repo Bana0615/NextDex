@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 //Components
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
 import { LocationClient, Region } from "pokenode-ts";
+import LanguageTable from "@/components/pokemon/LanguageTable";
 //Helpers
 import { formatName } from "@/helpers/formatName";
 
@@ -63,7 +65,42 @@ export default function RegionPage() {
                     {value} <small className="text-muted">(region)</small>
                   </h2>
                   <Row className="mt-5">
-                    <span className="text-center">Coming Soon.....</span>
+                    <Col md={9}>
+                      {/* <p>This is the description</p>
+                      <hr /> */}
+                      <h4 className="text-center">Region</h4>
+                      {apiData?.main_generation?.name ? (
+                        <p>
+                          The main generation for {value} is{" "}
+                          <Link
+                            href={`/pokemon/generation?name=${apiData.main_generation.name}`}
+                          >
+                            {apiData.main_generation.name}
+                          </Link>
+                          .
+                        </p>
+                      ) : (
+                        <p>There is no main generation data for this region</p>
+                      )}
+                    </Col>
+                    <Col md={3}>
+                      <Row className="justify-content-center text-center">
+                        {apiData?.locations && (
+                          <Col xs={12} md={6}>
+                            <h3 className="fw-bold mb-0">
+                              {apiData.locations.length}
+                            </h3>
+                            <p className="mt-1">{`Locations in the ${value} region`}</p>
+                          </Col>
+                        )}
+                      </Row>
+                      {apiData?.names && (
+                        <>
+                          <hr />
+                          <LanguageTable data={apiData.names} />
+                        </>
+                      )}
+                    </Col>
                   </Row>
                 </>
               )}
