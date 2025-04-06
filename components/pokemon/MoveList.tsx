@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Badge, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import PokeBadge from "@/components/pokemon/PokeBadge";
 
 /**

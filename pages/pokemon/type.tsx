@@ -11,6 +11,7 @@ import MonFooter from "@/components/MonFooter";
 import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
 import PokemonGrid from "@/components/pokemon/PokemonGrid";
 import MoveList from "@/components/pokemon/MoveList";
+import PokeBadge from "@/components/pokemon/PokeBadge";
 //Helpers
 import { createDamageRelationSentences } from "@/helpers/createDamageRelationSentences";
 import { createIndicesSentence } from "@/helpers/createIndicesSentence";
@@ -165,14 +166,32 @@ export default function TypePage() {
                   <div className="mt-5">
                     {apiData?.pokemon && (
                       <>
-                        <h3 className="text-center mb-4">{`${value} type Pokémon`}</h3>
+                        <h3 className="text-center mb-4">
+                          {`${value} type Pokémon `}
+                          <small>
+                            <PokeBadge
+                              name={apiData?.pokemon.length.toString()}
+                              className={typeData?.className ?? ""}
+                              fullWidth={false}
+                            />
+                          </small>
+                        </h3>
                         <PokemonGrid pokemonList={apiData?.pokemon} />
                       </>
                     )}
                     {apiData?.moves && (
                       <>
                         <hr />
-                        <h3 className="text-center mb-4">{`${value}-type moves`}</h3>
+                        <h3 className="text-center mb-4">
+                          {`${value}-type moves `}
+                          <small>
+                            <PokeBadge
+                              name={apiData?.moves.length.toString()}
+                              className={typeData?.className ?? ""}
+                              fullWidth={false}
+                            />
+                          </small>
+                        </h3>
                         <MoveList
                           moves={apiData?.moves}
                           className={typeData?.className}

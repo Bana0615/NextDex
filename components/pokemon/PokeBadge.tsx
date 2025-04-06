@@ -10,20 +10,30 @@ const PokeBadge = ({
   name,
   className,
   imgSrc = "",
+  fullWidth = true,
 }: {
   name: string;
   className: string;
   imgSrc?: string;
+  fullWidth?: boolean;
 }) => {
   const lightBackgroundTypes = ["Electric", "Ice", "Ground", "Steel"];
   const needsDarkText = lightBackgroundTypes.includes(name);
 
-  // Construct the className array using the 'styles' object
-  let badgeClasses = [
-    "w-100 d-flex align-items-center justify-content-center",
+  // Base classes that are always applied
+  const badgeClasses = [
+    "d-flex",
+    "align-items-center",
     styles.pokeBadge,
     styles[className],
   ];
+
+  // Add classes conditionally based on fullWidth prop
+  if (fullWidth) {
+    badgeClasses.push("w-100", "justify-content-center"); // Add full width and centering only if true
+  } else {
+    badgeClasses.push("d-inline-flex"); // You might use d-inline-flex if d-flex alone isn't sufficient
+  }
 
   // Add dark text if needed
   if (needsDarkText) {
