@@ -173,7 +173,7 @@ export default function TypePage() {
                             </thead>
                             <tbody>
                               {apiData?.names.map((item) => (
-                                <tr>
+                                <tr key={`lang-${item.language.name}`}>
                                   <td>{item.language.name}</td>
                                   <td>{item.name}</td>
                                 </tr>
