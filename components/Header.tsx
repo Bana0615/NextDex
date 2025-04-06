@@ -14,19 +14,17 @@ const defaultNavLinks = [
   { label: "Feedback", href: "/feedback", target: "" },
   {
     label: "GitHub",
-    href: process.env.NEXT_PUBLIC_APP_GITHUB_URL,
+    href: process.env.NEXT_PUBLIC_APP_GITHUB_URL || "",
     target: "_blank",
   },
 ];
 
-function Header(props: HeaderProps) {
-  const {
-    className,
-    navLinks = defaultNavLinks,
-    darkLinks = false,
-    showBadge = false,
-  } = props;
-
+function Header({
+  className,
+  navLinks = defaultNavLinks,
+  darkLinks = false,
+  showBadge = false,
+}: HeaderProps) {
   return (
     <Navbar
       id="main-header"
