@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 //Components
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
+import { LocationClient, Region } from "pokenode-ts";
 //Helpers
 import { formatName } from "@/helpers/formatName";
 
@@ -12,6 +13,7 @@ export default function RegionPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [value, setValue] = useState<string | null>(null);
+  const [apiData, setApiData] = useState<Region>();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -21,6 +23,22 @@ export default function RegionPage() {
       router.replace("/404");
       return;
     }
+
+    (async () => {
+      const api = new LocationClient();
+
+      await api
+        .getRegionByName(nameParam)
+        .then((data) => {
+          console.log("data", data);
+          setApiData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error(error);
+          setIsLoading(false);
+        });
+    })();
 
     setValue(formatName(nameParam));
 

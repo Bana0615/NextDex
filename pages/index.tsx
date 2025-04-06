@@ -2,8 +2,9 @@ import { Container, Row, Col } from "react-bootstrap";
 //Components
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
-import TypesSection from "@/components/pokemon/TypesSection";
-import PokedexesSection from "@/components/pokemon/PokedexesSection";
+import TypesSection from "@/components/pokemon/home/TypesSection";
+import PokedexesSection from "@/components/pokemon/home/PokedexesSection";
+import RegionsSection from "@/components/pokemon/home/RegionsSection";
 
 export default function Home() {
   return (
@@ -39,6 +40,8 @@ export default function Home() {
               <TypesSection />
               <hr />
               <PokedexesSection />
+              <hr />
+              <RegionsSection />
             </Col>
           </Row>
         </Container>
