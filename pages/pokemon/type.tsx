@@ -10,9 +10,11 @@ import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
 import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
 import PokemonGrid from "@/components/pokemon/PokemonGrid";
+import MoveList from "@/components/pokemon/MoveList";
 //Helpers
 import { createDamageRelationSentences } from "@/helpers/createDamageRelationSentences";
 import { createIndicesSentence } from "@/helpers/createIndicesSentence";
+import { formatName } from "@/helpers/formatName";
 //Data
 import typesData from "@/json/pokemon/types.json";
 //Types
@@ -37,9 +39,7 @@ export default function TypePage() {
       return;
     }
 
-    setValue(
-      nameParam.charAt(0).toUpperCase() + nameParam.slice(1).toLowerCase()
-    );
+    setValue(formatName(nameParam));
     setTypeData(foundType);
     (async () => {
       const api = new PokemonClient();
@@ -47,7 +47,6 @@ export default function TypePage() {
       await api
         .getTypeByName(nameParam)
         .then((data) => {
-          //delete tmp.moves; //TODO: More with this
           setApiData(data as PokemonTypeData);
         })
         .catch((error) => console.error(error));
@@ -105,16 +104,19 @@ export default function TypePage() {
                           {createIndicesSentence(value, apiData?.game_indices)}
                         </>
                       )}
-                      {apiData?.past_damage_relations && (
-                        <>
-                          <hr />
-                          <h4 className="text-center">Past Damage Relations</h4>
-                          {createDamageRelationSentences(
-                            value,
-                            apiData?.past_damage_relations[0]
-                          )}
-                        </>
-                      )}
+                      {apiData?.past_damage_relations &&
+                        apiData?.past_damage_relations.length > 0 && (
+                          <>
+                            <hr />
+                            <h4 className="text-center">
+                              Past Damage Relations
+                            </h4>
+                            {createDamageRelationSentences(
+                              value,
+                              apiData?.past_damage_relations[0]
+                            )}
+                          </>
+                        )}
                     </Col>
                     <Col md={3}>
                       <Row className="justify-content-center text-center">
@@ -158,21 +160,23 @@ export default function TypePage() {
                           </p>
                         </>
                       )}
-                      {apiData?.moves && (
-                        <p>
-                          {/* TODO: Create a section at the bottom of the page to list these */}
-                          {/* TODO: Maybe move this up as a badge and link to the bottom section? */}
-                          Total number of moves with this type:{" "}
-                          {apiData?.moves.length}
-                        </p>
-                      )}
                     </Col>
                   </Row>
                   <div className="mt-5">
-                    {apiData?.sprites && (
+                    {apiData?.pokemon && (
                       <>
                         <h3 className="text-center mb-4">{`${value} type Pokémon`}</h3>
                         <PokemonGrid pokemonList={apiData?.pokemon} />
+                      </>
+                    )}
+                    {apiData?.moves && (
+                      <>
+                        <hr />
+                        <h3 className="text-center mb-4">{`${value}-type moves`}</h3>
+                        <MoveList
+                          moves={apiData?.moves}
+                          className={typeData?.className}
+                        />
                       </>
                     )}
                     {apiData?.sprites && (

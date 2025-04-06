@@ -48,7 +48,7 @@ function MonFooter() {
                     verticalAlign: "text-bottom",
                   }}
                   src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
-                  alt=""
+                  alt="cc"
                   height={20}
                   width={20}
                 />
@@ -59,7 +59,7 @@ function MonFooter() {
                     verticalAlign: "text-bottom",
                   }}
                   src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
-                  alt=""
+                  alt="by"
                   height={20}
                   width={20}
                 />
@@ -70,7 +70,7 @@ function MonFooter() {
                     verticalAlign: "text-bottom",
                   }}
                   src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
-                  alt=""
+                  alt="nc"
                   height={20}
                   width={20}
                 />
@@ -81,7 +81,7 @@ function MonFooter() {
                     verticalAlign: "text-bottom",
                   }}
                   src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
-                  alt=""
+                  alt="sa"
                   height={20}
                   width={20}
                 />

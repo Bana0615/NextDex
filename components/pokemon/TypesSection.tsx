@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import Image from 'next/image';
-import Link from 'next/link';
-import { Badge, Col, Row } from "react-bootstrap";
+import Link from "next/link";
+import { Col, Row } from "react-bootstrap";
+import PokeBadge from "@/components/pokemon/PokeBadge";
 //Data
 import typesData from "@/json/pokemon/types.json";
 //Types
@@ -20,28 +20,11 @@ function TypesSection() {
             href={`/pokemon/type?name=${type.name}`}
             style={{ textDecoration: "none" }}
           >
-            <Badge
-              className="w-100 d-flex align-items-center justify-content-center"
-              style={{
-                backgroundColor: `${type.color} !important`,
-                color: "#fff",
-                textShadow: "1px 1px 2px rgba(0,0,0,0.6)",
-                padding: "0.5em",
-              }}
-            >
-              <Image
-                src={`/images/pokemon/types/transparent/${type.imgSrc}`}
-                alt={`${type.name} type icon`}
-                height={16}
-                width={16}
-                style={{
-                  height: '1.1em',
-                  width: 'auto',
-                  marginRight: "0.3em",
-                }}
-              />
-              <span>{type.name}</span>
-            </Badge>
+            <PokeBadge
+              name={type.name}
+              className={type.className}
+              imgSrc={type.imgSrc}
+            />
           </Link>
         </Col>
       ))}

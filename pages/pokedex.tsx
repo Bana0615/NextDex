@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 //Components
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
+//Helpers
+import { formatName } from "@/helpers/formatName";
 
 export default function PokedexPage() {
   const router = useRouter();
@@ -20,9 +22,7 @@ export default function PokedexPage() {
       return;
     }
 
-    setValue(
-      nameParam.charAt(0).toUpperCase() + nameParam.slice(1).toLowerCase()
-    );
+    setValue(formatName(nameParam));
 
     setIsLoading(false);
   }, [router]);
