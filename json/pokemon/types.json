@@ -2,108 +2,126 @@
   {
     "name": "Normal",
     "color": "#A8A77A",
+    "className": "bgNormal",
     "imgSrc": "normal.svg",
     "description": "Represents ordinary creatures and adaptability. They have few type advantages but also few weaknesses, often relying on diverse movepools."
   },
   {
     "name": "Fire",
     "color": "#EE8130",
+    "className": "bgFire",
     "imgSrc": "fire.svg",
     "description": "Characterized by intense heat, flames, and combustion. Fire-types often inflict burns and are powerful against plant and ice-based foes."
   },
   {
     "name": "Water",
     "color": "#6390F0",
+    "className": "bgWater",
     "imgSrc": "water.svg",
     "description": "Associated with oceans, rivers, and rain. Water-types are versatile, excelling against fire and ground, and often able to control water."
   },
   {
     "name": "Grass",
     "color": "#7AC74C",
+    "className": "bgGrass",
     "imgSrc": "grass.svg",
     "description": "Embodies nature, plants, and life energy. Grass-types often use status conditions like sleep or poison and draw strength from sunlight."
   },
   {
     "name": "Electric",
     "color": "#F7D02C",
+    "className": "bgElectric",
     "imgSrc": "electric.svg",
     "description": "Represents electricity, speed, and modern technology. Electric-types are known for paralysis-inducing moves and effectiveness against water and flying foes."
   },
   {
     "name": "Ice",
     "color": "#96D9D6",
+    "className": "bgIce",
     "imgSrc": "ice.svg",
     "description": "Associated with cold, snow, and glaciers. Ice-types can freeze opponents and are particularly effective against dragons and flying creatures."
   },
   {
     "name": "Fighting",
     "color": "#C22E28",
+    "className": "bgFighting",
     "imgSrc": "fighting.svg",
     "description": "Symbolizes physical strength, martial arts, and discipline. Fighting-types excel in close combat, breaking through defenses like rock and steel."
   },
   {
     "name": "Poison",
     "color": "#A33EA1",
+    "className": "bgPoison",
     "imgSrc": "poison.svg",
     "description": "Represents toxins, pollution, and debilitating ailments. Poison-types often weaken opponents over time and counter grass and fairy types."
   },
   {
     "name": "Ground",
     "color": "#E2BF65",
+    "className": "bgGround",
     "imgSrc": "ground.svg",
     "description": "Connected to the earth, sand, and seismic power. Ground-types are immune to electric attacks and hit hard against fire, rock, and steel."
   },
   {
     "name": "Flying",
     "color": "#A98FF3",
+    "className": "bgFlying",
     "imgSrc": "flying.svg",
     "description": "Associated with the sky, wind, and aerial agility. Flying-types often evade ground-based attacks and are strong against grass and fighting types."
   },
   {
     "name": "Psychic",
     "color": "#F95587",
+    "className": "bgPsychic",
     "imgSrc": "psychic.svg",
     "description": "Represents mental prowess, telekinesis, and extrasensory perception. Psychic-types often manipulate the battlefield and counter fighting and poison types."
   },
   {
     "name": "Bug",
     "color": "#A6B91A",
+    "className": "bgBug",
     "imgSrc": "bug.svg",
     "description": "Embodies insects, arthropods, and rapid adaptation. Bug-types often mature quickly and have advantages against grass, psychic, and dark types."
   },
   {
     "name": "Rock",
     "color": "#B6A136",
+    "className": "bgRock",
     "imgSrc": "rock.svg",
     "description": "Symbolizes stone, mountains, and sturdy defense. Rock-types possess high durability and are effective against fire, ice, and flying foes."
   },
   {
     "name": "Ghost",
     "color": "#735797",
+    "className": "bgGhost",
     "imgSrc": "ghost.svg",
     "description": "Represents the supernatural, spirits, and trickery. Ghost-types can phase through normal attacks and exploit psychic and other ghosts."
   },
   {
     "name": "Dragon",
     "color": "#6F35FC",
+    "className": "bgDragon",
     "imgSrc": "dragon.svg",
     "description": "Embodies mythical power, ancient lineage, and raw elemental force. Dragon-types are rare and powerful, primarily weak only to ice, fairy, and themselves."
   },
   {
     "name": "Dark",
     "color": "#705746",
+    "className": "bgDark",
     "imgSrc": "dark.svg",
     "description": "Associated with shadows, underhanded tactics, and exploiting weaknesses. Dark-types are immune to psychic moves and effective against ghost and psychic types."
   },
   {
     "name": "Steel",
     "color": "#B7B7CE",
+    "className": "bgSteel",
     "imgSrc": "steel.svg",
     "description": "Represents metal, industry, and impenetrable defense. Steel-types boast numerous resistances, are immune to poison, and counter ice, rock, and fairy types."
   },
   {
     "name": "Fairy",
     "color": "#D685AD",
+    "className": "bgFairy",
     "imgSrc": "fairy.svg",
     "description": "Embodies magic, enchantment, and otherworldly charm. Fairy-types are immune to dragon attacks and are strong against fighting, dragon, and dark types."
   }

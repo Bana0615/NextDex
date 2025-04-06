@@ -91,15 +91,13 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: linear-gradient(
-    to bottom,
-    var(--pokemon-red) 0%,
-    var(--pokemon-red) 48%,
-    var(--pokemon-dark-gray) 48%,
-    var(--pokemon-dark-gray) 52%,
-    var(--pokemon-white) 52%,
-    var(--pokemon-white) 100%
-  );
+  background: linear-gradient(to bottom,
+      var(--pokemon-red) 0%,
+      var(--pokemon-red) 48%,
+      var(--pokemon-dark-gray) 48%,
+      var(--pokemon-dark-gray) 52%,
+      var(--pokemon-white) 52%,
+      var(--pokemon-white) 100%);
   position: relative;
   pointer-events: auto;
   border: 1px solid var(--pokemon-dark-gray);
@@ -125,6 +123,7 @@
 
 /* --- Responsive Adjustments for Collapsed Navbar --- */
 @media (max-width: 991.98px) {
+
   /* Standard Bootstrap lg breakpoint */
   .pokemon-navbar .navbar-collapse {
     background-color: var(--pokemon-red);
@@ -141,12 +140,13 @@
     margin: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
+
   .pokemon-navbar .navbar-nav .nav-link:last-child {
     border-bottom: none;
   }
 }
 
-/* --- Pokemon Footer Styles --- */
+/* --- Pokémon Footer Styles --- */
 .pokemon-footer {
   background-color: var(--pokemon-dark-gray);
   color: var(--pokemon-light-gray);
@@ -178,4 +178,10 @@
 /* Ensure Nav items don't add extra bullet points or styles */
 .footer-nav .nav-item {
   list-style: none;
+}
+
+.copyright-section a {
+  color: var(--pokemon-red) !important;
+  font-size: 0.9rem;
+  transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
 }

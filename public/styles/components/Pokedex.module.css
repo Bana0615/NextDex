@@ -1,0 +1,306 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/* --- Base Pokedex Body --- */
+.pokedex {
+  width: clamp(280px, 85vw, 420px);
+  aspect-ratio: 350 / 550;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: calc(8px + 0.5vw);
+  background-color: #dc2626;
+  border: clamp(2px, 1vw, 4px) solid #a11d1d;
+  border-radius: 1rem 1rem 1rem 2rem;
+  padding: clamp(10px, 3vw, 20px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  position: relative;
+  font-family: "Press Start 2P", cursive;
+  overflow: hidden;
+}
+
+/* --- Top Section --- */
+.topSection {
+  position: relative;
+
+  padding-bottom: clamp(5px, 2vw, 10px);
+  border-bottom: clamp(2px, 1vw, 4px) solid #a11d1d;
+  z-index: 0;
+}
+
+.hinge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(15px, 5vw, 25px);
+  background-color: #b91c1c;
+  border-bottom: clamp(2px, 1vw, 4px) solid #a11d1d;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%);
+  z-index: 1;
+}
+
+.lightsContainer {
+  display: flex;
+  align-items: center;
+  gap: clamp(5px, 2vw, 10px);
+  position: relative;
+  z-index: 2;
+  padding-left: 1rem;
+  padding-top: clamp(20px, 6vw, 35px);
+}
+
+.light {
+  border-radius: 50%;
+  border: clamp(1px, 0.5vw, 2px) solid #333;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.blueLight {
+  width: clamp(35px, 1.2rem, 55px);
+  height: clamp(35px, 1.2rem, 55px);
+  background-color: #3b82f6;
+  border: clamp(2px, 0.8vw, 3px) solid #1e40af;
+}
+
+/* --- Small Top Lights --- */
+.redLight,
+.yellowLight,
+.greenLight {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.redLight {
+  background-color: #ef4444;
+}
+.yellowLight {
+  background-color: #facc15;
+}
+.greenLight {
+  background-color: #4ade80;
+}
+
+/* --- Middle Section --- */
+.middleSection {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0;
+  min-height: 0;
+}
+
+.screenBorder {
+  background-color: #d1d5db;
+  padding: clamp(5px, 2vw, 10px);
+  border-radius: 0.5rem 0.5rem 0.5rem 1.5rem;
+  border: clamp(1px, 0.5vw, 2px) solid #9ca3af;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+}
+
+.screen {
+  background-color: #1f2937;
+  color: #f3f4f6;
+  min-height: clamp(100px, 30vh, 180px);
+  border-radius: 0.3rem;
+  border: clamp(1px, 0.5vw, 2px) solid #111827;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+.pokemonSprite {
+  width: clamp(60px, 25%, 96px);
+  height: auto;
+  max-height: 100px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+  image-rendering: pixelated;
+}
+
+.pokemonInfo {
+  text-align: center;
+  font-size: clamp(0.6rem, 1.8vw, 0.9rem);
+}
+
+.pokemonInfo h3 {
+  font-size: clamp(0.7rem, 2.2vw, 1rem);
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.placeholderText {
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  color: #6b7280;
+}
+
+.screenBottomLights {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 0.5rem;
+}
+
+.smallButton {
+  border-radius: 50%;
+  border: 1px solid #444; /* Keep thin border */
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+}
+
+/* --- Small Bottom Red Buttons --- */
+.smallRedButton {
+  width: 1rem;
+  height: 1rem;
+  background-color: #ef4444; /* Red */
+}
+
+/* --- Bottom Section --- */
+.bottomSection {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem; /* Add gap between controls and speaker */
+}
+
+.controls {
+  display: grid;
+  /* Adjust grid layout for responsiveness */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  /* Use clamp for responsive gap */
+  gap: clamp(5px, 1.5vw, 10px);
+  width: 65%;
+  align-items: center;
+}
+
+.largeBlueButton {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  width: clamp(30px, 11vw, 45px);
+  height: clamp(30px, 11vw, 45px);
+  background-color: #3b82f6;
+  border: clamp(1px, 0.5vw, 2px) solid #1e40af;
+  border-radius: 50%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  justify-self: center;
+}
+.largeBlueButton:active {
+  transform: scale(0.95);
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.greenRectButton,
+.orangeRectButton {
+  width: clamp(35px, 12vw, 50px);
+  height: clamp(10px, 3.5vw, 15px);
+  border-radius: 0.3rem;
+  border: 1px solid #444;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  justify-self: center;
+}
+.greenRectButton:active,
+.orangeRectButton:active {
+  transform: translateY(1px);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.greenRectButton {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  background-color: #4ade80;
+}
+
+.orangeRectButton {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+  background-color: #fb923c;
+}
+
+.dPad {
+  grid-column: 1 / 4;
+  grid-row: 2 / 3;
+  /* Use clamp for responsive size */
+  width: clamp(45px, 15vw, 60px);
+  height: clamp(45px, 15vw, 60px);
+  background-color: #374151;
+  position: relative;
+  border-radius: 0.3rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  justify-self: center;
+  margin-top: 0.5rem;
+  cursor: grab;
+}
+
+.dPad::before,
+.dPad::after {
+  content: "";
+  position: absolute;
+  background-color: #374151;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.6);
+  border-radius: 0.2rem;
+}
+
+.dPad::before {
+  /* Horizontal */
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 30%;
+}
+
+.dPad::after {
+  /* Vertical */
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 100%;
+}
+
+.speakerGrill {
+  width: 30%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0;
+  margin-top: 1rem;
+  gap: clamp(3px, 1.5vh, 6px); /* Add gap based on height */
+}
+
+.speakerLine {
+  width: 80%;
+  height: clamp(2px, 0.8vw, 4px);
+  background-color: #b91c1c;
+  border-radius: 1px;
+}
+
+/* --- Media Queries for Fine-tuning --- */
+@media (max-width: 320px) {
+  /* Styles for very small screens below 320px */
+  .pokedex {
+    font-size: calc(7px + 0.5vw);
+  }
+
+  .pokemonInfo h3 {
+    font-size: 0.7rem;
+  }
+}
