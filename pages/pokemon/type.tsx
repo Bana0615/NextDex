@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,6 +12,7 @@ import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
 import PokemonGrid from "@/components/pokemon/PokemonGrid";
 import MoveList from "@/components/pokemon/MoveList";
 import PokeBadge from "@/components/pokemon/PokeBadge";
+import LanguageTable from "@/components/pokemon/LanguageTable";
 //Helpers
 import { createDamageRelationSentences } from "@/helpers/createDamageRelationSentences";
 import { createIndicesSentence } from "@/helpers/createIndicesSentence";
@@ -164,22 +165,7 @@ export default function TypePage() {
                       {apiData?.names && (
                         <>
                           <hr />
-                          <Table striped bordered hover>
-                            <thead>
-                              <tr>
-                                <th>Language</th>
-                                <th>Name</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {apiData?.names.map((item) => (
-                                <tr key={`lang-${item.language.name}`}>
-                                  <td>{item.language.name}</td>
-                                  <td>{item.name}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </Table>
+                          <LanguageTable data={apiData.names} />
                         </>
                       )}
                     </Col>

@@ -9,6 +9,7 @@ import MonFooter from "@/components/MonFooter";
 import { GameClient, Pokedex } from "pokenode-ts";
 import PokemonEntryList from "@/components/pokemon/PokemonEntryList";
 import PokeBadge from "@/components/pokemon/PokeBadge";
+import LanguageTable from "@/components/pokemon/LanguageTable";
 //Helpers
 import { formatName } from "@/helpers/formatName";
 import { createVersionGroupsSentence } from "@/helpers/createVersionGroupsSentence";
@@ -130,22 +131,7 @@ export default function PokedexPage() {
                   {apiData?.names && (
                     <>
                       <hr />
-                      <Table striped bordered hover>
-                        <thead>
-                          <tr>
-                            <th>Language</th>
-                            <th>Name</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {apiData?.names.map((item) => (
-                            <tr key={`lang-${item.language.name}`}>
-                              <td>{item.language.name}</td>
-                              <td>{item.name}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </Table>
+                      <LanguageTable data={apiData.names} />
                     </>
                   )}
                 </Col>
