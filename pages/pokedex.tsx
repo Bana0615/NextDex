@@ -37,7 +37,6 @@ export default function PokedexPage() {
       await api
         .getPokedexByName(nameParam)
         .then((data) => {
-          console.log("data", data);
           setApiData(data);
           setIsLoading(false);
         })
@@ -69,8 +68,8 @@ export default function PokedexPage() {
                 <Col>
                   <Row className="mt-5">
                     <Col md={9}>
-                      <p>This is the description</p>
-                      <hr />
+                      {/* <p>This is the description</p>
+                      <hr /> */}
                       <h4 className="text-center">Region</h4>
                       {apiData?.region?.name ? (
                         <p>

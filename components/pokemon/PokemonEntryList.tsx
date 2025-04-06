@@ -7,7 +7,6 @@ import Card from "react-bootstrap/Card";
 //Helpers
 import { formatName } from "@/helpers/formatName";
 import { getPokemonIdFromUrl } from "@/helpers/getPokemonIdFromUrl";
-import { formatEntryNumber } from "@/helpers/formatEntryNumber";
 //Styles
 import styles from "@/public/styles/components/PokemonGrid.module.css";
 //Types
