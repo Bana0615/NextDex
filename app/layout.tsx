@@ -49,7 +49,7 @@ export default function RootLayout({
 
       <body className={inter.className}>
         <div className="main-container">
-          <MonHeader />
+          <MonHeader showBadge={true} />
           <main className="main-content">
             {children} {/* Page content */}
           </main>

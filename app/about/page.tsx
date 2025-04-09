@@ -1,6 +1,11 @@
 import { Container, Row, Col } from "react-bootstrap";
+import type { Metadata } from "next";
 //Helpers
 import { generateGithubLink } from "@/helpers/_silabs/generateGithubLink";
+
+export const metadata: Metadata = {
+  title: "About",
+};
 
 export default function AboutPage() {
   const githubLink = generateGithubLink(
