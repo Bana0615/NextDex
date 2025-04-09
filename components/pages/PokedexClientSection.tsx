@@ -11,7 +11,7 @@ import PokemonEntryList from "@/components/pokemon/PokemonEntryList";
 import PokeBadge from "@/components/pokemon/PokeBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
 //Helpers
-import { formatName } from "@/helpers/formatName";
+import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 import { createVersionGroupsSentence } from "@/helpers/createVersionGroupsSentence";
 //Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -49,7 +49,7 @@ function PokedexClientSection() {
     setIsLoading(true);
     setErrorOccurred(false);
     setApiData(null);
-    setFormattedName(formatName(nameParam));
+    setFormattedName(capitalizeFirstLetter(nameParam));
 
     const api = new GameClient();
 
@@ -98,7 +98,7 @@ function PokedexClientSection() {
               <p>
                 This Pokédex is from the{" "}
                 <Link href={`/region?name=${apiData.region.name}`}>
-                  {formatName(apiData.region.name)}
+                  {capitalizeFirstLetter(apiData.region.name)}
                 </Link>{" "}
                 region.
               </p>

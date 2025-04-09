@@ -16,7 +16,7 @@ import LanguageTable from "@/components/pokemon/LanguageTable";
 //Helpers
 import { createDamageRelationSentences } from "@/helpers/createDamageRelationSentences";
 import { createIndicesSentence } from "@/helpers/createIndicesSentence";
-import { formatName } from "@/helpers/formatName";
+import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 //Data
 import typesData from "@/json/pokemon/types.json";
 //Types
@@ -58,7 +58,7 @@ function PokemonTypeClientSection() {
     setIsLoading(true);
     setErrorOccurred(false);
     setApiData(null);
-    setFormattedName(formatName(nameParam));
+    setFormattedName(capitalizeFirstLetter(nameParam));
     setTypeData(foundType);
 
     const api = new PokemonClient();

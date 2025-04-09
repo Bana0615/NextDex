@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Badge, Col, Row } from "react-bootstrap";
 import { GameClient, NamedAPIResource } from "pokenode-ts";
 //Helpers
-import { formatName } from "@/helpers/formatName";
+import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 
 function PokedexesSection() {
   const [isLoading, setIsLoading] = useState(true);
@@ -49,7 +49,7 @@ function PokedexesSection() {
                   maxWidth: "120px",
                 }}
               >
-                <span>{formatName(value.name)}</span>
+                <span>{capitalizeFirstLetter(value.name)}</span>
               </Badge>
             </Link>
           </Col>

@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 //Helpers
-import { formatName } from "@/helpers/formatName";
+import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 import { getPokemonIdFromUrl } from "@/helpers/getPokemonIdFromUrl";
 //Styles
 import styles from "@/public/styles/components/PokemonGrid.module.css";
@@ -60,7 +60,7 @@ function PokemonEntryList({ data }: PokemonEntryListProps) {
                   <Card.Img
                     variant="top"
                     src={imageUrl}
-                    alt={formatName(name)}
+                    alt={capitalizeFirstLetter(name)}
                     style={{
                       width: "96px",
                       height: "96px",
@@ -71,7 +71,7 @@ function PokemonEntryList({ data }: PokemonEntryListProps) {
                   />
                   <Card.Body className="d-flex flex-column justify-content-center">
                     <Card.Title as="h6" className="mb-1">
-                      {formatName(name)}
+                      {capitalizeFirstLetter(name)}
                     </Card.Title>
                     <Card.Text className="small text-muted mb-0">
                       Entry #: {entry_number}

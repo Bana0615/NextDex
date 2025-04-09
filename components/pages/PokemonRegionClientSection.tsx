@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { LocationClient, Region } from "pokenode-ts";
 import LanguageTable from "@/components/pokemon/LanguageTable";
 //Helpers
-import { formatName } from "@/helpers/formatName";
+import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 
 export default function PokemonRegionClientSectionWrapper() {
   return (
@@ -43,7 +43,7 @@ function PokemonRegionClientSection() {
     setIsLoading(true);
     setErrorOccurred(false);
     setApiData(null);
-    setFormattedName(formatName(nameParam));
+    setFormattedName(capitalizeFirstLetter(nameParam));
 
     const api = new LocationClient();
 

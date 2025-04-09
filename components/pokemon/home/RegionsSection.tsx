@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Badge, Col, Row } from "react-bootstrap";
 import { LocationClient, NamedAPIResource } from "pokenode-ts";
 //Helpers
-import { formatName } from "@/helpers/formatName";
+import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 
 function RegionsSection() {
   const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +50,7 @@ function RegionsSection() {
                   maxWidth: "120px",
                 }}
               >
-                <span>{formatName(value.name)}</span>
+                <span>{capitalizeFirstLetter(value.name)}</span>
               </Badge>
             </Link>
           </Col>
