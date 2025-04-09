@@ -10,6 +10,7 @@ import { LocationClient, Region } from "pokenode-ts";
 import LanguageTable from "@/components/pokemon/LanguageTable";
 //Helpers
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
+import { createVersionGroupsSentence } from "@/helpers/createVersionGroupsSentence";
 
 export default function PokemonRegionClientSectionWrapper() {
   return (
@@ -50,6 +51,7 @@ function PokemonRegionClientSection() {
     api
       .getRegionByName(nameParam)
       .then((data) => {
+        console.log("data", data);
         setApiData(data);
       })
       .catch((error) => {
@@ -100,6 +102,16 @@ function PokemonRegionClientSection() {
             </p>
           ) : (
             <p>There is no main generation data for this region</p>
+          )}
+          {apiData.version_groups && apiData.version_groups.length > 0 && (
+            <>
+              <hr />
+              <h4 className="text-center">Game Versions</h4>
+              {createVersionGroupsSentence(
+                `${formattedName} Region`,
+                apiData.version_groups
+              )}
+            </>
           )}
         </Col>
         <Col md={3}>

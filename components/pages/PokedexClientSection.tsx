@@ -110,7 +110,7 @@ function PokedexClientSection() {
                 <hr />
                 <h4 className="text-center">Game Versions</h4>
                 {createVersionGroupsSentence(
-                  formattedName,
+                  `${formattedName} Pokédex`,
                   apiData.version_groups
                 )}
               </>
