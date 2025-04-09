@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Container, Nav } from "react-bootstrap";
 import Image from "next/image";

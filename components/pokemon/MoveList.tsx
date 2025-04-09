@@ -22,7 +22,6 @@ function MoveList({ moves, className = "" }) {
 
   return (
     <Container className="my-3">
-      <h5 className="mb-3">Moves</h5>
       <div className="d-flex flex-wrap gap-2">
         {moveList.map((move) => (
           <Link

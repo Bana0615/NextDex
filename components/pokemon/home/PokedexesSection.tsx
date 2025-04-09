@@ -1,8 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from 'next/link';
+import Link from "next/link";
 import { Badge, Col, Row } from "react-bootstrap";
 import { GameClient, NamedAPIResource } from "pokenode-ts";
+//Helpers
+import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 
 function PokedexesSection() {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,10 +33,10 @@ function PokedexesSection() {
       {isLoading ? (
         <Col className="text-center">Loading Pokédexes...</Col>
       ) : (
-        pokedexes.map((type, index) => (
-          <Col key={type.name} className="mb-2 px-1">
+        pokedexes.map((value, index) => (
+          <Col key={value.name} className="mb-2 px-1">
             <Link
-              href={`/pokedex?name=${type.name}`}
+              href={`/pokedex?name=${value.name}`}
               style={{ textDecoration: "none" }}
             >
               <Badge
@@ -47,12 +49,7 @@ function PokedexesSection() {
                   maxWidth: "120px",
                 }}
               >
-                <span>
-                  {type.name
-                    .split("-")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")}
-                </span>
+                <span>{capitalizeFirstLetter(value.name)}</span>
               </Badge>
             </Link>
           </Col>

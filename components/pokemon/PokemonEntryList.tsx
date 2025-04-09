@@ -10,20 +10,19 @@ import { getPokemonIdFromUrl } from "@/helpers/getPokemonIdFromUrl";
 //Styles
 import styles from "@/public/styles/components/PokemonGrid.module.css";
 //Types
-import { TypePokemon } from "pokenode-ts";
+import { PokemonEntry } from "pokenode-ts";
 
-interface PokemonGridProps {
-  data: TypePokemon[];
+interface PokemonEntryListProps {
+  data: PokemonEntry[];
 }
 
-function PokemonGrid({ data }: PokemonGridProps) {
+function PokemonEntryList({ data }: PokemonEntryListProps) {
   const listToRender = data ?? [];
 
-  // Show a message if the list is empty
   if (listToRender.length === 0) {
     return (
       <Container className="my-4 text-center">
-        <p>No Pokémon to display.</p>
+        <p>No Pokémon entries to display.</p>
       </Container>
     );
   }
@@ -39,9 +38,10 @@ function PokemonGrid({ data }: PokemonGridProps) {
         className="g-4 justify-content-center"
       >
         {listToRender.map((item) => {
-          const name = item.pokemon.name;
-          const url = item.pokemon.url;
-          const slot = item.slot;
+          const name = item.pokemon_species.name;
+          const url = item.pokemon_species.url;
+          const entry_number = item.entry_number;
+
           const pokemonId = getPokemonIdFromUrl(url);
 
           const imageUrl = pokemonId
@@ -49,7 +49,7 @@ function PokemonGrid({ data }: PokemonGridProps) {
             : "/images/pokedex/question_mark.png"; // Fallback image
 
           return (
-            <Col key={`${pokemonId}-${name}`}>
+            <Col key={entry_number}>
               <Link
                 href={`/pokemon?name=${name}`}
                 className="text-decoration-none text-reset d-block h-100"
@@ -74,7 +74,7 @@ function PokemonGrid({ data }: PokemonGridProps) {
                       {capitalizeFirstLetter(name)}
                     </Card.Title>
                     <Card.Text className="small text-muted mb-0">
-                      Slot: {slot}
+                      Entry #: {entry_number}
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -87,4 +87,4 @@ function PokemonGrid({ data }: PokemonGridProps) {
   );
 }
 
-export default PokemonGrid;
+export default PokemonEntryList; // Export the new component name

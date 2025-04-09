@@ -2,18 +2,18 @@ import React from "react";
 import Badge from "react-bootstrap/Badge";
 import Image from "next/image";
 //Helpers
-import { formatName } from "@/helpers/formatName";
+import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 //Styles
 import styles from "@/public/styles/modules/typeBadges.module.css";
 
 const PokeBadge = ({
   name,
-  className,
+  className = "",
   imgSrc = "",
   fullWidth = true,
 }: {
   name: string;
-  className: string;
+  className?: string;
   imgSrc?: string;
   fullWidth?: boolean;
 }) => {
@@ -55,7 +55,7 @@ const PokeBadge = ({
           }}
         />
       )}
-      {formatName(name)}
+      {capitalizeFirstLetter(name)}
     </Badge>
   );
 };

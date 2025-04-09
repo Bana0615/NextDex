@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Navbar, Container, Nav, Badge } from "react-bootstrap";
 
