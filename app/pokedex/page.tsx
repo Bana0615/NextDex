@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import PokedexClientSection from "@/components/pages/PokedexClientSection";
 
 export const metadata: Metadata = {
-  title: "Pokedex",
+  title: "Pokédex",
 };
 
 export default function PokedexPage() {
