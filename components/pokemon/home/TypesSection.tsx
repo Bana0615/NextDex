@@ -9,21 +9,21 @@ import typesData from "@/json/pokemon/types.json";
 import { PokemonType } from "@/types/pokemon/Types";
 
 function TypesSection() {
-  const types: PokemonType[] = typesData ?? [];
+  const types: Record<string, PokemonType> = typesData ?? {};
 
   return (
     <Row g={2}>
       <h4 className="text-center mb-3">Pokémon Types</h4>
-      {types.map((type) => (
-        <Col key={type.name} xs={4} lg={2} className="mb-2 px-1">
+      {Object.entries(types).map(([typeName, typeDetails]) => (
+        <Col key={typeName} xs={4} lg={2} className="mb-2 px-1">
           <Link
-            href={`/pokemon/type?name=${type.name}`}
+            href={`/pokemon/type?name=${typeName}`}
             style={{ textDecoration: "none" }}
           >
             <PokeBadge
-              name={type.name}
-              className={type.className}
-              imgSrc={type.imgSrc}
+              name={typeName}
+              className={typeDetails.className}
+              imgSrc={typeDetails.imgSrc}
             />
           </Link>
         </Col>

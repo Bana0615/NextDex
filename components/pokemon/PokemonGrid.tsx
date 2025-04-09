@@ -1,19 +1,16 @@
 import React from "react";
 import Link from "next/link";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
+import { Container, Row, Col, Card } from "react-bootstrap";
 //Helpers
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 import { getPokemonIdFromUrl } from "@/helpers/getPokemonIdFromUrl";
 //Styles
 import styles from "@/public/styles/components/PokemonGrid.module.css";
 //Types
-import { TypePokemon } from "pokenode-ts";
+import type { TypePokemon, PokemonEntry, NamedAPIResource } from "pokenode-ts";
 
 interface PokemonGridProps {
-  data: TypePokemon[];
+  data: TypePokemon[] | PokemonEntry[] | NamedAPIResource[];
 }
 
 function PokemonGrid({ data }: PokemonGridProps) {
@@ -39,9 +36,15 @@ function PokemonGrid({ data }: PokemonGridProps) {
         className="g-4 justify-content-center"
       >
         {listToRender.map((item) => {
-          const name = item.pokemon.name;
-          const url = item.pokemon.url;
-          const slot = item.slot;
+          const pokemon = item?.pokemon
+            ? item.pokemon
+            : item?.pokemon_species
+            ? item.pokemon_species
+            : item;
+          const name = pokemon.name;
+          const url = pokemon.url;
+          const slot = item?.slot ?? -1;
+          const entry_number = item?.entry_number ?? -1;
           const pokemonId = getPokemonIdFromUrl(url);
 
           const imageUrl = pokemonId
@@ -74,7 +77,8 @@ function PokemonGrid({ data }: PokemonGridProps) {
                       {capitalizeFirstLetter(name)}
                     </Card.Title>
                     <Card.Text className="small text-muted mb-0">
-                      Slot: {slot}
+                      {slot !== -1 && <> Slot: {slot} </>}
+                      {entry_number !== -1 && <> Entry #: {entry_number} </>}
                     </Card.Text>
                   </Card.Body>
                 </Card>

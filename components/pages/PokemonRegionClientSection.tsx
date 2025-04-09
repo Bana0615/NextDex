@@ -11,7 +11,7 @@ import LanguageTable from "@/components/pokemon/LanguageTable";
 import PokeBadge from "@/components/pokemon/PokeBadge";
 //Helpers
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
-import { createVersionGroupsSentence } from "@/helpers/createVersionGroupsSentence";
+import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResourceSentence";
 
 export default function PokemonRegionClientSectionWrapper() {
   return (
@@ -89,7 +89,7 @@ function PokemonRegionClientSection() {
         <Col md={9}>
           {/* <p>This is the description</p>
                       <hr /> */}
-          <h4 className="text-center">Region</h4>
+          <h4 className="text-center">Main Generation</h4>
           {apiData?.main_generation?.name ? (
             <p>
               The main generation for {formattedName} is{" "}
@@ -107,8 +107,10 @@ function PokemonRegionClientSection() {
             <>
               <hr />
               <h4 className="text-center">Game Versions</h4>
-              {createVersionGroupsSentence(
-                `${formattedName} Region`,
+              {createNamedAPIResourceSentence(
+                `${formattedName} Region is associated with the version groups:`,
+                `${formattedName} is not associated with any specific version groups`,
+                "/pokemon/game",
                 apiData.version_groups
               )}
             </>

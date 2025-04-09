@@ -7,12 +7,12 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 //Components
 import { GameClient, Pokedex } from "pokenode-ts";
-import PokemonEntryList from "@/components/pokemon/PokemonEntryList";
+import PokemonGrid from "@/components/pokemon/PokemonGrid";
 import PokeBadge from "@/components/pokemon/PokeBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
 //Helpers
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
-import { createVersionGroupsSentence } from "@/helpers/createVersionGroupsSentence";
+import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResourceSentence";
 //Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
@@ -97,7 +97,7 @@ function PokedexClientSection() {
             {apiData.region?.name ? (
               <p>
                 This Pokédex is from the{" "}
-                <Link href={`/region?name=${apiData.region.name}`}>
+                <Link href={`/pokemon/region?name=${apiData.region.name}`}>
                   {capitalizeFirstLetter(apiData.region.name)}
                 </Link>{" "}
                 region.
@@ -109,8 +109,10 @@ function PokedexClientSection() {
               <>
                 <hr />
                 <h4 className="text-center">Game Versions</h4>
-                {createVersionGroupsSentence(
-                  `${formattedName} Pokédex`,
+                {createNamedAPIResourceSentence(
+                  `${formattedName} Pokédex is associated with the version groups:`,
+                  `${formattedName} is not associated with any specific version groups`,
+                  "/pokemon/game",
                   apiData.version_groups
                 )}
               </>
@@ -169,7 +171,7 @@ function PokedexClientSection() {
                 />
               </small>
             </h3>
-            <PokemonEntryList data={apiData.pokemon_entries} />
+            <PokemonGrid data={apiData.pokemon_entries} />
           </>
         ) : (
           <p className="text-center">

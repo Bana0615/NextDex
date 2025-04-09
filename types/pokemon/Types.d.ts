@@ -1,7 +1,6 @@
 import { Type } from "pokenode-ts";
 
 export type PokemonType = {
-  name: string;
   color: string;
   imgSrc: string;
   description: string;
