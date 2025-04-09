@@ -52,7 +52,6 @@ function PokemonRegionClientSection() {
     api
       .getRegionByName(nameParam)
       .then((data) => {
-        console.log("data", data);
         setApiData(data);
       })
       .catch((error) => {
@@ -114,6 +113,35 @@ function PokemonRegionClientSection() {
               )}
             </>
           )}
+          {apiData?.pokedexes && (
+            <>
+              <hr />
+              <h3 className="text-center mb-4">
+                {`Pokédexes `}
+                <small>
+                  <PokeBadge
+                    name={apiData?.pokedexes.length.toString()}
+                    fullWidth={false}
+                  />
+                </small>
+              </h3>
+              <div className="d-flex flex-wrap gap-2">
+                {apiData.pokedexes.map((item, index) => (
+                  <Link
+                    key={item.name}
+                    href={`/pokedex?name=${item.name}`}
+                    className="text-decoration-none"
+                    passHref
+                  >
+                    <PokeBadge
+                      name={item.name}
+                      className={index % 2 === 0 ? "" : "bgGray"}
+                    />
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
         </Col>
         <Col md={3}>
           <Row className="justify-content-center text-center">
@@ -131,23 +159,23 @@ function PokemonRegionClientSection() {
             </>
           )}
         </Col>
-        {apiData?.pokedexes && (
+        {apiData?.locations && (
           <Col xs={12}>
             <hr />
             <h3 className="text-center mb-4">
-              {`Pokédexes `}
+              {`${formattedName} Locations `}
               <small>
                 <PokeBadge
-                  name={apiData?.pokedexes.length.toString()}
+                  name={apiData?.locations.length.toString()}
                   fullWidth={false}
                 />
               </small>
             </h3>
             <div className="d-flex flex-wrap gap-2">
-              {apiData.pokedexes.map((item, index) => (
+              {apiData.locations.map((item, index) => (
                 <Link
                   key={item.name}
-                  href={`/pokedex?name=${item.name}`}
+                  href={`/pokemon/location?name=${item.name}`}
                   className="text-decoration-none"
                   passHref
                 >
