@@ -8,12 +8,12 @@ import styles from "@/public/styles/modules/typeBadges.module.css";
 
 const PokeBadge = ({
   name,
-  className,
+  className = "",
   imgSrc = "",
   fullWidth = true,
 }: {
   name: string;
-  className: string;
+  className?: string;
   imgSrc?: string;
   fullWidth?: boolean;
 }) => {

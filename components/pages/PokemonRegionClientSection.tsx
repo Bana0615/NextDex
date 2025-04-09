@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 //Components
 import { LocationClient, Region } from "pokenode-ts";
 import LanguageTable from "@/components/pokemon/LanguageTable";
+import PokeBadge from "@/components/pokemon/PokeBadge";
 //Helpers
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 import { createVersionGroupsSentence } from "@/helpers/createVersionGroupsSentence";
@@ -130,6 +131,35 @@ function PokemonRegionClientSection() {
             </>
           )}
         </Col>
+        {apiData?.pokedexes && (
+          <Col xs={12}>
+            <hr />
+            <h3 className="text-center mb-4">
+              {`Pokédexes `}
+              <small>
+                <PokeBadge
+                  name={apiData?.pokedexes.length.toString()}
+                  fullWidth={false}
+                />
+              </small>
+            </h3>
+            <div className="d-flex flex-wrap gap-2">
+              {apiData.pokedexes.map((item, index) => (
+                <Link
+                  key={item.name}
+                  href={`/pokedex?name=${item.name}`}
+                  className="text-decoration-none"
+                  passHref
+                >
+                  <PokeBadge
+                    name={item.name}
+                    className={index % 2 === 0 ? "" : "bgGray"}
+                  />
+                </Link>
+              ))}
+            </div>
+          </Col>
+        )}
       </Row>
     </>
   );

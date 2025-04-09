@@ -17,7 +17,6 @@ function RegionsSection() {
       await api
         .listRegions(0, 100)
         .then((data) => {
-          console.log("data", data);
           setRegions(data.results);
           setIsLoading(false);
         })
