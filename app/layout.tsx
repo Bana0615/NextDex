@@ -1,4 +1,5 @@
 // app/layout.tsx
+import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import MonHeader from "@/components/MonHeader";
@@ -45,8 +46,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {GA_TRACKING_ID && <GoogleAnalytics gaId={GA_TRACKING_ID} />}
-
       <body className={inter.className}>
         <div className="main-container">
           <MonHeader showBadge={true} />
@@ -55,6 +54,12 @@ export default function RootLayout({
           </main>
           <MonFooter />
         </div>
+
+        {GA_TRACKING_ID && (
+          <Suspense fallback={null}>
+            <GoogleAnalytics gaId={GA_TRACKING_ID} />
+          </Suspense>
+        )}
       </body>
     </html>
   );
