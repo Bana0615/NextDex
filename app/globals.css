@@ -1,0 +1,188 @@
+:root {
+  --pokemon-red: #e63946;
+  --pokemon-white: #ffffff;
+  --pokemon-light-gray: #f8f9fa;
+  --pokemon-dark-gray: #212529;
+  --pokemon-text: #333333;
+  --pokemon-yellow: #ffcb05;
+}
+
+/* --- Navbar Base Styles --- */
+.pokemon-navbar {
+  background-color: var(--pokemon-red);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* --- Brand Styling --- */
+.pokemon-navbar .pokemon-brand,
+.pokemon-navbar .pokemon-brand .navbar-subtitle {
+  color: var(--pokemon-white) !important;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  position: relative;
+}
+
+.pokemon-navbar .navbar-subtitle {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: normal;
+  opacity: 0.9;
+  text-shadow: none;
+}
+
+/* --- Nav Link Styling --- */
+.pokemon-navbar .pokemon-nav-link {
+  color: var(--pokemon-white) !important;
+  margin: 0 0.5rem;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+  z-index: 10;
+  position: relative;
+}
+
+.pokemon-navbar .pokemon-nav-link:hover,
+.pokemon-navbar .pokemon-nav-link:focus {
+  color: var(--pokemon-yellow) !important;
+  opacity: 0.85;
+}
+
+/* Active link styling (if using React Router or similar active state) */
+.pokemon-navbar .pokemon-nav-link.active {
+  font-weight: bold;
+}
+
+/* --- Badge Styling --- */
+.pokemon-badge {
+  background-color: var(--pokemon-yellow) !important;
+  color: var(--pokemon-dark-gray) !important;
+  font-size: 0.6rem;
+  padding: 0.3em 0.5em;
+  vertical-align: middle;
+  border-radius: 0.25rem;
+}
+
+/* --- Navbar Toggler (Hamburger Menu) Styling --- */
+.pokemon-navbar .pokemon-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+  z-index: 10;
+  position: relative;
+}
+
+.pokemon-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* --- Centered CSS Pokeball Styling --- */
+.pokeball-center-container {
+  position: absolute;
+  left: 50%;
+  top: 0px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  width: 40px;
+  height: 40px;
+  z-index: 5;
+}
+
+/* The main Pokeball element */
+.css-pokeball {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(
+    to bottom,
+    var(--pokemon-red) 0%,
+    var(--pokemon-red) 48%,
+    var(--pokemon-dark-gray) 48%,
+    var(--pokemon-dark-gray) 52%,
+    var(--pokemon-white) 52%,
+    var(--pokemon-white) 100%
+  );
+  position: relative;
+  pointer-events: auto;
+  border: 1px solid var(--pokemon-dark-gray);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Pseudo-element for the center button */
+.css-pokeball::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35%;
+  height: 35%;
+  background-color: var(--pokemon-white);
+  border-radius: 50%;
+  border: 3px solid var(--pokemon-dark-gray);
+  box-sizing: border-box;
+  box-shadow: inset 0 0 0 2px var(--pokemon-white);
+}
+
+/* --- Responsive Adjustments for Collapsed Navbar --- */
+@media (max-width: 991.98px) {
+  /* Standard Bootstrap lg breakpoint */
+  .pokemon-navbar .navbar-collapse {
+    background-color: var(--pokemon-red);
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0 0 0.25rem 0.25rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Adjust link spacing/padding in collapsed menu */
+  .pokemon-navbar .pokemon-nav-link {
+    padding: 0.65rem 0;
+    margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .pokemon-navbar .navbar-nav .nav-link:last-child {
+    border-bottom: none;
+  }
+}
+
+/* --- Pokémon Footer Styles --- */
+.pokemon-footer {
+  background-color: var(--pokemon-dark-gray);
+  color: var(--pokemon-light-gray);
+  margin-top: auto;
+  border-top: 4px solid var(--pokemon-red);
+}
+
+.footer-copyright {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+/* Style the navigation links in the footer */
+.footer-link {
+  color: var(--pokemon-light-gray) !important;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+}
+
+/* Hover/Focus styles for footer links */
+.footer-link:hover,
+.footer-link:focus {
+  color: var(--pokemon-yellow) !important;
+  text-decoration: none;
+}
+
+/* Ensure Nav items don't add extra bullet points or styles */
+.footer-nav .nav-item {
+  list-style: none;
+}
+
+.copyright-section a {
+  color: var(--pokemon-red) !important;
+  font-size: 0.9rem;
+  transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+}
