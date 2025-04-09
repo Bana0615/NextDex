@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Badge, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { GameClient, NamedAPIResource } from "pokenode-ts";
-//Helpers
-import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
+// Components
+import PokeBadge from "@/components/pokemon/PokeBadge";
 
 function PokedexesSection() {
   const [isLoading, setIsLoading] = useState(true);
-  const [pokedexes, setPokedexes] = useState<NamedAPIResource[]>([]);
+  const [data, setData] = useState<NamedAPIResource[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -17,7 +17,7 @@ function PokedexesSection() {
       await api
         .listPokedexes(0, 100)
         .then((data) => {
-          setPokedexes(data.results);
+          setData(data.results);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -29,32 +29,29 @@ function PokedexesSection() {
 
   return (
     <Row g={2}>
-      <h4 className="text-center mb-3">Pokédexes</h4>
-      {isLoading ? (
-        <Col className="text-center">Loading Pokédexes...</Col>
-      ) : (
-        pokedexes.map((value, index) => (
-          <Col key={value.name} className="mb-2 px-1">
-            <Link
-              href={`/pokedex?name=${value.name}`}
-              style={{ textDecoration: "none" }}
-            >
-              <Badge
-                className="w-100 d-flex align-items-center justify-content-center"
-                bg={index % 2 === 0 ? "danger" : "secondary"}
-                style={{
-                  color: "#fff",
-                  textShadow: "1px 1px 2px rgba(0,0,0,0.6)",
-                  padding: ".6em .5em",
-                  maxWidth: "120px",
-                }}
+      <Col>
+        <h4 className="text-center mb-3">Pokedexes</h4>
+        {isLoading ? (
+          <div className="text-center">Loading Pokedexes...</div>
+        ) : (
+          <div className="d-flex flex-wrap gap-2 justify-content-center">
+            {data.map((value, index) => (
+              <Link
+                key={value.name}
+                href={`/pokedex?name=${value.name}`}
+                className="text-decoration-none"
+                passHref
               >
-                <span>{capitalizeFirstLetter(value.name)}</span>
-              </Badge>
-            </Link>
-          </Col>
-        ))
-      )}
+                <PokeBadge
+                  name={value.name}
+                  className={index % 2 === 0 ? "" : "bgGray"}
+                  fullWidth={false}
+                />
+              </Link>
+            ))}
+          </div>
+        )}
+      </Col>
     </Row>
   );
 }

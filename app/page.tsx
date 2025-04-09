@@ -2,6 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import TypesSection from "@/components/pokemon/home/TypesSection";
 import PokedexesSection from "@/components/pokemon/home/PokedexesSection";
 import RegionsSection from "@/components/pokemon/home/RegionsSection";
+import GenerationsSection from "@/components/pokemon/home/GenerationsSection";
 
 export default function HomePage() {
   return (
@@ -35,6 +36,8 @@ export default function HomePage() {
           <PokedexesSection />
           <hr />
           <RegionsSection />
+          <hr />
+          <GenerationsSection />
         </Col>
       </Row>
     </Container>
