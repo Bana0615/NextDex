@@ -1,20 +1,40 @@
 import { Container, Row, Col } from "react-bootstrap";
+import TypesSection from "@/components/pokemon/home/TypesSection";
+import PokedexesSection from "@/components/pokemon/home/PokedexesSection";
+import RegionsSection from "@/components/pokemon/home/RegionsSection";
 
 export default function HomePage() {
   return (
     <Container className="main-content mt-3 mb-3">
-      <h3 className="text-center my-3">SiloCityPages</h3>
-      <Row className="shadow-lg p-3 bg-body rounded">
-        <Col lg={8} className="mx-auto">
-          SiloCityPages, developed by SiloCityLabs, is a streamlined framework
-          designed to accelerate the development and deployment of static
-          websites. Leveraging the power of Bootstrap for responsive design,
-          React for component-driven architecture, and Next.js for efficient
-          rendering, SiloCityPages provides a robust foundation for building
-          modern web applications. Optimized for seamless deployment to GitHub
-          Pages, this framework simplifies the process of creating and hosting
-          performant, visually appealing websites, allowing developers to focus
-          on content and functionality rather than complex configurations.
+      <Row className="shadow-lg mt-3 p-3 bg-body rounded">
+        <Col lg={7}>
+          <h2 className="fw-bold mb-3 text-center">
+            Welcome to {process.env.NEXT_PUBLIC_APP_NAME}!
+          </h2>
+          <p className="lead fs-6">
+            Your ultimate destination for exploring the vast world of Pokémon!
+          </p>
+          <p className="lh-lg">
+            Built with cutting-edge web technologies including{" "}
+            <strong>React</strong>, <strong>Next.js</strong>, and{" "}
+            <strong>Bootstrap</strong>, NéxtDex offers a fast, responsive, and
+            visually appealing experience for trainers of all levels. Dive into
+            our comprehensive <strong>Pokédex</strong> section to search,
+            filter, and learn intricate details about every known{" "}
+            <strong>Pokémon</strong>. Beyond the Pokédex, NéxtDex is designed to
+            be an ever-expanding resource, featuring in-depth information on{" "}
+            <strong>Pokémon</strong> games, regions, items, characters, and much
+            more. Prepare to enhance your <strong>Pokémon</strong> knowledge
+            with a sleek interface and a wealth of data right at your
+            fingertips!
+          </p>
+        </Col>
+        <Col lg={5}>
+          <TypesSection />
+          <hr />
+          <PokedexesSection />
+          <hr />
+          <RegionsSection />
         </Col>
       </Row>
     </Container>

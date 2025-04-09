@@ -1,8 +1,8 @@
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import MonHeader from "@/components/MonHeader";
+import MonFooter from "@/components/MonFooter";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/public/styles/_fw.css";
 import "./globals.css";
@@ -49,11 +49,11 @@ export default function RootLayout({
 
       <body className={inter.className}>
         <div className="main-container">
-          <Header />
+          <MonHeader />
           <main className="main-content">
             {children} {/* Page content */}
           </main>
-          <Footer />
+          <MonFooter />
         </div>
       </body>
     </html>
