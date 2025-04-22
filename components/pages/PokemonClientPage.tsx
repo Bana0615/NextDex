@@ -75,6 +75,8 @@ function PokemonClientSection() {
         delete test.game_indices;
         delete test.held_items;
         delete test.moves;
+        delete test.types;
+        delete test.past_types;
         console.log("test", test);
         setApiData(data);
         // Set Held items
@@ -118,13 +120,69 @@ function PokemonClientSection() {
           <p>
             The <a href="https://pokeapi.co/">PokéApi</a>{" "}
             <span className="fw-bold">id</span> for {formattedName} is{" "}
-            {apiData?.id ?? "???"}.
-          </p>
-          <p>
+            {apiData?.id ?? "???"}.{" "}
             {`The base experience gained for defeating ${formattedName} is ${
               apiData?.base_experience ?? "???"
             }.`}
           </p>
+
+          {/* Types */}
+          {apiData.types && apiData.types.length > 0 && (
+            <p>
+              {/* Handle singular vs plural */}
+              {`${formattedName}'s ${
+                apiData.types.length > 1 ? "types are" : "type is"
+              } `}
+              {apiData.types
+                .sort((a, b) => a.slot - b.slot) // Sort by slot (primary first)
+                .map((typeInfo, index) => (
+                  <React.Fragment key={typeInfo.type.name}>
+                    {index > 0 && " / "}
+                    <Link
+                      href={`/pokemon/type?name=${typeInfo.type.name}`}
+                      passHref
+                    >
+                      {capitalizeFirstLetter(typeInfo.type.name)}
+                    </Link>
+                  </React.Fragment>
+                ))}
+              .
+            </p>
+          )}
+
+          {/* Past Types */}
+          {apiData.past_types && apiData.past_types.length > 0 && (
+            <p>
+              {`In past generations, ${formattedName}'s typing changed: `}
+              {apiData.past_types.map((pastTypeInfo, genIndex) => {
+                // Format generation name (e.g., "generation-i" -> "Generation I")
+                const generationFormatted = capitalizeFirstLetter(
+                  pastTypeInfo.generation.name
+                );
+                return (
+                  <React.Fragment key={pastTypeInfo.generation.name}>
+                    {/* Add punctuation between different generation entries */}
+                    {genIndex > 0 && ". "}
+                    {`In ${generationFormatted}, it was `}
+                    {pastTypeInfo.types
+                      .sort((a, b) => a.slot - b.slot) // Sort types by slot
+                      .map((typeInfo, typeIndex) => (
+                        <React.Fragment key={typeInfo.type.name}>
+                          {typeIndex > 0 && " / "}
+                          <Link
+                            href={`/pokemon/type?name=${typeInfo.type.name}`}
+                            passHref
+                          >
+                            {capitalizeFirstLetter(typeInfo.type.name)}
+                          </Link>
+                        </React.Fragment>
+                      ))}
+                  </React.Fragment>
+                );
+              })}
+              . {/* Final period */}
+            </p>
+          )}
           {apiData.forms && (
             <>
               {createNamedAPIResourceSentence(
