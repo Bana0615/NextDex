@@ -2,18 +2,18 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
+// --- Next ---
 import Link from "next/link";
-// Import hooks from 'next/navigation' for App Router
 import { useRouter, useSearchParams } from "next/navigation";
-//Components
+// --- Components ---
 import { GameClient, Pokedex } from "pokenode-ts";
 import PokemonGrid from "@/components/pokemon/PokemonGrid";
-import PokeBadge from "@/components/pokemon/PokeBadge";
+import SclBadge from "@/components/_silabs/SclBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
-//Helpers
+// --- Helpers ---
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResourceSentence";
-//Icons
+// --- Icons ---
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -90,7 +90,6 @@ function PokedexClientSection() {
         {formattedName} <small className="text-muted">(Pokédex)</small>
       </h2>
       <Row>
-        {" "}
         <Col md={9}>
           <Row className="mt-5">
             <h4 className="text-center">Region</h4>
@@ -164,9 +163,8 @@ function PokedexClientSection() {
             <h3 className="text-center mb-4">
               Pokémon in the {formattedName} Pokédex{" "}
               <small>
-                <PokeBadge
+                <SclBadge
                   name={apiData.pokemon_entries.length.toString()}
-                  className={""}
                   fullWidth={false}
                 />
               </small>

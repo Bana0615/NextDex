@@ -1,8 +1,10 @@
 import React from "react";
-import Link from "next/link";
 import { Container } from "react-bootstrap";
-import PokeBadge from "@/components/pokemon/PokeBadge";
-//Types
+// --- Next ---
+import Link from "next/link";
+// --- Components ---
+import SclBadge from "@/components/_silabs/SclBadge";
+// --- Types ---
 import type { NamedAPIResource } from "pokenode-ts";
 
 /**
@@ -32,9 +34,9 @@ function MoveList({ moves, className = "" }) {
             className="text-decoration-none"
             passHref
           >
-            <PokeBadge
+            <SclBadge
               name={move.name}
-              className={
+              badgeOverwrite={
                 className ? className : index % 2 === 0 ? "" : "bgGray"
               }
             />

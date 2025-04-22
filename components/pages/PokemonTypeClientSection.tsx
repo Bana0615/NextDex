@@ -2,16 +2,16 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { PokemonClient, Type as PokemonTypeData } from "pokenode-ts";
+// --- Next ---
 import Link from "next/link";
 import Image from "next/image";
-// Import hooks from 'next/navigation' for App Router
 import { useRouter, useSearchParams } from "next/navigation";
-import { PokemonClient, Type as PokemonTypeData } from "pokenode-ts";
 //Components
 import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
 import PokemonGrid from "@/components/pokemon/PokemonGrid";
 import MoveList from "@/components/pokemon/MoveList";
-import PokeBadge from "@/components/pokemon/PokeBadge";
+import SclBadge from "@/components/_silabs/SclBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
 //Helpers
 import { createDamageRelationSentences } from "@/helpers/createDamageRelationSentences";
@@ -193,9 +193,9 @@ function PokemonTypeClientSection() {
             <h3 className="text-center mb-4">
               {`${formattedName} type Pokémon `}
               <small>
-                <PokeBadge
+                <SclBadge
                   name={apiData?.pokemon.length.toString()}
-                  className={typeData?.className ?? "bgGray"}
+                  badgeOverwrite={typeData?.className ?? "bgGray"}
                   fullWidth={false}
                 />
               </small>
@@ -209,9 +209,9 @@ function PokemonTypeClientSection() {
             <h3 className="text-center mb-4">
               {`${formattedName}-type moves `}
               <small>
-                <PokeBadge
+                <SclBadge
                   name={apiData?.moves.length.toString()}
-                  className={typeData?.className ?? "bgGray"}
+                  badgeOverwrite={typeData?.className ?? "bgGray"}
                   fullWidth={false}
                 />
               </small>

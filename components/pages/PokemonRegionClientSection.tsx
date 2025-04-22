@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
+// --- Next ---
 import Link from "next/link";
-// Import hooks from 'next/navigation' for App Router
 import { useRouter, useSearchParams } from "next/navigation";
-//Components
+// --- Components ---
 import { LocationClient, Region } from "pokenode-ts";
 import LanguageTable from "@/components/pokemon/LanguageTable";
-import PokeBadge from "@/components/pokemon/PokeBadge";
-//Helpers
+import SclBadge from "@/components/_silabs/SclBadge";
+// --- Helpers ---
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResourceSentence";
 
@@ -121,7 +121,7 @@ function PokemonRegionClientSection() {
               <h3 className="text-center mb-4">
                 {`Pokédexes `}
                 <small>
-                  <PokeBadge
+                  <SclBadge
                     name={apiData?.pokedexes.length.toString()}
                     fullWidth={false}
                   />
@@ -135,9 +135,9 @@ function PokemonRegionClientSection() {
                     className="text-decoration-none"
                     passHref
                   >
-                    <PokeBadge
+                    <SclBadge
                       name={item.name}
-                      className={index % 2 === 0 ? "" : "bgGray"}
+                      badgeOverwrite={index % 2 === 0 ? "" : "bgGray"}
                     />
                   </Link>
                 ))}
@@ -167,7 +167,7 @@ function PokemonRegionClientSection() {
             <h3 className="text-center mb-4">
               {`${formattedName} Locations `}
               <small>
-                <PokeBadge
+                <SclBadge
                   name={apiData?.locations.length.toString()}
                   fullWidth={false}
                 />
@@ -181,9 +181,9 @@ function PokemonRegionClientSection() {
                   className="text-decoration-none"
                   passHref
                 >
-                  <PokeBadge
+                  <SclBadge
                     name={item.name}
-                    className={index % 2 === 0 ? "" : "bgGray"}
+                    badgeOverwrite={index % 2 === 0 ? "" : "bgGray"}
                   />
                 </Link>
               ))}
