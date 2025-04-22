@@ -1,12 +1,15 @@
 "use client";
+
 import React from "react";
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
+// --- Components ---
 import PokeBadge from "@/components/pokemon/PokeBadge";
-//Data
+import SclBadge from "@/components/_silabs/SclBadge";
+// --- Data ---
 import typesData from "@/json/pokemon/types.json";
-//Types
-import { PokemonType } from "@/types/pokemon/Types";
+// --- Types ---
+import type { PokemonType } from "@/types/pokemon/Types";
 
 function TypesSection() {
   const types: Record<string, PokemonType> = typesData ?? {};
@@ -20,10 +23,11 @@ function TypesSection() {
             href={`/pokemon/type?name=${typeName}`}
             style={{ textDecoration: "none" }}
           >
-            <PokeBadge
+            <SclBadge
               name={typeName}
-              className={typeDetails.className}
-              imgSrc={typeDetails.imgSrc}
+              badgeOverwrite={typeDetails.className}
+              imgSrc={`/images/pokemon/types/transparent/${typeDetails.imgSrc}`}
+              fullWidth={true}
             />
           </Link>
         </Col>
