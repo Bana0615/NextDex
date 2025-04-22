@@ -19,12 +19,14 @@ const defaultNavLinks = [
   },
 ];
 
-function Header({
+export default function Header({
   className,
   navLinks = defaultNavLinks,
   darkLinks = false,
   showBadge = false,
 }: HeaderProps) {
+  navLinks = navLinks.length > 0 ? navLinks : defaultNavLinks;
+
   return (
     <Navbar
       id="main-header"
@@ -77,5 +79,3 @@ function Header({
     </Navbar>
   );
 }
-
-export default Header;

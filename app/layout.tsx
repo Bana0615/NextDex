@@ -1,13 +1,14 @@
-// app/layout.tsx
 import { Suspense } from "react";
+// --- Next ---
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import MonHeader from "@/components/MonHeader";
-import MonFooter from "@/components/MonFooter";
+// --- Components ---
+import GoogleAnalytics from "@/components/_silabs/GoogleAnalytics";
+
+// --- Styles ---
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/public/styles/_fw.css";
 import "./globals.css";
-import GoogleAnalytics from "@/components/_silabs/GoogleAnalytics";
 
 // --- Environment Variables ---
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_APP_GA_TRACKING_ID;
@@ -33,10 +34,9 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  // themeColor: "#ffffff", // Optional: Add theme color
 };
 
-// Setup a font (example using Inter)
+// Setup a font
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -47,13 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="main-container">
-          <MonHeader showBadge={true} />
-          <main className="main-content">
-            {children} {/* Page content */}
-          </main>
-          <MonFooter />
-        </div>
+        {children}
 
         {GA_TRACKING_ID && (
           <Suspense fallback={null}>
