@@ -24,6 +24,8 @@ function MonHeader({
   showBadge = false,
   navLinks = defaultNavLinks,
 }: HeaderProps) {
+  navLinks = navLinks.length > 0 ? navLinks : defaultNavLinks;
+
   return (
     <Navbar
       id="main-header"

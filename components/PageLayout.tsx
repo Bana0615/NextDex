@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import MonHeader from "@/components/MonHeader";
+import MonFooter from "@/components/MonFooter";
 
 interface NavLink {
   label: string;
@@ -20,6 +20,7 @@ interface PageLayoutProps {
   headerShowBadge?: boolean;
 }
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export default function PageLayout({
   children,
   headerClassName = "",
@@ -32,15 +33,14 @@ export default function PageLayout({
   return (
     <div className="main-container">
       {showHeader && (
-        <Header
+        <MonHeader
           className={headerClassName}
           navLinks={navLinks}
-          darkLinks={headerDarkLinks}
           showBadge={headerShowBadge}
         />
       )}
       <main className="main-content">{children}</main>
-      {showFooter && <Footer />}
+      {showFooter && <MonFooter />}
     </div>
   );
 }

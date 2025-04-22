@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Badge, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { LocationClient, NamedAPIResource } from "pokenode-ts";
 // Components
 import PokeBadge from "@/components/pokemon/PokeBadge";

@@ -9,7 +9,7 @@ import GenerationsSection from "@/components/pokemon/home/GenerationsSection";
 
 export default function HomePage() {
   return (
-    <PageLayout>
+    <PageLayout headerShowBadge={true}>
       <Container className="main-content mt-3 mb-3">
         <Row className="shadow-lg mt-3 p-3 bg-body rounded">
           <Col lg={7}>
