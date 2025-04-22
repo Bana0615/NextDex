@@ -9,14 +9,12 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 // --- Components ---
 import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
-import PokemonGrid from "@/components/pokemon/PokemonGrid";
 import MoveList from "@/components/pokemon/MoveList";
 import SclBadge from "@/components/_silabs/SclBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
 // --- Helpers ---
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
-import { createDamageRelationSentences } from "@/helpers/createDamageRelationSentences";
-import { createIndicesSentence } from "@/helpers/createIndicesSentence";
+import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResourceSentence";
 // --- Font Awesome ---
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
@@ -68,6 +66,7 @@ function PokemonClientSection() {
         delete test.weight;
         delete test.order;
         delete test.abilities;
+        delete test.forms;
         console.log("test", test);
         setApiData(data);
       })
@@ -114,6 +113,16 @@ function PokemonClientSection() {
               apiData?.base_experience ?? "???"
             }.`}
           </p>
+          {apiData.forms && apiData.forms.length > 0 && (
+            <>
+              {createNamedAPIResourceSentence(
+                `${formattedName}'s form(s): `,
+                `${formattedName} does not have any forms.`,
+                "/pokemon/form",
+                apiData.forms
+              )}
+            </>
+          )}
         </Col>
         <Col md={3}>
           <Row className="justify-content-center text-center">
@@ -160,7 +169,6 @@ function PokemonClientSection() {
             <h3 className="text-center mb-3">
               Abilities
               <small className="ms-2">
-                {/* Use a neutral variant like 'info' or 'light' for the count badge */}
                 <SclBadge
                   name={apiData.abilities.length.toString()}
                   badgeOverwrite="bgPoke"
