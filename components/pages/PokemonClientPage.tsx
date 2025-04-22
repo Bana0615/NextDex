@@ -98,6 +98,7 @@ function PokemonClientSection() {
         //TODO: Figure out what is_default is used for
         //TODO: Figure out what location_area_encounters is used for
         //TODO: Figure out why past_abilities all seem to be null
+        //TODO: Figure out what species is used for
         const test = { ...data };
         delete test.id;
         delete test.name;
@@ -157,9 +158,9 @@ function PokemonClientSection() {
             {apiData.types && apiData.types.length > 0
               ? renderLinkedTypes(apiData.types, "current")
               : "Pokémon"}{" "}
-            {/* Fallback if types somehow aren't available */} type Pokémon,
-            registered in the <a href="https://pokeapi.co/">PokéApi</a> with an
-            ID of {apiData.id ?? "???"}. Defeating {formattedName} grants{" "}
+            type Pokémon, registered in the{" "}
+            <a href="https://pokeapi.co/">PokéApi</a> with an ID of{" "}
+            {apiData.id ?? "???"}. Defeating {formattedName} grants{" "}
             {apiData.base_experience ?? "???"} base experience points.
             {/* Past Types */}
             {apiData.past_types && apiData.past_types.length > 0 && (
