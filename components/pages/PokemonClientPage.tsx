@@ -67,6 +67,7 @@ function PokemonClientSection() {
         delete test.height;
         delete test.weight;
         delete test.order;
+        delete test.abilities;
         console.log("test", test);
         setApiData(data);
       })
@@ -154,7 +155,7 @@ function PokemonClientSection() {
       </Row>
 
       <Row className="mt-4 pt-3 border-top">
-        {apiData?.abilities && apiData.abilities.length > 0 && (
+        {apiData?.abilities && (
           <div className="my-4">
             <h3 className="text-center mb-3">
               Abilities
@@ -166,44 +167,42 @@ function PokemonClientSection() {
                 />
               </small>
             </h3>
-            <div className="d-flex flex-wrap justify-content-center align-items-center gap-2">
-              {apiData.abilities
-                .sort((a, b) => a.slot - b.slot) // Sort by slot
-                .map((abilityItem) => (
-                  // Use React.Fragment with key for clarity
-                  <React.Fragment key={abilityItem.ability.name}>
-                    <Link
-                      href={`/pokemon/ability?name=${abilityItem.ability.name}`}
-                      className="text-decoration-none"
-                      // Title attribute formatting depends on your desired output for hyphenated names
-                      title={
-                        abilityItem.is_hidden
-                          ? `${capitalizeFirstLetter(
-                              abilityItem.ability.name
-                            )} (Hidden Ability)` // Format as needed
-                          : capitalizeFirstLetter(abilityItem.ability.name) // Format as needed
-                      }
-                      passHref
-                    >
-                      <SclBadge
-                        name={abilityItem.ability.name}
-                        badgeOverwrite={
-                          abilityItem.is_hidden ? "bgGray" : "bgPoke"
+            {apiData.abilities.length > 0 ? (
+              <div className="d-flex flex-wrap justify-content-center align-items-center gap-2">
+                {apiData.abilities
+                  .sort((a, b) => a.slot - b.slot) // Sort by slot
+                  .map((abilityItem) => (
+                    <React.Fragment key={abilityItem.ability.name}>
+                      <Link
+                        href={`/pokemon/ability?name=${abilityItem.ability.name}`}
+                        className="text-decoration-none"
+                        title={
+                          `${capitalizeFirstLetter(
+                            abilityItem.ability.name
+                          )} ` +
+                          `(Slot ${abilityItem.slot})` +
+                          (abilityItem.is_hidden ? " - Hidden Ability" : "") // Indicate if hidden based on the flag
                         }
-                        faIcon={abilityItem.is_hidden ? faEyeSlash : undefined}
-                      />
-                    </Link>
-                  </React.Fragment>
-                ))}
-            </div>
-          </div>
-        )}
-
-        {/* Optional: Handle case where Pokemon has no abilities */}
-        {apiData?.abilities && apiData.abilities.length === 0 && (
-          <div className="my-4 text-center">
-            <h3 className="mb-3">Abilities</h3>
-            <p className="text-muted">This Pokémon has no listed abilities.</p>
+                        passHref
+                      >
+                        <SclBadge
+                          name={abilityItem.ability.name}
+                          badgeOverwrite={
+                            abilityItem.is_hidden ? "bgGray" : "bgPoke"
+                          }
+                          faIcon={
+                            abilityItem.is_hidden ? faEyeSlash : undefined
+                          }
+                        />
+                      </Link>
+                    </React.Fragment>
+                  ))}
+              </div>
+            ) : (
+              <p className="text-muted">
+                This Pokémon has no listed abilities.
+              </p>
+            )}
           </div>
         )}
       </Row>
