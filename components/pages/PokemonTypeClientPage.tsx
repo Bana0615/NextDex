@@ -10,7 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 // --- Components ---
 import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
 import PokemonGrid from "@/components/pokemon/PokemonGrid";
-import MoveList from "@/components/pokemon/MoveList";
+import NamedApiBadgeList from "@/components/pokemon/NamedApiBadgeList";
 import SclBadge from "@/components/_silabs/SclBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
 // --- Helpers ---
@@ -216,7 +216,11 @@ function PokemonTypeClientSection() {
                 />
               </small>
             </h3>
-            <MoveList moves={apiData?.moves} className={typeData?.className} />
+            <NamedApiBadgeList
+              items={apiData?.moves}
+              url={"/pokemon/move"}
+              className={typeData?.className}
+            />
           </>
         )}
         {apiData?.sprites && (

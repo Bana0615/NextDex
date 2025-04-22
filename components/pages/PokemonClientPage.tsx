@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
-import { PokemonClient, Pokemon } from "pokenode-ts";
+import { PokemonClient, Pokemon, NamedAPIResource } from "pokenode-ts";
 // --- Next ---
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 // --- Components ---
 import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
-import MoveList from "@/components/pokemon/MoveList";
+import NamedApiBadgeList from "@/components/pokemon/NamedApiBadgeList";
 import SclBadge from "@/components/_silabs/SclBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
 // --- Helpers ---
@@ -34,6 +34,9 @@ function PokemonClientSection() {
   const [apiData, setApiData] = useState<Pokemon | null>(null);
   const [formattedName, setFormattedName] = useState<string>("");
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
+  const [games, setGames] = useState<NamedAPIResource[]>([]);
+  const [heldItems, setHeldItems] = useState<NamedAPIResource[]>([]);
+  const [moves, setMoves] = useState<NamedAPIResource[]>([]);
 
   useEffect(() => {
     const nameParam = searchParams?.get("name") ?? "";
@@ -58,6 +61,8 @@ function PokemonClientSection() {
       .getPokemonByName(nameParam)
       .then((data) => {
         //TODO: Figure out what is_default is used for
+        //TODO: Figure out what location_area_encounters is used for
+        //TODO: Figure out why past_abilities all seem to be null
         const test = { ...data };
         delete test.id;
         delete test.name;
@@ -67,8 +72,15 @@ function PokemonClientSection() {
         delete test.order;
         delete test.abilities;
         delete test.forms;
+        delete test.game_indices;
+        delete test.held_items;
+        delete test.moves;
         console.log("test", test);
         setApiData(data);
+        // Set Held items
+        setGames(data?.game_indices.map((item) => item.version) ?? []);
+        setHeldItems(data?.held_items.map((item) => item.item) ?? []);
+        setMoves(data?.moves.map((item) => item.move) ?? []);
       })
       .catch((error) => {
         console.error("Failed to fetch Pokémon data:", error);
@@ -99,7 +111,7 @@ function PokemonClientSection() {
   return (
     <>
       <h2 className="fw-bold mb-3 text-center">
-        {formattedName} <small className="text-muted">(type)</small>
+        {formattedName} <small className="text-muted">(pokémon)</small>
       </h2>
       <Row>
         <Col md={9}>
@@ -113,13 +125,59 @@ function PokemonClientSection() {
               apiData?.base_experience ?? "???"
             }.`}
           </p>
-          {apiData.forms && apiData.forms.length > 0 && (
+          {apiData.forms && (
             <>
               {createNamedAPIResourceSentence(
-                `${formattedName}'s form(s): `,
+                `A list of forms ${formattedName} can take on: `,
                 `${formattedName} does not have any forms.`,
                 "/pokemon/form",
                 apiData.forms
+              )}
+            </>
+          )}
+          {/* Held Items */}
+          {createNamedAPIResourceSentence(
+            `A list of items ${formattedName} may be holding when encountered: `,
+            `${formattedName} does not hold any items when encountered.`,
+            "/pokemon/item",
+            heldItems
+          )}
+          {apiData?.abilities && (
+            <>
+              {apiData.abilities.length > 0 ? (
+                <div className="d-flex flex-wrap gap-2">
+                  <span className="fw-bold">Abilities: </span>
+                  {apiData.abilities
+                    .sort((a, b) => a.slot - b.slot) // Sort by slot
+                    .map((abilityItem) => (
+                      <React.Fragment key={abilityItem.ability.name}>
+                        <Link
+                          href={`/pokemon/ability?name=${abilityItem.ability.name}`}
+                          className="text-decoration-none"
+                          title={
+                            `${capitalizeFirstLetter(
+                              abilityItem.ability.name
+                            )} ` +
+                            `(Slot ${abilityItem.slot})` +
+                            (abilityItem.is_hidden ? " - Hidden Ability" : "") // Indicate if hidden based on the flag
+                          }
+                          passHref
+                        >
+                          <SclBadge
+                            name={abilityItem.ability.name}
+                            badgeOverwrite={
+                              abilityItem.is_hidden ? "bgGray" : "bgPoke"
+                            }
+                            faIcon={
+                              abilityItem.is_hidden ? faEyeSlash : undefined
+                            }
+                          />
+                        </Link>
+                      </React.Fragment>
+                    ))}
+                </div>
+              ) : (
+                <p className="text-muted">Abilities: None</p>
               )}
             </>
           )}
@@ -155,64 +213,54 @@ function PokemonClientSection() {
             )}
             {apiData?.abilities && (
               <Col xs={12} md={6}>
-                <h3 className="fw-bold mb-0">{apiData?.abilities.length}</h3>
+                <h3 className="fw-bold mb-0">{apiData.abilities.length}</h3>
                 <p className="mt-1">Abilities</p>
               </Col>
             )}
+            <Col xs={12} md={6}>
+              <h3 className="fw-bold mb-0">{games.length}</h3>
+              <p className="mt-1">Games</p>
+            </Col>
+            <Col xs={12} md={6}>
+              <h3 className="fw-bold mb-0">{heldItems.length}</h3>
+              <p className="mt-1">Held Items</p>
+            </Col>
+            <Col xs={12} md={6}>
+              <h3 className="fw-bold mb-0">{moves.length}</h3>
+              <p className="mt-1">Moves</p>
+            </Col>
           </Row>
         </Col>
       </Row>
 
+      {/* Games */}
       <Row className="mt-4 pt-3 border-top">
-        {apiData?.abilities && (
-          <div className="my-4">
-            <h3 className="text-center mb-3">
-              Abilities
-              <small className="ms-2">
-                <SclBadge
-                  name={apiData.abilities.length.toString()}
-                  badgeOverwrite="bgPoke"
-                />
-              </small>
-            </h3>
-            {apiData.abilities.length > 0 ? (
-              <div className="d-flex flex-wrap justify-content-center align-items-center gap-2">
-                {apiData.abilities
-                  .sort((a, b) => a.slot - b.slot) // Sort by slot
-                  .map((abilityItem) => (
-                    <React.Fragment key={abilityItem.ability.name}>
-                      <Link
-                        href={`/pokemon/ability?name=${abilityItem.ability.name}`}
-                        className="text-decoration-none"
-                        title={
-                          `${capitalizeFirstLetter(
-                            abilityItem.ability.name
-                          )} ` +
-                          `(Slot ${abilityItem.slot})` +
-                          (abilityItem.is_hidden ? " - Hidden Ability" : "") // Indicate if hidden based on the flag
-                        }
-                        passHref
-                      >
-                        <SclBadge
-                          name={abilityItem.ability.name}
-                          badgeOverwrite={
-                            abilityItem.is_hidden ? "bgGray" : "bgPoke"
-                          }
-                          faIcon={
-                            abilityItem.is_hidden ? faEyeSlash : undefined
-                          }
-                        />
-                      </Link>
-                    </React.Fragment>
-                  ))}
-              </div>
-            ) : (
-              <p className="text-muted">
-                This Pokémon has no listed abilities.
-              </p>
-            )}
-          </div>
-        )}
+        <h3 className="text-center mb-4">
+          {`Games `}
+          <small>
+            <SclBadge
+              name={games.length.toString()}
+              fullWidth={false}
+              badgeOverwrite="bgPoke"
+            />
+          </small>
+        </h3>
+        <NamedApiBadgeList items={games} url={"/pokemon/game"} />
+      </Row>
+
+      {/* Moves */}
+      <Row className="mt-4 pt-3 border-top">
+        <h3 className="text-center mb-4">
+          {`Moves `}
+          <small>
+            <SclBadge
+              name={moves.length.toString()}
+              fullWidth={false}
+              badgeOverwrite="bgPoke"
+            />
+          </small>
+        </h3>
+        <NamedApiBadgeList items={moves} url={"/pokemon/move"} />
       </Row>
 
       {/* --- Legend --- */}

@@ -10,7 +10,7 @@ import { GameClient, Generation } from "pokenode-ts";
 import LanguageTable from "@/components/pokemon/LanguageTable";
 import SclBadge from "@/components/_silabs/SclBadge";
 import PokemonGrid from "@/components/pokemon/PokemonGrid";
-import MoveList from "@/components/pokemon/MoveList";
+import NamedApiBadgeList from "@/components/pokemon/NamedApiBadgeList";
 // --- Helpers ---
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResourceSentence";
@@ -190,7 +190,10 @@ function PokemonGenerationClientSection() {
                 />
               </small>
             </h3>
-            <MoveList moves={apiData?.moves} className={""} />
+            <NamedApiBadgeList
+              items={apiData?.moves}
+              url={"/pokemon/move"}
+            />
           </>
         )}
         {apiData?.abilities && (

@@ -1,8 +1,9 @@
 import React, { JSX } from "react";
 import Link from "next/link";
 import { NamedAPIResource } from "pokenode-ts";
-// Helpers
+// --- Helpers ---
 import { getSentenceSeperator } from "@/helpers/getSentenceSeperator";
+import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 
 /**
  * Creates a JSX sentence listing NamedAPIResources with links.
@@ -34,7 +35,7 @@ export function createNamedAPIResourceSentence(
 
         const groupLink = (
           <Link href={linkHref} key={item.name}>
-            {item.name}
+            {capitalizeFirstLetter(item.name)}
           </Link>
         );
 
