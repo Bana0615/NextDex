@@ -54,7 +54,6 @@ function PokemonGenerationClientSection() {
     api
       .getGenerationByName(nameParam)
       .then((data) => {
-        console.log("data", data);
         setApiData(data);
       })
       .catch((error) => {
