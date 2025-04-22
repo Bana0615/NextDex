@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
 import { GameClient, NamedAPIResource } from "pokenode-ts";
-// Components
-import PokeBadge from "@/components/pokemon/PokeBadge";
+// --- Components ---
+import SclBadge from "@/components/_silabs/SclBadge";
 
 function GenerationsSection() {
   const [isLoading, setIsLoading] = useState(true);
@@ -42,10 +42,10 @@ function GenerationsSection() {
                 className="text-decoration-none"
                 passHref
               >
-                <PokeBadge
+                <SclBadge
                   name={value.name}
-                  className={index % 2 === 0 ? "" : "bgGray"}
-                  fullWidth={false}
+                  badgeOverwrite={index % 2 === 0 ? "" : "bgGray"}
+                  fullWidth={true}
                 />
               </Link>
             ))}
