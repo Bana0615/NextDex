@@ -5,16 +5,16 @@ import type { Metadata } from "next";
 import PageLayout from "@/components/PageLayout";
 
 export const metadata: Metadata = {
-  title: "Pokémon",
+  title: "Pokémon Ability",
 };
 
-export default function PokemonPage() {
+export default function PokemonAbilityPage() {
   return (
     <PageLayout headerShowBadge={true}>
       <Container className="main-content mt-3 mb-3">
         <Row className="shadow-lg mt-3 p-3 bg-body rounded">
           <Row className="mt-5">
-            <h2 className="text-center">Pokémon</h2>
+            <h2 className="text-center">Pokémon Ability</h2>
             <span className="text-center">Coming Soon.....</span>
           </Row>
         </Row>

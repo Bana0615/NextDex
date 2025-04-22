@@ -4,35 +4,40 @@ import Image from "next/image";
 //Helpers
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 //Styles
-import styles from "@/public/styles/modules/typeBadges.module.css";
+import styles from "@/public/styles/components/SclBadges.module.css";
 
-const PokeBadge = ({
+const SclBadge = ({
   name,
-  className = "",
+  variant = "",
+  badgeOverwrite = "",
   imgSrc = "",
-  fullWidth = true,
+  needsDarkText = false,
+  fullWidth = false,
 }: {
   name: string;
-  className?: string;
+  variant?: string;
+  badgeOverwrite?: string;
   imgSrc?: string;
+  needsDarkText?: boolean;
   fullWidth?: boolean;
 }) => {
-  const lightBackgroundTypes = ["Electric", "Ice", "Ground", "Steel"];
-  const needsDarkText = lightBackgroundTypes.includes(name);
-
   // Base classes that are always applied
   const badgeClasses = [
     "d-flex",
     "align-items-center",
-    styles.pokeBadge,
-    styles[className],
+    styles.baseBadge,
+    styles[badgeOverwrite],
   ];
 
-  // Add classes conditionally based on fullWidth prop
+  // Add classes conditionally
+  if (variant) {
+    badgeClasses.push(variant);
+  }
+
   if (fullWidth) {
     badgeClasses.push("w-100", "justify-content-center"); // Add full width and centering only if true
   } else {
-    badgeClasses.push("d-inline-flex"); // You might use d-inline-flex if d-flex alone isn't sufficient
+    badgeClasses.push("d-inline-flex");
   }
 
   // Add dark text if needed
@@ -41,11 +46,14 @@ const PokeBadge = ({
   }
 
   return (
-    <Badge className={badgeClasses.join(" ")}>
+    <Badge
+      className={badgeClasses.join(" ")}
+      bg={variant ? variant : "success"}
+    >
       {imgSrc && (
         <Image
-          src={`/images/pokemon/types/transparent/${imgSrc}`}
-          alt={`${name} type icon`}
+          src={imgSrc}
+          alt={`${name} icon`}
           height={16}
           width={16}
           style={{
@@ -60,4 +68,4 @@ const PokeBadge = ({
   );
 };
 
-export default PokeBadge;
+export default SclBadge;

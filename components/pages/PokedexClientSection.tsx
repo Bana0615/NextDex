@@ -2,18 +2,18 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
+// --- Next ---
 import Link from "next/link";
-// Import hooks from 'next/navigation' for App Router
 import { useRouter, useSearchParams } from "next/navigation";
-//Components
+// --- Components ---
 import { GameClient, Pokedex } from "pokenode-ts";
-import PokemonEntryList from "@/components/pokemon/PokemonEntryList";
-import PokeBadge from "@/components/pokemon/PokeBadge";
+import PokemonGrid from "@/components/pokemon/PokemonGrid";
+import SclBadge from "@/components/_silabs/SclBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
-//Helpers
+// --- Helpers ---
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
-import { createVersionGroupsSentence } from "@/helpers/createVersionGroupsSentence";
-//Icons
+import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResourceSentence";
+// --- Icons ---
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -90,14 +90,13 @@ function PokedexClientSection() {
         {formattedName} <small className="text-muted">(Pokédex)</small>
       </h2>
       <Row>
-        {" "}
         <Col md={9}>
           <Row className="mt-5">
             <h4 className="text-center">Region</h4>
             {apiData.region?.name ? (
               <p>
                 This Pokédex is from the{" "}
-                <Link href={`/region?name=${apiData.region.name}`}>
+                <Link href={`/pokemon/region?name=${apiData.region.name}`}>
                   {capitalizeFirstLetter(apiData.region.name)}
                 </Link>{" "}
                 region.
@@ -109,8 +108,10 @@ function PokedexClientSection() {
               <>
                 <hr />
                 <h4 className="text-center">Game Versions</h4>
-                {createVersionGroupsSentence(
-                  `${formattedName} Pokédex`,
+                {createNamedAPIResourceSentence(
+                  `${formattedName} Pokédex is associated with the version groups:`,
+                  `${formattedName} is not associated with any specific version groups`,
+                  "/pokemon/game",
                   apiData.version_groups
                 )}
               </>
@@ -162,14 +163,13 @@ function PokedexClientSection() {
             <h3 className="text-center mb-4">
               Pokémon in the {formattedName} Pokédex{" "}
               <small>
-                <PokeBadge
+                <SclBadge
                   name={apiData.pokemon_entries.length.toString()}
-                  className={""}
                   fullWidth={false}
                 />
               </small>
             </h3>
-            <PokemonEntryList data={apiData.pokemon_entries} />
+            <PokemonGrid data={apiData.pokemon_entries} />
           </>
         ) : (
           <p className="text-center">

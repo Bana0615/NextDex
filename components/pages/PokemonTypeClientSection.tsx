@@ -2,16 +2,16 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { PokemonClient, Type as PokemonTypeData } from "pokenode-ts";
+// --- Next ---
 import Link from "next/link";
 import Image from "next/image";
-// Import hooks from 'next/navigation' for App Router
 import { useRouter, useSearchParams } from "next/navigation";
-import { PokemonClient, Type as PokemonTypeData } from "pokenode-ts";
 //Components
 import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
 import PokemonGrid from "@/components/pokemon/PokemonGrid";
 import MoveList from "@/components/pokemon/MoveList";
-import PokeBadge from "@/components/pokemon/PokeBadge";
+import SclBadge from "@/components/_silabs/SclBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
 //Helpers
 import { createDamageRelationSentences } from "@/helpers/createDamageRelationSentences";
@@ -41,13 +41,11 @@ function PokemonTypeClientSection() {
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 
   useEffect(() => {
-    const nameParam = searchParams?.get("name");
-    const foundType = typesData.find(
-      (type) => type.name.toLowerCase() === nameParam?.toLowerCase()
-    );
+    const nameParam = searchParams?.get("name") ?? "";
+    const foundType = typesData[nameParam.toLowerCase()] ?? null;
 
     // Handle case where nameParam is missing or empty
-    if (!nameParam || !foundType) {
+    if (!nameParam) {
       console.warn("No 'name' parameter found in URL.");
       setErrorOccurred(true);
       setIsLoading(false);
@@ -100,7 +98,7 @@ function PokemonTypeClientSection() {
         {typeData && (
           <Image
             src={`/images/pokemon/types/color/${typeData.imgSrc}`}
-            alt={`${typeData.name} type icon`}
+            alt={`${formattedName} type icon`}
             height={35}
             width={35}
             style={{
@@ -113,7 +111,7 @@ function PokemonTypeClientSection() {
       </h2>
       <Row>
         <Col md={9}>
-          <p>{typeData?.description}</p>
+          <p>{typeData?.description ?? "No description available"}</p>
           {apiData?.damage_relations && (
             <>
               <hr />
@@ -148,7 +146,7 @@ function PokemonTypeClientSection() {
             {apiData?.pokemon && (
               <Col xs={12} md={6}>
                 <h3 className="fw-bold mb-0">{apiData?.pokemon.length}</h3>
-                <p className="mt-1">{`${formattedName} type Pokémon`}</p>
+                <p className="mt-1">{`${formattedName} Pokémon`}</p>
               </Col>
             )}
             {apiData?.moves && (
@@ -195,9 +193,9 @@ function PokemonTypeClientSection() {
             <h3 className="text-center mb-4">
               {`${formattedName} type Pokémon `}
               <small>
-                <PokeBadge
+                <SclBadge
                   name={apiData?.pokemon.length.toString()}
-                  className={typeData?.className ?? ""}
+                  badgeOverwrite={typeData?.className ?? "bgGray"}
                   fullWidth={false}
                 />
               </small>
@@ -211,9 +209,9 @@ function PokemonTypeClientSection() {
             <h3 className="text-center mb-4">
               {`${formattedName}-type moves `}
               <small>
-                <PokeBadge
+                <SclBadge
                   name={apiData?.moves.length.toString()}
-                  className={typeData?.className ?? ""}
+                  badgeOverwrite={typeData?.className ?? "bgGray"}
                   fullWidth={false}
                 />
               </small>

@@ -2,16 +2,16 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
+// --- Next ---
 import Link from "next/link";
-// Import hooks from 'next/navigation' for App Router
 import { useRouter, useSearchParams } from "next/navigation";
-//Components
+// --- Components ---
 import { LocationClient, Region } from "pokenode-ts";
 import LanguageTable from "@/components/pokemon/LanguageTable";
-import PokeBadge from "@/components/pokemon/PokeBadge";
-//Helpers
+import SclBadge from "@/components/_silabs/SclBadge";
+// --- Helpers ---
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
-import { createVersionGroupsSentence } from "@/helpers/createVersionGroupsSentence";
+import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResourceSentence";
 
 export default function PokemonRegionClientSectionWrapper() {
   return (
@@ -89,7 +89,7 @@ function PokemonRegionClientSection() {
         <Col md={9}>
           {/* <p>This is the description</p>
                       <hr /> */}
-          <h4 className="text-center">Region</h4>
+          <h4 className="text-center">Main Generation</h4>
           {apiData?.main_generation?.name ? (
             <p>
               The main generation for {formattedName} is{" "}
@@ -107,8 +107,10 @@ function PokemonRegionClientSection() {
             <>
               <hr />
               <h4 className="text-center">Game Versions</h4>
-              {createVersionGroupsSentence(
-                `${formattedName} Region`,
+              {createNamedAPIResourceSentence(
+                `${formattedName} Region is associated with the version groups:`,
+                `${formattedName} is not associated with any specific version groups`,
+                "/pokemon/game",
                 apiData.version_groups
               )}
             </>
@@ -119,7 +121,7 @@ function PokemonRegionClientSection() {
               <h3 className="text-center mb-4">
                 {`Pokédexes `}
                 <small>
-                  <PokeBadge
+                  <SclBadge
                     name={apiData?.pokedexes.length.toString()}
                     fullWidth={false}
                   />
@@ -133,9 +135,9 @@ function PokemonRegionClientSection() {
                     className="text-decoration-none"
                     passHref
                   >
-                    <PokeBadge
+                    <SclBadge
                       name={item.name}
-                      className={index % 2 === 0 ? "" : "bgGray"}
+                      badgeOverwrite={index % 2 === 0 ? "" : "bgGray"}
                     />
                   </Link>
                 ))}
@@ -165,7 +167,7 @@ function PokemonRegionClientSection() {
             <h3 className="text-center mb-4">
               {`${formattedName} Locations `}
               <small>
-                <PokeBadge
+                <SclBadge
                   name={apiData?.locations.length.toString()}
                   fullWidth={false}
                 />
@@ -179,9 +181,9 @@ function PokemonRegionClientSection() {
                   className="text-decoration-none"
                   passHref
                 >
-                  <PokeBadge
+                  <SclBadge
                     name={item.name}
-                    className={index % 2 === 0 ? "" : "bgGray"}
+                    badgeOverwrite={index % 2 === 0 ? "" : "bgGray"}
                   />
                 </Link>
               ))}
