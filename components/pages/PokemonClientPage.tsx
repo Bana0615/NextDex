@@ -18,6 +18,41 @@ import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResource
 // --- Font Awesome ---
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
+// Renders a list of NamedAPIResource links, separated by commas/and
+const renderResourceList = (resources, basePath, keyPrefix) => {
+  if (!resources || resources.length === 0) return null;
+  return resources.map((resource, index) => (
+    <React.Fragment key={`${keyPrefix}-${resource.name}`}>
+      {/* Conjunctions and separators */}
+      {index > 0 &&
+        index === resources.length - 1 &&
+        resources.length > 1 &&
+        " and "}
+      {index > 0 && index < resources.length - 1 && ", "}
+      {/* The Link */}
+      <Link href={`${basePath}?name=${resource.name}`} passHref>
+        {capitalizeFirstLetter(resource.name)}
+      </Link>
+    </React.Fragment>
+  ));
+};
+
+// --- Helper Function (from previous example) ---
+// Renders types with " / " separator
+const renderLinkedTypes = (types, keyPrefix) => {
+  if (!types || types.length === 0) return null;
+  return types
+    .sort((a, b) => a.slot - b.slot)
+    .map((typeInfo, index) => (
+      <React.Fragment key={`${keyPrefix}-${typeInfo.type.name}`}>
+        {index > 0 && " / "}
+        <Link href={`/pokemon/type?name=${typeInfo.type.name}`} passHref>
+          {capitalizeFirstLetter(typeInfo.type.name)}
+        </Link>
+      </React.Fragment>
+    ));
+};
+
 export default function PokemonClientPage() {
   return (
     <Suspense fallback={<LoadingFallback />}>
@@ -117,89 +152,62 @@ function PokemonClientSection() {
       </h2>
       <Row>
         <Col md={9}>
-          <p>
-            The <a href="https://pokeapi.co/">PokéApi</a>{" "}
-            <span className="fw-bold">id</span> for {formattedName} is{" "}
-            {apiData?.id ?? "???"}.{" "}
-            {`The base experience gained for defeating ${formattedName} is ${
-              apiData?.base_experience ?? "???"
-            }.`}
-          </p>
-
-          {/* Types */}
-          {apiData.types && apiData.types.length > 0 && (
-            <p>
-              {/* Handle singular vs plural */}
-              {`${formattedName}'s ${
-                apiData.types.length > 1 ? "types are" : "type is"
-              } `}
-              {apiData.types
-                .sort((a, b) => a.slot - b.slot) // Sort by slot (primary first)
-                .map((typeInfo, index) => (
-                  <React.Fragment key={typeInfo.type.name}>
-                    {index > 0 && " / "}
-                    <Link
-                      href={`/pokemon/type?name=${typeInfo.type.name}`}
-                      passHref
-                    >
-                      {capitalizeFirstLetter(typeInfo.type.name)}
-                    </Link>
-                  </React.Fragment>
-                ))}
-              .
-            </p>
-          )}
-
-          {/* Past Types */}
-          {apiData.past_types && apiData.past_types.length > 0 && (
-            <p>
-              {`In past generations, ${formattedName}'s typing changed: `}
-              {apiData.past_types.map((pastTypeInfo, genIndex) => {
-                // Format generation name (e.g., "generation-i" -> "Generation I")
-                const generationFormatted = capitalizeFirstLetter(
-                  pastTypeInfo.generation.name
-                );
-                return (
-                  <React.Fragment key={pastTypeInfo.generation.name}>
-                    {/* Add punctuation between different generation entries */}
-                    {genIndex > 0 && ". "}
-                    {`In ${generationFormatted}, it was `}
-                    {pastTypeInfo.types
-                      .sort((a, b) => a.slot - b.slot) // Sort types by slot
-                      .map((typeInfo, typeIndex) => (
-                        <React.Fragment key={typeInfo.type.name}>
-                          {typeIndex > 0 && " / "}
-                          <Link
-                            href={`/pokemon/type?name=${typeInfo.type.name}`}
-                            passHref
-                          >
-                            {capitalizeFirstLetter(typeInfo.type.name)}
-                          </Link>
-                        </React.Fragment>
-                      ))}
-                  </React.Fragment>
-                );
-              })}
-              . {/* Final period */}
-            </p>
-          )}
-          {apiData.forms && (
+          <p className="lead fs-6 mt-4 mb-5">
+            {formattedName} is an{" "}
+            {apiData.types && apiData.types.length > 0
+              ? renderLinkedTypes(apiData.types, "current")
+              : "Pokémon"}{" "}
+            {/* Fallback if types somehow aren't available */} type Pokémon,
+            registered in the <a href="https://pokeapi.co/">PokéApi</a> with an
+            ID of {apiData.id ?? "???"}. Defeating {formattedName} grants{" "}
+            {apiData.base_experience ?? "???"} base experience points.
+            {/* Past Types */}
+            {apiData.past_types && apiData.past_types.length > 0 && (
+              <>
+                {" "}
+                Historically, its typing differed:{" "}
+                {apiData.past_types.map((pastTypeInfo, genIndex) => {
+                  const generationFormatted = capitalizeFirstLetter(
+                    pastTypeInfo.generation.name
+                  );
+                  return (
+                    <React.Fragment key={pastTypeInfo.generation.name}>
+                      {genIndex > 0 && "; "}{" "}
+                      {/* Separator for multiple past entries */}
+                      in {generationFormatted}, it was classified as{" "}
+                      {renderLinkedTypes(
+                        pastTypeInfo.types,
+                        pastTypeInfo.generation.name
+                      )}
+                    </React.Fragment>
+                  );
+                })}
+                .
+              </>
+            )}
             <>
-              {createNamedAPIResourceSentence(
-                `A list of forms ${formattedName} can take on: `,
-                `${formattedName} does not have any forms.`,
-                "/pokemon/form",
-                apiData.forms
+              {" "}
+              It takes{" "}
+              {apiData.forms.length > 1 ? " the forms of " : " the form of "}
+              {renderResourceList(apiData.forms, "/pokemon/form", "form")}
+              {heldItems && heldItems.length > 0 && " and"}
+              {/* Items part */}
+              {heldItems && heldItems.length > 0 ? (
+                // Case: Items exist
+                <>
+                  {" "}
+                  sometimes be encountered holding items such as{" "}
+                  {renderResourceList(heldItems, "/pokemon/item", "item")}.
+                </>
+              ) : (
+                // Case: No items exist
+                <>
+                  {" "}
+                  and is not typically found holding any items when encountered.
+                </>
               )}
             </>
-          )}
-          {/* Held Items */}
-          {createNamedAPIResourceSentence(
-            `A list of items ${formattedName} may be holding when encountered: `,
-            `${formattedName} does not hold any items when encountered.`,
-            "/pokemon/item",
-            heldItems
-          )}
+          </p>
           {apiData?.abilities && (
             <>
               {apiData.abilities.length > 0 ? (

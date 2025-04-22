@@ -24,11 +24,11 @@ export function createNamedAPIResourceSentence(
 
   // Handle empty cases
   if (numGroups === 0) {
-    return <p>{emptyString}</p>;
+    return <span>{emptyString}</span>;
   }
 
   return (
-    <p>
+    <span>
       {initialString}{" "}
       {values.map((item, index) => {
         const linkHref = `${link}?name=${item.name}`;
@@ -48,6 +48,6 @@ export function createNamedAPIResourceSentence(
           </React.Fragment>
         );
       })}
-    </p>
+    </span>
   );
 }
