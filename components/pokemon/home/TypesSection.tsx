@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
 // --- Components ---
-import PokeBadge from "@/components/pokemon/PokeBadge";
 import SclBadge from "@/components/_silabs/SclBadge";
 // --- Data ---
 import typesData from "@/json/pokemon/types.json";
