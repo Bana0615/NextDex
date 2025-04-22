@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Container, Row, Col, Card } from "react-bootstrap";
-//Helpers
+// --- Helpers ---
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 import { getPokemonIdFromUrl } from "@/helpers/getPokemonIdFromUrl";
 //Styles

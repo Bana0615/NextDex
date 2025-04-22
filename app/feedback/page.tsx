@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 // --- Layout ---
 import PageLayout from "@/components/PageLayout";
-// Components
+// --- Components ---
 import FeedbackForm from "@/components/FeedbackForm";
 
 export const metadata: Metadata = {

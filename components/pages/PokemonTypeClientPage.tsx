@@ -7,13 +7,13 @@ import { PokemonClient, Type as PokemonTypeData } from "pokenode-ts";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-//Components
+// --- Components ---
 import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
 import PokemonGrid from "@/components/pokemon/PokemonGrid";
 import MoveList from "@/components/pokemon/MoveList";
 import SclBadge from "@/components/_silabs/SclBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
-//Helpers
+// --- Helpers ---
 import { createDamageRelationSentences } from "@/helpers/createDamageRelationSentences";
 import { createIndicesSentence } from "@/helpers/createIndicesSentence";
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";

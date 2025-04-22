@@ -1,19 +1,19 @@
 import React, { JSX } from "react";
-import Link from 'next/link';
-import { GenerationGameIndex } from "pokenode-ts";
-//Helpers
+import Link from "next/link";
+import { GenerationGameIndex, VersionGameIndex } from "pokenode-ts";
+// --- Helpers ---
 import { getSentenceSeperator } from "@/helpers/getSentenceSeperator";
 
 /**
  * Creates a JSX sentence describing game indices with links.
  *
  * @param {string} baseName - The name of the item
- * @param {GenerationGameIndex[]} values - Array of item objects game indicies.
+ * @param {GenerationGameIndex[] | VersionGameIndex[]} values - Array of item objects game indicies.
  * @returns {JSX.Element | null} - JSX element representing the sentence, or null if no game indices.
  */
 export function createIndicesSentence(
   baseName: string,
-  values: GenerationGameIndex[]
+  values: GenerationGameIndex[] | VersionGameIndex[]
 ): JSX.Element {
   const numTypes = values.length;
 
@@ -27,7 +27,10 @@ export function createIndicesSentence(
       {baseName} has game indices of{" "}
       {values.map((info, index) => {
         const typeLink = (
-          <Link href={`/pokemon/generation?name=${info.generation.name}`} key={info.generation.name}>
+          <Link
+            href={`/pokemon/generation?name=${info.generation.name}`}
+            key={info.generation.name}
+          >
             {info.generation.name}
           </Link>
         );
