@@ -22,7 +22,7 @@ import typesData from "@/json/pokemon/types.json";
 //Types
 import { PokemonType } from "@/types/pokemon/Types";
 
-export default function PokemonTypeClientSectionWrapper() {
+export default function PokemonTypeClientPage() {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <PokemonTypeClientSection />

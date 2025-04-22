@@ -17,7 +17,7 @@ import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResource
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-export default function PokedexClientSectionWrapper() {
+export default function PokedexClientPage() {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <PokedexClientSection />

@@ -15,7 +15,7 @@ import MoveList from "@/components/pokemon/MoveList";
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResourceSentence";
 
-export default function PokemonGenerationClientSectionWrapper() {
+export default function PokemonGenerationClientPage() {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <PokemonGenerationClientSection />

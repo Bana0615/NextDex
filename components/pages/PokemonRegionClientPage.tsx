@@ -13,7 +13,7 @@ import SclBadge from "@/components/_silabs/SclBadge";
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResourceSentence";
 
-export default function PokemonRegionClientSectionWrapper() {
+export default function PokemonRegionClientPage() {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <PokemonRegionClientSection />

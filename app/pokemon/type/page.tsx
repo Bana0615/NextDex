@@ -4,18 +4,18 @@ import type { Metadata } from "next";
 // --- Layout ---
 import PageLayout from "@/components/PageLayout";
 // --- Components ---
-import PokemonTypeClientSection from "@/components/pages/PokemonTypeClientSection";
+import PokemonTypeClientPage from "@/components/pages/PokemonTypeClientPage";
 
 export const metadata: Metadata = {
   title: "Pokémon Type",
 };
 
-export default function PokedexPage() {
+export default function PokemonTypePage() {
   return (
     <PageLayout headerShowBadge={true}>
       <Container className="main-content mt-3 mb-3">
         <Row className="shadow-lg mt-3 p-3 bg-body rounded">
-          <PokemonTypeClientSection />
+          <PokemonTypeClientPage />
         </Row>
       </Container>
     </PageLayout>

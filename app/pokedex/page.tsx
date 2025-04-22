@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 // --- Layout ---
 import PageLayout from "@/components/PageLayout";
 // --- Components ---
-import PokedexClientSection from "@/components/pages/PokedexClientSection";
+import PokedexClientPage from "@/components/pages/PokedexClientPage";
 
 export const metadata: Metadata = {
   title: "Pokédex",
@@ -15,7 +15,7 @@ export default function PokedexPage() {
     <PageLayout headerShowBadge={true}>
       <Container className="main-content mt-3 mb-3">
         <Row className="shadow-lg mt-3 p-3 bg-body rounded">
-          <PokedexClientSection />
+          <PokedexClientPage />
         </Row>
       </Container>
     </PageLayout>
