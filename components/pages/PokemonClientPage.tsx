@@ -19,46 +19,18 @@ import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
 import NamedApiBadgeList from "@/components/pokemon/NamedApiBadgeList";
 import SclBadge from "@/components/_silabs/SclBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
+// --- Components ---
+import Description from "@/components/pages/sections/PokemonClientPage/Description";
 // --- Helpers ---
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 import { createNamedAPIResourceSentence } from "@/helpers/createNamedAPIResourceSentence";
 // --- Font Awesome ---
-import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
-// Renders a list of NamedAPIResource links, separated by commas/and
-const renderResourceList = (resources, basePath, keyPrefix) => {
-  if (!resources || resources.length === 0) return null;
-  return resources.map((resource, index) => (
-    <React.Fragment key={`${keyPrefix}-${resource.name}`}>
-      {/* Conjunctions and separators */}
-      {index > 0 &&
-        index === resources.length - 1 &&
-        resources.length > 1 &&
-        " and "}
-      {index > 0 && index < resources.length - 1 && ", "}
-      {/* The Link */}
-      <Link href={`${basePath}?name=${resource.name}`} passHref>
-        {capitalizeFirstLetter(resource.name)}
-      </Link>
-    </React.Fragment>
-  ));
-};
-
-// --- Helper Function (from previous example) ---
-// Renders types with " / " separator
-const renderLinkedTypes = (types, keyPrefix) => {
-  if (!types || types.length === 0) return null;
-  return types
-    .sort((a, b) => a.slot - b.slot)
-    .map((typeInfo, index) => (
-      <React.Fragment key={`${keyPrefix}-${typeInfo.type.name}`}>
-        {index > 0 && " / "}
-        <Link href={`/pokemon/type?name=${typeInfo.type.name}`} passHref>
-          {capitalizeFirstLetter(typeInfo.type.name)}
-        </Link>
-      </React.Fragment>
-    ));
-};
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEyeSlash,
+  faVolumeLow,
+  faVolumeHigh,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function PokemonClientPage() {
   return (
@@ -170,6 +142,23 @@ function PokemonClientSection() {
     fetchAllPokemonData();
   }, [searchParams]);
 
+  // --- Audio Playback Function ---
+  const playCry = (url: string | undefined | null) => {
+    if (!url) {
+      console.warn("Cry URL is missing.");
+      return;
+    }
+    try {
+      console.log("Playing cry:", url);
+      const audio = new Audio(url);
+      audio.play().catch((error) => {
+        console.error("Error playing audio cry:", error);
+      });
+    } catch (error) {
+      console.error("Error creating Audio object for cry:", error);
+    }
+  };
+
   if (isLoading) {
     return <LoadingFallback />;
   }
@@ -194,62 +183,49 @@ function PokemonClientSection() {
       </h2>
       <Row>
         <Col md={9}>
-          <p className="lead fs-6 mt-4 mb-5">
-            {formattedName} is an{" "}
-            {apiData.types && apiData.types.length > 0
-              ? renderLinkedTypes(apiData.types, "current")
-              : "Pokémon"}{" "}
-            type Pokémon, registered in the{" "}
-            <a href="https://pokeapi.co/">PokéApi</a> with an ID of{" "}
-            {apiData.id ?? "???"}. Defeating {formattedName} grants{" "}
-            {apiData.base_experience ?? "???"} base experience points.
-            {/* Past Types */}
-            {apiData.past_types && apiData.past_types.length > 0 && (
-              <>
-                {" "}
-                Historically, its typing differed:{" "}
-                {apiData.past_types.map((pastTypeInfo, genIndex) => {
-                  const generationFormatted = capitalizeFirstLetter(
-                    pastTypeInfo.generation.name
-                  );
-                  return (
-                    <React.Fragment key={pastTypeInfo.generation.name}>
-                      {genIndex > 0 && "; "}{" "}
-                      {/* Separator for multiple past entries */}
-                      in {generationFormatted}, it was classified as{" "}
-                      {renderLinkedTypes(
-                        pastTypeInfo.types,
-                        pastTypeInfo.generation.name
-                      )}
-                    </React.Fragment>
-                  );
-                })}
-                .
-              </>
-            )}
-            <>
+          <Description
+            pokemonName={formattedName}
+            apiData={apiData}
+            heldItems={heldItems}
+          />
+          {/* === Pokémon Cries Section === */}
+          {apiData?.cries && (apiData.cries.latest || apiData.cries.legacy) && (
+            <div className="mb-3">
               {" "}
-              It takes{" "}
-              {apiData.forms.length > 1 ? " the forms of " : " the form of "}
-              {renderResourceList(apiData.forms, "/pokemon/form", "form")}
-              {heldItems && heldItems.length > 0 && " and"}
-              {/* Items part */}
-              {heldItems && heldItems.length > 0 ? (
-                // Case: Items exist
-                <>
-                  {" "}
-                  sometimes be encountered holding items such as{" "}
-                  {renderResourceList(heldItems, "/pokemon/item", "item")}.
-                </>
-              ) : (
-                // Case: No items exist
-                <>
-                  {" "}
-                  and is not typically found holding any items when encountered.
-                </>
-              )}
-            </>
-          </p>
+              {/* Add margin below */}
+              <div className="d-flex flex-wrap gap-2 align-items-center">
+                <span className="fw-bold">Cries:</span>
+                {/* Conditionally render Latest cry button */}
+                {apiData.cries.latest && (
+                  <button
+                    className="btn btn-sm btn-outline-danger" // Bootstrap button styling
+                    onClick={() => playCry(apiData.cries.latest)}
+                    type="button" // Explicitly set type for non-submit buttons
+                    title={`Play ${formattedName}'s latest cry`}
+                  >
+                    Play Latest
+                    {/* Optional: Add FontAwesome Icon */}
+                    <FontAwesomeIcon icon={faVolumeHigh} className="ms-1" />
+                  </button>
+                )}
+                {/* Conditionally render Legacy cry button */}
+                {apiData.cries.legacy && (
+                  <button
+                    className="btn btn-sm btn-outline-secondary"
+                    onClick={() => playCry(apiData.cries.legacy)}
+                    type="button"
+                    title={`Play ${formattedName}'s legacy cry`}
+                  >
+                    Play Legacy
+                    {/* Optional: Add FontAwesome Icon */}
+                    <FontAwesomeIcon icon={faVolumeLow} className="ms-1" />
+                  </button>
+                )}
+              </div>
+              <hr className="mt-2 mb-3" /> {/* Separator */}
+            </div>
+          )}
+          {/* === End Cries Section === */}
           {apiData?.abilities && (
             <>
               {apiData.abilities.length > 0 ? (
