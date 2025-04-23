@@ -58,7 +58,7 @@ export default function Description({
   heldItems,
 }: DescriptionProps) {
   return (
-    <p className="lead fs-6 mt-4 mb-5">
+    <span>
       {pokemonName} is an{" "}
       {apiData.types && apiData.types.length > 0
         ? renderLinkedTypes(apiData.types, "current")
@@ -103,6 +103,6 @@ export default function Description({
           <> It is not typically found holding any items when encountered.</>
         )}
       </>
-    </p>
+    </span>
   );
 }

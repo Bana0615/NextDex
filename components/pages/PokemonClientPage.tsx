@@ -154,12 +154,14 @@ function PokemonClientSection() {
       </h2>
       <Row>
         <Col md={9}>
-          <Description
-            pokemonName={formattedName}
-            apiData={apiData}
-            heldItems={heldItems}
-          />
-          <AbilitiesSection pokemonName={formattedName} apiData={apiData} />
+          <p className="lead fs-6 mb-4">
+            <Description
+              pokemonName={formattedName}
+              apiData={apiData}
+              heldItems={heldItems}
+            />
+            <AbilitiesSection pokemonName={formattedName} apiData={apiData} />
+          </p>
           <Cries pokemonName={formattedName} apiData={apiData} />
         </Col>
         <Col md={3}>

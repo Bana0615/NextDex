@@ -7,7 +7,12 @@ import Link from "next/link";
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter"; // Assuming this helper exists
 // --- Types ---
 // Assuming these types are correctly defined elsewhere
-import type { Pokemon, PokemonAbility } from "pokenode-ts";
+import type {
+  Pokemon,
+  NamedAPIResource,
+  PokemonAbility,
+  PokemonAbilityPast,
+} from "pokenode-ts";
 
 // --- Helper Functions ---
 
@@ -24,8 +29,7 @@ const renderAbilityList = (
 ) => {
   if (!abilities || abilities.length === 0) return null;
 
-  // Sort abilities (e.g., by slot or alphabetically, optional)
-  // Sorting by slot might be useful if the API guarantees slot order significance
+  // Sort abilities by slot for consistent order
   const sortedAbilities = abilities.sort((a, b) => a.slot - b.slot);
 
   return sortedAbilities.map((abilityInfo, index) => (
@@ -55,7 +59,7 @@ type AbilitiesSectionProps = {
 
 /**
  * Renders a paragraph describing the Pokémon's current and past abilities,
- * indicating hidden status and handling empty past ability slots.
+ * indicating hidden status and handling empty past ability slots with more context.
  */
 export default function AbilitiesSection({
   pokemonName,
@@ -76,17 +80,18 @@ export default function AbilitiesSection({
     (!currentAbilities || currentAbilities.length === 0) &&
     (!pastAbilitiesInfo || pastAbilitiesInfo.length === 0)
   ) {
-    // You could return a specific message if needed
-    // return <p className="lead fs-6 mt-4 mb-5">{pokemonName} has no documented abilities.</p>;
     return null;
   }
 
+  // Find the current hidden ability, if one exists
+  const currentHiddenAbility = currentAbilities?.find((a) => a.is_hidden);
+
   return (
-    <p className="lead fs-6 mt-4 mb-5">
+    <span>
       {/* Current Abilities */}
       {currentAbilities && currentAbilities.length > 0 ? (
         <>
-          {pokemonName}'s known{" "}
+          {` ${pokemonName}'s known `}
           {currentAbilities.length > 1 ? "abilities are" : "ability is"}{" "}
           {renderAbilityList(
             currentAbilities,
@@ -96,7 +101,6 @@ export default function AbilitiesSection({
           .
         </>
       ) : (
-        // Optional: Message if no current abilities but maybe past ones exist
         // Render this only if there are NO abilities at all (current or past)
         (!pastAbilitiesInfo || pastAbilitiesInfo.length === 0) && (
           <>{pokemonName} has no documented abilities.</>
@@ -107,28 +111,48 @@ export default function AbilitiesSection({
       {pastAbilitiesInfo && pastAbilitiesInfo.length > 0 && (
         <>
           {" "}
-          {/* Add space if current abilities were listed and past abilities exist */}
           Historically, its abilities have changed:{" "}
           {pastAbilitiesInfo.map((pastAbilityInfo, genIndex) => {
             const generationFormatted = capitalizeFirstLetter(
               pastAbilityInfo.generation.name
             );
             // Extract abilities for this past generation (keep full PokemonAbility)
-            // Check if abilities array exists AND is not null (based on API doc image)
             const pastGenAbilities = pastAbilityInfo.abilities?.filter(
               (a): a is PokemonAbility => !!a?.ability
             );
+
+            // Determine if the slot was empty in this past generation
+            const wasSlotEmpty =
+              pastGenAbilities === null || pastGenAbilities?.length === 0;
+
+            // Check if this past entry is for Gen IV and if there's a current hidden ability
+            const isGen4EmptySlotCase =
+              wasSlotEmpty &&
+              pastAbilityInfo.generation.name === "generation-iv" &&
+              currentHiddenAbility;
 
             return (
               <React.Fragment key={pastAbilityInfo.generation.name}>
                 {genIndex > 0 && "; "}{" "}
                 {/* Separator for multiple past entries */}
                 in {generationFormatted},{" "}
-                {pastGenAbilities === null || pastGenAbilities?.length === 0 ? (
-                  // Handle the case where the ability slot was empty or data missing
-                  <>it had no ability listed in this slot</>
+                {isGen4EmptySlotCase ? (
+                  // Special message for likely hidden ability slot empty in Gen IV
+                  <>
+                    its hidden ability slot, now occupied by{" "}
+                    <Link
+                      href={`/pokemon/ability?name=${currentHiddenAbility.ability.name}`}
+                      passHref
+                    >
+                      {capitalizeFirstLetter(currentHiddenAbility.ability.name)}
+                    </Link>
+                    , was not yet available
+                  </>
+                ) : wasSlotEmpty ? (
+                  // Generic fallback for other empty slot cases
+                  <>one of its ability slots was empty</>
                 ) : (
-                  // Render the abilities it had
+                  // Render the abilities it had in that generation
                   <>
                     it had the{" "}
                     {pastGenAbilities.length > 1 ? "abilities" : "ability"}{" "}
@@ -145,6 +169,6 @@ export default function AbilitiesSection({
           .
         </>
       )}
-    </p>
+    </span>
   );
 }
