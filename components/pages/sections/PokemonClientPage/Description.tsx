@@ -91,21 +91,16 @@ export default function Description({
         </>
       )}
       <>
-        {" "}
-        It takes {apiData.forms.length > 1 ? " the forms of " : " the form of "}
-        {renderResourceList(apiData.forms, "/pokemon/form", "form")}
-        {heldItems && heldItems.length > 0 && " and"}
-        {/* Items part */}
         {heldItems && heldItems.length > 0 ? (
           // Case: Items exist
           <>
             {" "}
-            sometimes be encountered holding items such as{" "}
+            It can sometimes be encountered holding items such as{" "}
             {renderResourceList(heldItems, "/pokemon/item", "item")}.
           </>
         ) : (
           // Case: No items exist
-          <> and is not typically found holding any items when encountered.</>
+          <> It is not typically found holding any items when encountered.</>
         )}
       </>
     </p>

@@ -44,7 +44,7 @@ function PokedexesSection() {
               >
                 <SclBadge
                   name={value.name}
-                  badgeOverwrite={index % 2 === 0 ? "" : "bgGray"}
+                  badgeOverwrite={index % 2 === 0 ? "bgPoke" : "bgGray"}
                   fullWidth={true}
                 />
               </Link>

@@ -190,10 +190,7 @@ function PokemonGenerationClientSection() {
                 />
               </small>
             </h3>
-            <NamedApiBadgeList
-              items={apiData?.moves}
-              url={"/pokemon/move"}
-            />
+            <NamedApiBadgeList items={apiData?.moves} url={"/pokemon/move"} />
           </>
         )}
         {apiData?.abilities && (
@@ -219,7 +216,7 @@ function PokemonGenerationClientSection() {
                   >
                     <SclBadge
                       name={item.name}
-                      badgeOverwrite={index % 2 === 0 ? "" : "bgGray"}
+                      badgeOverwrite={index % 2 === 0 ? "bgPoke" : "bgGray"}
                     />
                   </Link>
                 ))}
