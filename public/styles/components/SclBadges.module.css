@@ -9,6 +9,9 @@
 }
 
 /* --- Custom Colors --- */
+.bgNext {
+  background-color: #198754 !important;
+}
 .bgPoke {
   background-color: #e53945 !important;
 }

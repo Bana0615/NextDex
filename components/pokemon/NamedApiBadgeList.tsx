@@ -12,7 +12,7 @@ import type { NamedAPIResource } from "pokenode-ts";
  * @param {NamedAPIResource[]} items - The array of item objects, e.g., [{ name: string, url: string }]
  * @param {string} url - The link to the page for the badge.
  * @param {string} emptyMessage - The message to display when there are no items.
- * @param {string} className - The override class name (e.g., bgPoke) for the badge background.
+ * @param {string} className - The override class name (e.g., bgNext) for the badge background.
  */
 export default function NamedApiBadgeList({
   items,
@@ -44,7 +44,7 @@ export default function NamedApiBadgeList({
           <SclBadge
             name={item.name}
             badgeOverwrite={
-              className ? className : index % 2 === 0 ? "bgPoke" : "bgGray"
+              className ? className : index % 2 === 0 ? "bgNext" : "bgGray"
             }
           />
         </Link>

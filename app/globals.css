@@ -1,15 +1,16 @@
 :root {
-  --pokemon-red: #e63946;
+  --pokemon-green: #198754; /* New Primary Green */
   --pokemon-white: #ffffff;
-  --pokemon-light-gray: #f8f9fa;
-  --pokemon-dark-gray: #212529;
-  --pokemon-text: #333333;
-  --pokemon-yellow: #ffcb05;
+  --pokemon-light-gray: #f8f9fa; /* Light background / secondary */
+  --pokemon-dark-gray: #212529; /* Footer background / dark elements */
+  --pokemon-text: #333333; /* Main body text */
+  --pokemon-yellow: #ffcb05; /* Primary Accent (hovers, badges) */
+  --pokemon-red-original: #e63946;
 }
 
 /* --- Navbar Base Styles --- */
 .pokemon-navbar {
-  background-color: var(--pokemon-red);
+  background-color: var(--pokemon-green);
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -42,15 +43,19 @@
   position: relative;
 }
 
+/* Keep Yellow hover for contrast and Pokémon feel */
 .pokemon-navbar .pokemon-nav-link:hover,
 .pokemon-navbar .pokemon-nav-link:focus {
   color: var(--pokemon-yellow) !important;
-  opacity: 0.85;
+  opacity: 0.9; /* Slightly increased opacity on hover */
 }
 
 /* Active link styling (if using React Router or similar active state) */
 .pokemon-navbar .pokemon-nav-link.active {
   font-weight: bold;
+  /* Optional: Slightly different color or underline for active */
+  text-decoration: underline;
+  color: var(--pokemon-light-gray) !important;
 }
 
 /* --- Badge Styling --- */
@@ -78,56 +83,56 @@
 .pokeball-center-container {
   position: absolute;
   left: 50%;
-  top: 0px;
+  top: 0px; /* Adjust slightly if needed based on navbar height */
   transform: translateX(-50%);
   pointer-events: none;
-  width: 40px;
+  width: 40px; /* Adjust size as needed */
   height: 40px;
-  z-index: 5;
+  z-index: 5; /* Below navbar items but above background */
 }
 
-/* The main Pokeball element */
+/* The main Pokeball element - NOW GREEN TOP */
 .css-pokeball {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   background: linear-gradient(
     to bottom,
-    var(--pokemon-red) 0%,
-    var(--pokemon-red) 48%,
+    var(--pokemon-green) 0%,
+    /* Use Green for top */ var(--pokemon-green) 48%,
     var(--pokemon-dark-gray) 48%,
-    var(--pokemon-dark-gray) 52%,
+    /* Center line */ var(--pokemon-dark-gray) 52%,
     var(--pokemon-white) 52%,
-    var(--pokemon-white) 100%
+    /* White bottom */ var(--pokemon-white) 100%
   );
   position: relative;
   pointer-events: auto;
   border: 1px solid var(--pokemon-dark-gray);
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
+  overflow: hidden; /* Important for the gradient shape */
 }
 
-/* Pseudo-element for the center button */
+/* Pseudo-element for the center button (remains white/dark gray) */
 .css-pokeball::after {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 35%;
+  width: 35%; /* Adjust size relative to ball */
   height: 35%;
   background-color: var(--pokemon-white);
   border-radius: 50%;
-  border: 3px solid var(--pokemon-dark-gray);
+  border: 3px solid var(--pokemon-dark-gray); /* Adjust border thickness */
   box-sizing: border-box;
-  box-shadow: inset 0 0 0 2px var(--pokemon-white);
+  box-shadow: inset 0 0 0 2px var(--pokemon-white); /* Inner white ring */
 }
 
 /* --- Responsive Adjustments for Collapsed Navbar --- */
 @media (max-width: 991.98px) {
   /* Standard Bootstrap lg breakpoint */
   .pokemon-navbar .navbar-collapse {
-    background-color: var(--pokemon-red);
+    background-color: var(--pokemon-green);
     padding: 0.5rem 1rem;
     margin-top: 0.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -151,8 +156,8 @@
 .pokemon-footer {
   background-color: var(--pokemon-dark-gray);
   color: var(--pokemon-light-gray);
-  margin-top: auto;
-  border-top: 4px solid var(--pokemon-red);
+  margin-top: auto; /* Pushes footer to bottom */
+  border-top: 4px solid var(--pokemon-green);
 }
 
 .footer-copyright {
@@ -169,7 +174,6 @@
   transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
 }
 
-/* Hover/Focus styles for footer links */
 .footer-link:hover,
 .footer-link:focus {
   color: var(--pokemon-yellow) !important;
@@ -181,8 +185,16 @@
   list-style: none;
 }
 
+/* Update copyright section link color */
 .copyright-section a {
-  color: var(--pokemon-red) !important;
-  font-size: 0.9rem;
+  color: var(--pokemon-green) !important;
+  font-size: 0.9rem; /* Match footer-link or adjust as needed */
+  font-weight: 500; /* Added for slightly more emphasis */
   transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+}
+
+.copyright-section a:hover,
+.copyright-section a:focus {
+  color: var(--pokemon-yellow) !important;
+  text-decoration: none;
 }

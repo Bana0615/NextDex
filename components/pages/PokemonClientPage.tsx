@@ -250,7 +250,7 @@ function PokemonClientSection() {
                           <SclBadge
                             name={abilityItem.ability.name}
                             badgeOverwrite={
-                              abilityItem.is_hidden ? "bgGray" : "bgPoke"
+                              abilityItem.is_hidden ? "bgGray" : "bgNext"
                             }
                             faIcon={
                               abilityItem.is_hidden ? faEyeSlash : undefined
@@ -325,7 +325,7 @@ function PokemonClientSection() {
             <SclBadge
               name={games.length.toString()}
               fullWidth={false}
-              badgeOverwrite="bgPoke"
+              badgeOverwrite="bgNext"
             />
           </small>
         </h3>
@@ -340,7 +340,7 @@ function PokemonClientSection() {
             <SclBadge
               name={moves.length.toString()}
               fullWidth={false}
-              badgeOverwrite="bgPoke"
+              badgeOverwrite="bgNext"
             />
           </small>
         </h3>

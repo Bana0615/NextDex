@@ -44,7 +44,7 @@ function GenerationsSection() {
               >
                 <SclBadge
                   name={value.name}
-                  badgeOverwrite={index % 2 === 0 ? "bgPoke" : "bgGray"}
+                  badgeOverwrite={index % 2 === 0 ? "bgNext" : "bgGray"}
                   fullWidth={true}
                 />
               </Link>

@@ -5,7 +5,7 @@
   "description": "NéxtDex: Explore a comprehensive Pokémon Pokédex, game information, and more. Fast, modern Pokémon hub built with React & Next.js.",
   "lang": "en-US",
   "dir": "ltr",
-  "theme_color": "#E63946",
+  "theme_color": "#198754",
   "background_color": "#FFFFFF",
   "display": "fullscreen",
   "orientation": "portrait",
