@@ -2,11 +2,18 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
-import { PokemonClient, Pokemon, NamedAPIResource } from "pokenode-ts";
 // --- Next ---
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
+// --- Pokemon ---
+import {
+  PokemonClient,
+  Pokemon,
+  NamedAPIResource,
+  PokemonSpecies,
+  PokemonForm,
+} from "pokenode-ts";
 // --- Components ---
 import PokemonSpritesDisplay from "@/components/pokemon/PokemonSpritesDisplay";
 import NamedApiBadgeList from "@/components/pokemon/NamedApiBadgeList";
@@ -64,9 +71,13 @@ export default function PokemonClientPage() {
 function PokemonClientSection() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
+  // --- State Definitions ---
   const [isLoading, setIsLoading] = useState(true);
   const [apiData, setApiData] = useState<Pokemon | null>(null);
+  const [apiSpeciesData, setApiSpeciesData] = useState<PokemonSpecies | null>(
+    null
+  );
+  const [apiFormData, setApiFormData] = useState<PokemonForm | null>(null);
   const [formattedName, setFormattedName] = useState<string>("");
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
   const [games, setGames] = useState<NamedAPIResource[]>([]);
@@ -76,58 +87,88 @@ function PokemonClientSection() {
   useEffect(() => {
     const nameParam = searchParams?.get("name") ?? "";
 
-    // Handle case where nameParam is missing or empty
+    // --- Initial Check ---
     if (!nameParam) {
       console.warn("No 'name' parameter found in URL.");
       setErrorOccurred(true);
       setIsLoading(false);
-      return;
+      // Clear all data states if no name param
+      setApiData(null);
+      setApiSpeciesData(null);
+      setApiFormData(null);
+      setGames([]);
+      setHeldItems([]);
+      setMoves([]);
+      setFormattedName("");
+      return; // Exit early
     }
 
-    // Reset state for new fetch
-    setIsLoading(true);
-    setErrorOccurred(false);
-    setApiData(null);
-    setFormattedName(capitalizeFirstLetter(nameParam));
-
+    // --- API Client ---
     const api = new PokemonClient();
 
-    api
-      .getPokemonByName(nameParam)
-      .then((data) => {
-        //TODO: Figure out what is_default is used for
-        //TODO: Figure out what location_area_encounters is used for
-        //TODO: Figure out why past_abilities all seem to be null
-        //TODO: Figure out what species is used for
-        const test = { ...data };
-        delete test.id;
-        delete test.name;
-        delete test.base_experience;
-        delete test.height;
-        delete test.weight;
-        delete test.order;
-        delete test.abilities;
-        delete test.forms;
-        delete test.game_indices;
-        delete test.held_items;
-        delete test.moves;
-        delete test.types;
-        delete test.past_types;
-        console.log("test", test);
-        setApiData(data);
-        // Set Held items
-        setGames(data?.game_indices.map((item) => item.version) ?? []);
-        setHeldItems(data?.held_items.map((item) => item.item) ?? []);
-        setMoves(data?.moves.map((item) => item.move) ?? []);
-      })
-      .catch((error) => {
+    // --- Async Fetch Function ---
+    const fetchAllPokemonData = async () => {
+      // Reset state for the new fetch operation
+      setIsLoading(true);
+      setErrorOccurred(false);
+      setApiData(null); // Clear previous data before fetching
+      setApiSpeciesData(null);
+      setApiFormData(null);
+      setGames([]);
+      setHeldItems([]);
+      setMoves([]);
+      setFormattedName(capitalizeFirstLetter(nameParam)); // Set name early for potential display
+
+      try {
+        // --- Create Promises ---
+        // Order matters for destructuring results later
+        const promises = [
+          api.getPokemonSpeciesByName(nameParam), // Result 1: speciesData
+          api.getPokemonFormByName(nameParam), // Result 2: formData
+          api.getPokemonByName(nameParam), // Result 3: pokemonData
+        ];
+
+        // --- Execute Concurrently ---
+        const [speciesData, formData, pokemonData] = (await Promise.all(
+          promises
+        )) as [PokemonSpecies, PokemonForm, Pokemon];
+
+        // --- Process Successful Results ---
+        console.log("getPokemonSpeciesByName data:", speciesData);
+        setApiSpeciesData(speciesData);
+
+        console.log("getPokemonFormByName data:", formData);
+        setApiFormData(formData);
+
+        console.log("getPokemonByName data:", pokemonData);
+        setApiData(pokemonData);
+        // Extract derived data from pokemonData
+        setGames(pokemonData?.game_indices.map((item) => item.version) ?? []);
+        setHeldItems(pokemonData?.held_items.map((item) => item.item) ?? []);
+        setMoves(pokemonData?.moves.map((item) => item.move) ?? []);
+
+        // Ensure error state is false after successful fetch
+        setErrorOccurred(false);
+      } catch (error) {
+        // --- Handle Errors from Any Promise ---
         console.error("Failed to fetch Pokémon data:", error);
         setErrorOccurred(true);
-      })
-      .finally(() => {
+        // Clear data states on error
+        setApiData(null);
+        setApiSpeciesData(null);
+        setApiFormData(null);
+        setGames([]);
+        setHeldItems([]);
+        setMoves([]);
+      } finally {
+        // --- Always run after try/catch ---
         setIsLoading(false);
-      });
-  }, [searchParams, router]);
+      }
+    };
+
+    // --- Trigger the Fetch ---
+    fetchAllPokemonData();
+  }, [searchParams]);
 
   if (isLoading) {
     return <LoadingFallback />;
