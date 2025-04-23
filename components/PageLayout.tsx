@@ -1,6 +1,8 @@
 "use client";
 
+// --- React ---
 import React from "react";
+// --- Components ---
 import MonHeader from "@/components/MonHeader";
 import MonFooter from "@/components/MonFooter";
 

@@ -1,6 +1,8 @@
+// --- React ---
 import React, { Suspense } from "react";
-import type { Metadata } from "next";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
+// --- Next ---
+import type { Metadata } from "next";
 // --- Layout ---
 import PageLayout from "@/components/PageLayout";
 // --- Components ---
