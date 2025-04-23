@@ -20,8 +20,9 @@ import NamedApiBadgeList from "@/components/pokemon/NamedApiBadgeList";
 import SclBadge from "@/components/_silabs/SclBadge";
 import LanguageTable from "@/components/pokemon/LanguageTable";
 // --- Components ---
-import Description from "@/components/pages/sections/PokemonClientPage/Description";
+import AbilitiesSection from "@/components/pages/sections/PokemonClientPage/AbilitiesSection";
 import Cries from "@/components/pages/sections/PokemonClientPage/Cries";
+import Description from "@/components/pages/sections/PokemonClientPage/Description";
 // --- Helpers ---
 import { capitalizeFirstLetter } from "@/helpers/_silabs/capitalizeFirstLetter";
 // --- Font Awesome ---
@@ -84,7 +85,6 @@ function PokemonClientSection() {
 
       try {
         // --- Create Promises ---
-        // Order matters for destructuring results later
         const promises = [
           api.getPokemonSpeciesByName(nameParam),
           api.getPokemonByName(nameParam),
@@ -159,46 +159,8 @@ function PokemonClientSection() {
             apiData={apiData}
             heldItems={heldItems}
           />
+          <AbilitiesSection pokemonName={formattedName} apiData={apiData} />
           <Cries pokemonName={formattedName} apiData={apiData} />
-          {apiData?.abilities && (
-            <>
-              {apiData.abilities.length > 0 ? (
-                <div className="d-flex flex-wrap gap-2">
-                  <span className="fw-bold">Abilities: </span>
-                  {apiData.abilities
-                    .sort((a, b) => a.slot - b.slot) // Sort by slot
-                    .map((abilityItem) => (
-                      <React.Fragment key={abilityItem.ability.name}>
-                        <Link
-                          href={`/pokemon/ability?name=${abilityItem.ability.name}`}
-                          className="text-decoration-none"
-                          title={
-                            `${capitalizeFirstLetter(
-                              abilityItem.ability.name
-                            )} ` +
-                            `(Slot ${abilityItem.slot})` +
-                            (abilityItem.is_hidden ? " - Hidden Ability" : "") // Indicate if hidden based on the flag
-                          }
-                          passHref
-                        >
-                          <SclBadge
-                            name={abilityItem.ability.name}
-                            badgeOverwrite={
-                              abilityItem.is_hidden ? "bgGray" : "bgNext"
-                            }
-                            faIcon={
-                              abilityItem.is_hidden ? faEyeSlash : undefined
-                            }
-                          />
-                        </Link>
-                      </React.Fragment>
-                    ))}
-                </div>
-              ) : (
-                <p className="text-muted">Abilities: None</p>
-              )}
-            </>
-          )}
         </Col>
         <Col md={3}>
           <Row className="justify-content-center text-center">

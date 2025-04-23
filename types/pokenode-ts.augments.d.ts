@@ -1,4 +1,8 @@
-import { PokemonTypeSprites, PokemonCries } from "@/types/pokemon/Types";
+import {
+  PokemonTypeSprites,
+  PokemonCries,
+  PokemonAbilityPast,
+} from "@/types/pokemon/Types";
 
 declare module "pokenode-ts" {
   interface Type {
@@ -6,6 +10,12 @@ declare module "pokenode-ts" {
   }
   interface Pokemon {
     cries?: PokemonCries | null;
+    past_abilities?: PokemonAbilityPast[] | null;
+  }
+
+  interface PokemonAbilityPast {
+    generation: NamedAPIResource;
+    abilities: PokemonAbility[];
   }
 }
 

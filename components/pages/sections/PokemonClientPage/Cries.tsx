@@ -34,7 +34,8 @@ export default function Cries({ pokemonName, apiData }: CriesProps) {
   return (
     <>
       {apiData?.cries && (apiData.cries.latest || apiData.cries.legacy) && (
-        <div className="mb-3">
+        <div>
+          <hr />
           <div className="d-flex flex-wrap gap-2 align-items-center">
             <span className="fw-bold">Cries:</span>
             {/* Conditionally render Latest cry button */}
@@ -61,7 +62,6 @@ export default function Cries({ pokemonName, apiData }: CriesProps) {
               </button>
             )}
           </div>
-          <hr />
         </div>
       )}
     </>
